@@ -67,7 +67,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
             onPressed: () {
               _scaffoldKey.currentState!.openDrawer();
             }),
-        title: Text('News Blog', style: boldTextStyle(color: black, size: 20)),
+        title: Text('Dòng họ hiện tại', style: boldTextStyle(color: black, size: 20)),
         backgroundColor: white,
         centerTitle: true,
         bottom: TabBar(
