@@ -72,7 +72,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
         centerTitle: true,
         bottom: TabBar(
           controller: tabController,
-          tabs: [Tab(text: 'All News'), Tab(text: 'Technology'), Tab(text: 'Fashion'), Tab(text: 'Sports'), Tab(text: 'Science')],
+          tabs: [Tab(text: 'All News', icon: Icon(Icons.newspaper)), Tab(text: 'Technology', icon: Icon(Icons.devices)), Tab(text: 'Fashion', icon: Icon(Icons.style)), Tab(text: 'Sports', icon: Icon(Icons.sports_score)), Tab(text: 'Science', icon: Icon(Icons.science))],
           labelStyle: boldTextStyle(),
           labelColor: black,
           unselectedLabelStyle: primaryTextStyle(),
