@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gia_pha_mobile/component/FamilyTreeComponent.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gia_pha_mobile/component/NBAllNewsComponent.dart';
 import 'package:gia_pha_mobile/component/NBNewsComponent.dart';
@@ -32,7 +33,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
   }
 
   Future<void> init() async {
-    tabController = TabController(length: 5, vsync: this);
+    tabController = TabController(length: 6, vsync: this);
     mNewsList.forEach((element) {
       if (element.categoryName == 'Technology') {
         mTechNewsList.add(element);
@@ -72,7 +73,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
         centerTitle: true,
         bottom: TabBar(
           controller: tabController,
-          tabs: [Tab(text: 'All News', icon: Icon(Icons.newspaper)), Tab(text: 'Technology', icon: Icon(Icons.devices)), Tab(text: 'Fashion', icon: Icon(Icons.style)), Tab(text: 'Sports', icon: Icon(Icons.sports_score)), Tab(text: 'Science', icon: Icon(Icons.science))],
+          tabs: [Tab(text: 'Cây Gia Phả', icon: Icon(Icons.account_tree)), Tab(text: 'All News', icon: Icon(Icons.newspaper)), Tab(text: 'Technology', icon: Icon(Icons.devices)), Tab(text: 'Fashion', icon: Icon(Icons.style)), Tab(text: 'Sports', icon: Icon(Icons.sports_score)), Tab(text: 'Science', icon: Icon(Icons.science))],
           labelStyle: boldTextStyle(),
           labelColor: black,
           unselectedLabelStyle: primaryTextStyle(),
@@ -127,6 +128,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
       body: TabBarView(
         controller: tabController,
         children: [
+          FamilyTreeComponent(),
           NBAllNewsComponent(),
           PurchaseMoreScreen(false),
           NBNewsComponent(list: mFashionNewsList),

@@ -9,6 +9,8 @@ import 'package:gia_pha_mobile/utils/NBDataProviders.dart';
 class NBAllNewsComponent extends StatefulWidget {
   static String tag = '/NBAllNewsComponent';
 
+  const NBAllNewsComponent({super.key});
+
   @override
   NBAllNewsComponentState createState() => NBAllNewsComponentState();
 }

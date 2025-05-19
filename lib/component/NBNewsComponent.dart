@@ -8,7 +8,7 @@ class NBNewsComponent extends StatefulWidget {
   static String tag = '/NBNewsComponent';
   final List<NBNewsDetailsModel>? list;
 
-  NBNewsComponent({this.list});
+  const NBNewsComponent({super.key, this.list});
 
   @override
   NBNewsComponentState createState() => NBNewsComponentState();
