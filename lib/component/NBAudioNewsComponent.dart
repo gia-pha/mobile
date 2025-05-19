@@ -8,7 +8,7 @@ class NBAudioNewsComponent extends StatefulWidget {
 
   final List<NBNewsDetailsModel>? list;
 
-  NBAudioNewsComponent({this.list});
+  const NBAudioNewsComponent({super.key, this.list});
 
   @override
   NBAudioNewsComponentState createState() => NBAudioNewsComponentState();
