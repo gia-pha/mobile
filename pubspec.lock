@@ -444,10 +444,10 @@ packages:
     dependency: "direct main"
     description:
       name: org_chart
-      sha256: a5f99540e423cae49f4ce24369cf8d406f8a1110898be8d2dda620ff8803ce4a
+      sha256: "00153002f47a34d561920ec09c209047681ab750f91af00fc9204e437237909a"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.2+1"
+    version: "5.0.0-alpha.2"
   package_info:
     dependency: "direct main"
     description:

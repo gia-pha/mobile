@@ -18,7 +18,7 @@ dependencies:
   package_info: ^2.0.2
   cached_network_image: ^3.4.1
   url_launcher: ^6.3.1
-  org_chart: ^4.2.2+1
+  org_chart: ^5.0.0-alpha
 
 dev_dependencies:
   flutter_test:
