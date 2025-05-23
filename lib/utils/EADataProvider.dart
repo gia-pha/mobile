@@ -2,6 +2,7 @@ import 'package:gia_pha_mobile/model/EAForYouModel.dart';
 import 'package:gia_pha_mobile/model/EAEventListModel.dart';
 import 'package:gia_pha_mobile/model/EAActivityModel.dart';
 import 'package:gia_pha_mobile/model/EAWalkThroughModel.dart';
+import 'package:gia_pha_mobile/model/EATicketModel.dart';
 import 'EAImages.dart';
 
 List<EAWalkThrough> walkThroughList = [
@@ -206,6 +207,29 @@ List<EAEventList> eventList = [
       name: 'Why Las vegas hotal Room For you',
       date: 'MAR 15,2018',
       image: event_ic_walk_through1),
+];
+
+List<EATicketModel> ticketList = [
+  EATicketModel(
+      name: 'Normal Ticket',
+      time: '4:30 until 6:30',
+      payment: 'Sold Out',
+      count: 0),
+  EATicketModel(
+      name: 'VIP Ticket',
+      time: '6:30 until 7:30',
+      payment: '*\$80=\$0',
+      count: 0),
+  EATicketModel(
+      name: 'Normal Ticket',
+      time: '4:30 until 6:30',
+      payment: '*\$80=\$0',
+      count: 0),
+  EATicketModel(
+      name: 'VIP Ticket',
+      time: '6:30 until 7:30',
+      payment: '*\$80=\$160',
+      count: 2),
 ];
 
 List<EAActivityModel> imageList = [
