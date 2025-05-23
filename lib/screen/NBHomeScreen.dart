@@ -7,6 +7,7 @@ import 'package:gia_pha_mobile/component/NBNewsComponent.dart';
 import 'package:gia_pha_mobile/model/NBModel.dart';
 import 'package:gia_pha_mobile/screen/PurchaseMoreScreen.dart';
 import 'package:gia_pha_mobile/screen/EAMayBEYouKnowScreen.dart';
+import 'package:gia_pha_mobile/screen/CalendarScreen.dart';
 import 'package:gia_pha_mobile/utils/NBColors.dart';
 import 'package:gia_pha_mobile/utils/NBDataProviders.dart';
 import 'package:gia_pha_mobile/utils/NBImages.dart';
@@ -35,7 +36,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
   }
 
   Future<void> init() async {
-    tabController = TabController(length: 8, vsync: this);
+    tabController = TabController(length: 9, vsync: this);
     mNewsList.forEach((element) {
       if (element.categoryName == 'Technology') {
         mTechNewsList.add(element);
@@ -75,7 +76,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
         centerTitle: true,
         bottom: TabBar(
           controller: tabController,
-          tabs: [Tab(text: 'Cây Gia Phả', icon: Icon(Icons.account_tree)), Tab(text: 'Thành Viên', icon: Icon(Icons.people)), Tab(text: 'Sự Kiện', icon: Icon(Icons.people)), Tab(text: 'All News', icon: Icon(Icons.newspaper)), Tab(text: 'Technology', icon: Icon(Icons.devices)), Tab(text: 'Fashion', icon: Icon(Icons.style)), Tab(text: 'Sports', icon: Icon(Icons.sports_score)), Tab(text: 'Science', icon: Icon(Icons.science))],
+          tabs: [Tab(text: 'Cây Gia Phả', icon: Icon(Icons.account_tree)), Tab(text: 'Thành Viên', icon: Icon(Icons.people)), Tab(text: 'Sự Kiện', icon: Icon(Icons.event)), Tab(text: 'Lịch', icon: Icon(Icons.calendar_month)), Tab(text: 'All News', icon: Icon(Icons.newspaper)), Tab(text: 'Technology', icon: Icon(Icons.devices)), Tab(text: 'Fashion', icon: Icon(Icons.style)), Tab(text: 'Sports', icon: Icon(Icons.sports_score)), Tab(text: 'Science', icon: Icon(Icons.science))],
           labelStyle: boldTextStyle(),
           labelColor: black,
           unselectedLabelStyle: primaryTextStyle(),
@@ -133,6 +134,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
           FamilyTreeComponent(),
           EAMayBEYouKnowScreen(),
           EANewsList(),
+          CalendarScreen(),
           NBAllNewsComponent(),
           PurchaseMoreScreen(false),
           NBNewsComponent(list: mFashionNewsList),
