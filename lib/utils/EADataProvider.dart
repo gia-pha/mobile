@@ -1,6 +1,4 @@
 import 'package:gia_pha_mobile/model/EAForYouModel.dart';
-import 'package:gia_pha_mobile/model/EAEventListModel.dart';
-import 'package:gia_pha_mobile/model/EAActivityModel.dart';
 import 'package:gia_pha_mobile/model/EAWalkThroughModel.dart';
 import 'package:gia_pha_mobile/model/EATicketModel.dart';
 import 'EAImages.dart';
@@ -178,37 +176,6 @@ List<EAForYouModel> getMayKnowData() {
   return list;
 }
 
-List<EAEventList> eventList = [
-  EAEventList(
-      name: 'Fashion finest AW17 During London Fashion Week',
-      date: 'MAR 30,2016',
-      image: event_ic_paris),
-  EAEventList(
-      name: 'Bike New York For Bike Month',
-      date: 'MAR 24,2018',
-      image: event_ic_tokyo),
-  EAEventList(
-      name: 'Washington Square Outdoor Art Exhibit',
-      date: 'MAR 20,2018',
-      image: event_ic_newYork),
-  EAEventList(
-      name: 'Why Las vegas hotal Room For you',
-      date: 'MAR 15,2018',
-      image: event_ic_festival),
-  EAEventList(
-      name: 'Bike New York For Bike Month',
-      date: 'MAR 24,2018',
-      image: event_ic_music),
-  EAEventList(
-      name: 'Washington Square Outdoor Art Exhibit',
-      date: 'MAR 20,2018',
-      image: event_ic_london),
-  EAEventList(
-      name: 'Why Las vegas hotal Room For you',
-      date: 'MAR 15,2018',
-      image: event_ic_walk_through1),
-];
-
 List<EATicketModel> ticketList = [
   EATicketModel(
       name: 'Normal Ticket',
@@ -230,10 +197,4 @@ List<EATicketModel> ticketList = [
       time: '6:30 until 7:30',
       payment: '*\$80=\$160',
       count: 2),
-];
-
-List<EAActivityModel> imageList = [
-  EAActivityModel(image: event_ic_newYork),
-  EAActivityModel(image: event_ic_paris),
-  EAActivityModel(image: event_ic_tokyo),
 ];
