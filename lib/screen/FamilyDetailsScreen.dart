@@ -8,18 +8,16 @@ import 'package:gia_pha_mobile/utils/NBWidgets.dart';
 import 'package:gia_pha_mobile/utils/NBAppWidget.dart';
 
 
-class NBNewsDetailsScreen extends StatefulWidget {
-  static String tag = '/NBNewsDetailsScreen';
+class FamilyDetailsScreen extends StatefulWidget {
+  final NBNewsDetailsModel newsDetails;
 
-  final NBNewsDetailsModel? newsDetails;
-
-  const NBNewsDetailsScreen({super.key, this.newsDetails});
+  const FamilyDetailsScreen({super.key, required this.newsDetails});
 
   @override
-  NBNewsDetailsScreenState createState() => NBNewsDetailsScreenState();
+  FamilyDetailsScreenState createState() => FamilyDetailsScreenState();
 }
 
-class NBNewsDetailsScreenState extends State<NBNewsDetailsScreen> {
+class FamilyDetailsScreenState extends State<FamilyDetailsScreen> {
   bool isFollowing = false;
 
   @override
@@ -40,29 +38,20 @@ class NBNewsDetailsScreenState extends State<NBNewsDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back,color: Colors.black),
-            onPressed: () {
-              finish(context);
-            }),
-        elevation: 0,
-        backgroundColor: white,
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('${widget.newsDetails!.categoryName}', style: boldTextStyle(color: NBPrimaryColor)),
+            Text('${widget.newsDetails.categoryName}', style: boldTextStyle(color: NBPrimaryColor)),
             Row(
               children: [
-                Text('${widget.newsDetails!.title}', style: boldTextStyle(size: 20)).expand(flex: 3),
-                widget.newsDetails!.isBookmark
+                Text('${widget.newsDetails.title}', style: boldTextStyle(size: 20)).expand(flex: 3),
+                widget.newsDetails.isBookmark
                     ? IconButton(
                         icon: Icon(Icons.bookmark),
                         onPressed: () {
                           setState(() {
-                            widget.newsDetails!.isBookmark = !widget.newsDetails!.isBookmark;
+                            widget.newsDetails.isBookmark = !widget.newsDetails.isBookmark;
                           });
                           toasty(context, 'Removed from Bookmark');
                         })
@@ -70,14 +59,14 @@ class NBNewsDetailsScreenState extends State<NBNewsDetailsScreen> {
                         icon: Icon(Icons.bookmark_border),
                         onPressed: () {
                           setState(() {
-                            widget.newsDetails!.isBookmark = !widget.newsDetails!.isBookmark;
+                            widget.newsDetails.isBookmark = !widget.newsDetails.isBookmark;
                           });
                           toasty(context, 'Added to Bookmark');
                         }),
               ],
             ),
             16.height,
-            commonCacheImageWidget(widget.newsDetails!.image, 200, width: context.width(), fit: BoxFit.cover).cornerRadiusWithClipRRect(16),
+            commonCacheImageWidget(widget.newsDetails.image, 200, width: context.width(), fit: BoxFit.cover).cornerRadiusWithClipRRect(16),
             16.height,
             ListTile(
               contentPadding: EdgeInsets.all(0),
@@ -102,7 +91,7 @@ class NBNewsDetailsScreenState extends State<NBNewsDetailsScreen> {
               ).cornerRadiusWithClipRRect(30),
             ),
             16.height,
-            Text('${widget.newsDetails!.details}', style: primaryTextStyle(), textAlign: TextAlign.justify),
+            Text('${widget.newsDetails.details}', style: primaryTextStyle(), textAlign: TextAlign.justify),
             16.height,
             nbAppButtonWidget(context, 'Comment', () {
               PurchaseMoreScreen(true).launch(context);
