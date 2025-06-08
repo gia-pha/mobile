@@ -8,6 +8,8 @@ import 'package:gia_pha_mobile/utils/NBWidgets.dart';
 class NBMembershipScreen extends StatefulWidget {
   static String tag = '/NBMembershipScreen';
 
+  const NBMembershipScreen({super.key});
+
   @override
   NBMembershipScreenState createState() => NBMembershipScreenState();
 }
@@ -73,11 +75,11 @@ class NBMembershipScreenState extends State<NBMembershipScreen> {
                         child: Icon(Icons.check, color: index == selectedIndex ? white : grey.withOpacity(0.2)),
                       ),
                       16.height,
-                      Text('${membershipPlanList[index].timePeriod}', style: boldTextStyle(size: 20)),
+                      Text(membershipPlanList[index].timePeriod, style: boldTextStyle(size: 20)),
                       8.height,
-                      Text('${membershipPlanList[index].price}', style: boldTextStyle()),
+                      Text(membershipPlanList[index].price, style: boldTextStyle()),
                       16.height,
-                      Text('${membershipPlanList[index].text}', style: secondaryTextStyle()),
+                      Text(membershipPlanList[index].text, style: secondaryTextStyle()),
                     ],
                   ),
                 ).onTap(() {

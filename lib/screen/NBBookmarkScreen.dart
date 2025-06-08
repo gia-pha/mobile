@@ -30,11 +30,11 @@ class NBBookmarkScreenState extends State<NBBookmarkScreen> {
   }
 
   Future<void> init() async {
-    newsList.forEach((element) {
+    for (var element in newsList) {
       if (element.isBookmark) {
         bookmarkNewsList.add(element);
       }
-    });
+    }
   }
 
   @override
@@ -46,7 +46,7 @@ class NBBookmarkScreenState extends State<NBBookmarkScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: nbAppBarWidget(context, title: 'Bookmark'),
-      body: bookmarkNewsList.length != 0
+      body: bookmarkNewsList.isNotEmpty
           ? SingleChildScrollView(
               child: Column(
                 children: [
@@ -58,8 +58,8 @@ class NBBookmarkScreenState extends State<NBBookmarkScreen> {
                         value: dropDownValue,
                         items: List.generate(dropDownItems.length, (index) {
                           return DropdownMenuItem(
-                            child: Text('${dropDownItems[index]}', style: boldTextStyle()),
                             value: dropDownItems[index],
+                            child: Text('${dropDownItems[index]}', style: boldTextStyle()),
                           );
                         }),
                         onChanged: (dynamic value) {
@@ -98,8 +98,8 @@ class NBBookmarkScreenState extends State<NBBookmarkScreen> {
                                 return [
                                   PopupMenuItem(
                                     height: 10,
-                                    child: Text('Remove', style: boldTextStyle()),
                                     value: 'Remove',
+                                    child: Text('Remove', style: boldTextStyle()),
                                   ),
                                 ];
                               },

@@ -10,6 +10,8 @@ import 'package:gia_pha_mobile/utils/NBWidgets.dart';
 class NBSignInScreen extends StatefulWidget {
   static String tag = '/NBSignInScreen';
 
+  const NBSignInScreen({super.key});
+
   @override
   NBSignInScreenState createState() => NBSignInScreenState();
 }
@@ -84,6 +86,10 @@ class NBSignInScreenState extends State<NBSignInScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppButton(
+                  onTap: () {},
+                  width: (context.width() - (3 * 16)) * 0.5,
+                  color: NBFacebookColor,
+                  elevation: 0,
                   child: Row(
                     children: [
                       Image.asset(NBFacebookLogo, width: 20, height: 20),
@@ -91,13 +97,13 @@ class NBSignInScreenState extends State<NBSignInScreen> {
                       Text('Facebook', style: primaryTextStyle(color: white)),
                     ],
                   ),
-                  onTap: () {},
-                  width: (context.width() - (3 * 16)) * 0.5,
-                  color: NBFacebookColor,
-                  elevation: 0,
                 ).cornerRadiusWithClipRRect(20),
                 16.width,
                 AppButton(
+                  onTap: () {},
+                  width: (context.width() - (3 * 16)) * 0.5,
+                  elevation: 0,
+                  shapeBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide(width: 1, color: grey)),
                   child: Row(
                     children: [
                       Image.asset(NBGoogleLogo, width: 20, height: 20),
@@ -105,10 +111,6 @@ class NBSignInScreenState extends State<NBSignInScreen> {
                       Text('Google', style: primaryTextStyle(color: black)),
                     ],
                   ),
-                  onTap: () {},
-                  width: (context.width() - (3 * 16)) * 0.5,
-                  elevation: 0,
-                  shapeBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide(width: 1, color: grey)),
                 ),
               ],
             ),

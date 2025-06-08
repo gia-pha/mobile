@@ -7,6 +7,8 @@ import 'package:nb_utils/nb_utils.dart';
 class NBSplashScreen extends StatefulWidget {
   static String tag = '/NBSplashScreen';
 
+  const NBSplashScreen({super.key});
+
   @override
   NBSplashScreenState createState() => NBSplashScreenState();
 }

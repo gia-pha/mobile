@@ -48,7 +48,7 @@ class NBAllNewsComponentState extends State<NBAllNewsComponent> {
       child: Column(
         children: [
           16.height,
-          Container(
+          SizedBox(
             height: 200,
             child: PageView(
               controller: pageController,

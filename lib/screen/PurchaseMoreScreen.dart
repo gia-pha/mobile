@@ -7,7 +7,7 @@ import 'package:gia_pha_mobile/utils/NBImages.dart';
 class PurchaseMoreScreen extends StatefulWidget {
   final bool? enableAppbar;
 
-  PurchaseMoreScreen(this.enableAppbar);
+  const PurchaseMoreScreen(this.enableAppbar, {super.key});
 
   @override
   _PurchaseMoreScreenState createState() => _PurchaseMoreScreenState();

@@ -7,6 +7,8 @@ import 'package:gia_pha_mobile/utils/NBWidgets.dart';
 class NBShowMoreNewsScreen extends StatefulWidget {
   static String tag = '/NBShowMoreNewsScreen';
 
+  const NBShowMoreNewsScreen({super.key});
+
   @override
   NBShowMoreNewsScreenState createState() => NBShowMoreNewsScreenState();
 }

@@ -6,6 +6,8 @@ import 'package:gia_pha_mobile/utils/NBWidgets.dart';
 class NBSingUpScreen extends StatefulWidget {
   static String tag = '/NBSingUpScreen';
 
+  const NBSingUpScreen({super.key});
+
   @override
   NBSingUpScreenState createState() => NBSingUpScreenState();
 }
