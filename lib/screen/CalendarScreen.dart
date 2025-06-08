@@ -14,7 +14,7 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
-  DateTime _currentDate = DateTime(2019, 2, 3);
+  final DateTime _currentDate = DateTime(2019, 2, 3);
   DateTime _currentDate2 = DateTime(2019, 2, 3);
   String _currentMonth = DateFormat.yMMM().format(DateTime(2019, 2, 3));
   DateTime _targetDateTime = DateTime(2019, 2, 3);

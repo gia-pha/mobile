@@ -7,6 +7,8 @@ import 'package:gia_pha_mobile/utils/NBImages.dart';
 class NBWalkThroughScreen extends StatefulWidget {
   static String tag = '/NBWalkThroughScreen';
 
+  const NBWalkThroughScreen({super.key});
+
   @override
   NBWalkThroughScreenState createState() => NBWalkThroughScreenState();
 }
@@ -41,7 +43,7 @@ class NBWalkThroughScreenState extends State<NBWalkThroughScreen> {
           Column(
             children: [
               70.height,
-              Container(
+              SizedBox(
                 height: context.height() * 0.5,
                 child: PageView.builder(
                   controller: pageController,

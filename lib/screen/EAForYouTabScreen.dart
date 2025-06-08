@@ -110,7 +110,7 @@ class EAForYouTabScreenState extends State<EAForYouTabScreen> {
                           children: [
                             Text(forYouList[i].hashtag!,
                                 style: secondaryTextStyle()),
-                            Text('\$' + forYouList[i].price.toString(),
+                            Text('\$${forYouList[i].price}',
                                 style: boldTextStyle(color: primaryColor1)),
                           ],
                         ),
@@ -149,7 +149,7 @@ class EAForYouTabScreenState extends State<EAForYouTabScreen> {
                                     style: secondaryTextStyle()),
                               ],
                             ),
-                            Text(forYouList[i].distance.toString() + 'km',
+                            Text('${forYouList[i].distance}km',
                                 style:
                                     secondaryTextStyle(color: primaryColor1)),
                           ],

@@ -9,6 +9,8 @@ import 'package:gia_pha_mobile/utils/NBAppWidget.dart';
 class NBSettingScreen extends StatefulWidget {
   static String tag = '/NBSettingScreen';
 
+  const NBSettingScreen({super.key});
+
   @override
   NBSettingScreenState createState() => NBSettingScreenState();
 }
@@ -54,9 +56,9 @@ class NBSettingScreenState extends State<NBSettingScreen> {
               index == 0
                   ? Row(
                       children: [
-                        commonCacheImageWidget('${result!.image}', 30),
+                        commonCacheImageWidget(result!.image, 30),
                         8.width,
-                        Text('${result!.name}', style: primaryTextStyle()),
+                        Text(result!.name, style: primaryTextStyle()),
                         Icon(Icons.navigate_next).paddingAll(8),
                       ],
                     )

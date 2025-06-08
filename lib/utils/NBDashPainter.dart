@@ -31,7 +31,7 @@ class _DashPainter extends CustomPainter {
       ..strokeCap = strokeCap
       ..style = PaintingStyle.stroke;
 
-    Path _path;
+    Path path;
     if (customPath != null) {
       // _path = dashPath(
       //   customPath!(size),
@@ -129,6 +129,6 @@ class _DashPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_DashPainter oldDelegate) {
-    return oldDelegate.strokeWidth != this.strokeWidth || oldDelegate.color != this.color || oldDelegate.dashPattern != this.dashPattern || oldDelegate.borderType != this.borderType;
+    return oldDelegate.strokeWidth != strokeWidth || oldDelegate.color != color || oldDelegate.dashPattern != dashPattern || oldDelegate.borderType != borderType;
   }
 }
