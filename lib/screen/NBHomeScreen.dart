@@ -10,7 +10,7 @@ import 'package:gia_pha_mobile/model/NBModel.dart';
 import 'package:gia_pha_mobile/screen/PurchaseMoreScreen.dart';
 import 'package:gia_pha_mobile/screen/EAMayBEYouKnowScreen.dart';
 import 'package:gia_pha_mobile/screen/CalendarScreen.dart';
-import 'package:gia_pha_mobile/screen/EATodayTicketScreen.dart';
+import 'package:gia_pha_mobile/screen/WACategoriesScreen.dart';
 import 'package:gia_pha_mobile/utils/NBColors.dart';
 import 'package:gia_pha_mobile/utils/NBDataProviders.dart';
 import 'package:gia_pha_mobile/utils/NBImages.dart';
@@ -141,7 +141,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
           EAMayBEYouKnowScreen(),
           EAForYouTabScreen(),
           CalendarScreen(),
-          EATodayTicketScreen(),
+          WACategoriesScreen(),
           ImageGalleryScreen(),
           NBAllNewsComponent(),
           PurchaseMoreScreen(false),

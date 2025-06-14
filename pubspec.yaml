@@ -23,6 +23,7 @@ dependencies:
   flutter_calendar_carousel: ^2.5.3
   intl: ^0.20.0
   simple_gallery: ^0.0.3
+  fl_chart: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -36,3 +37,4 @@ flutter:
   assets:
     - images/newsBlog/
     - images/events/
+    - assets/
