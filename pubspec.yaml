@@ -24,12 +24,20 @@ dependencies:
   intl: ^0.20.0
   simple_gallery: ^0.0.3
   fl_chart: ^1.0.0
+  pact_dart: ^0.8.0
+
+dependency_overrides:
+  pact_dart:
+    git:
+      url: https://github.com/tienvx/pact_dart.git
+      ref: allow-install-http-package-1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^6.0.0
+  test: ^1.25.15
 
 
 flutter:
