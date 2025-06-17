@@ -1,10 +1,11 @@
 import 'package:pact_dart/pact_dart.dart';
 import 'package:test/test.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
-  test('Counter value should be incremented', () {
+  test('Counter value should be incremented', () async {
     // Create a Pact between the consumer and provider
-    final pact = PactMockService('QueryMatcherConsumer', 'QueryMatcherProvider');
+    final pact = PactMockService('mobile', 'member');
 
     // Create a new interaction
     pact
@@ -14,27 +15,10 @@ void main() {
         // Configure the request
         .withRequest(
           'GET',
-          '/api/search',
+          '/api/members',
           query: {
-            // Simple value
-            'simple': 'value',
-            // Multiple values for a single parameter
-            'ids': PactMatchers.QueryMultiValue(['1', '2', '3']),
-            // Regex matching for a single value
-            'code': PactMatchers.QueryRegex('ABC123', '^[A-Z]{3}\\d{3}\$'),
-            // Regex matching for all values in a list
-            'types': PactMatchers.QueryMultiRegex([
-              'type1',
-              'type2',
-            ], '^type\\d+\$'),
-            // Type matching with type inference (integer)
-            'limit': PactMatchers.QuerySomethingLike(10),
-            // Type matching with type inference (decimal)
-            'price': PactMatchers.QuerySomethingLike(19.99),
-            // Type matching with type inference (boolean)
-            'available': PactMatchers.QuerySomethingLike(true),
-            // Match array of values of the same type
-            'tags': PactMatchers.QueryEachLike("tag", min: 2),
+            'status': PactMatchers.QueryRegex('divorced', 'divorced|separated|engaged'),
+            'adoptionStatus': PactMatchers.QueryRegex('adopted', 'adopted|foster'),
           },
         )
         // Configure the response
@@ -42,11 +26,25 @@ void main() {
           200,
           headers: {'Content-Type': 'application/json'},
           body: {
-            'results': [
-              {'id': 1, 'name': 'Item 1'},
-              {'id': 2, 'name': 'Item 2'},
-            ],
-            'metadata': {'total': 2, 'query': 'value'},
+            'results': PactMatchers.EachLike(
+              {
+                'id': PactMatchers.SomethingLike('gf1'),
+                'name': PactMatchers.SomethingLike('Robert Smith'),
+                'fatherId': PactMatchers.SomethingLike('gf2'),
+                'motherId': PactMatchers.SomethingLike('gm2'),
+                'dateOfBirth': PactMatchers.SomethingLike('1980-01-01T00:00:00Z'),
+                'dateOfDeath': PactMatchers.SomethingLike('2020-01-01T00:00:00Z'),
+                'gender': PactMatchers.IntegerLike(1),
+                'spouses': PactMatchers.EachLike('gf2'),
+                'extraData': {
+                  'medicalInfo': PactMatchers.SomethingLike('No allergies'),
+                  'hobbies': PactMatchers.EachLike('reading'),
+                },
+                'color': PactMatchers.IntegerLike(4289374895), // Example ARGB color
+                'isDeceased': PactMatchers.SomethingLike(true),
+              },
+              min: 1,
+            ),
           },
         );
 
@@ -58,8 +56,17 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
+
+      var url = Uri.http(pact.addr, '/api/members', {
+        'status': 'divorced',
+        'adoptionStatus': 'adopted',
+      });
+      var response = await http.get(url);
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
       // Write the pact file if all tests pass
-      pact.writePactFile();
+      pact.writePactFile(directory: 'test/contract/contracts');
     } finally {
       // Clean up the mock server
       pact.reset();
