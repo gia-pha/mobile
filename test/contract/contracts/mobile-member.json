@@ -1,0 +1,197 @@
+{
+  "consumer": {
+    "name": "mobile"
+  },
+  "interactions": [
+    {
+      "description": "a request to search with query matchers",
+      "providerStates": [
+        {
+          "name": "search service is running"
+        }
+      ],
+      "request": {
+        "matchingRules": {
+          "query": {
+            "adoptionStatus": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "adopted|foster"
+                }
+              ]
+            },
+            "status": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "divorced|separated|engaged"
+                }
+              ]
+            }
+          }
+        },
+        "method": "GET",
+        "path": "/api/members",
+        "query": {
+          "adoptionStatus": [
+            "adopted"
+          ],
+          "status": [
+            "divorced"
+          ]
+        }
+      },
+      "response": {
+        "body": {
+          "results": {
+            "color": 4289374895,
+            "dateOfBirth": "1980-01-01T00:00:00Z",
+            "dateOfDeath": "2020-01-01T00:00:00Z",
+            "extraData": {
+              "hobbies": "reading",
+              "medicalInfo": "No allergies"
+            },
+            "fatherId": "gf2",
+            "gender": 1,
+            "id": "gf1",
+            "isDeceased": true,
+            "motherId": "gm2",
+            "name": "Robert Smith",
+            "spouses": "gf2"
+          }
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$.results": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            },
+            "$.results.color": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.results.dateOfBirth": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.results.dateOfDeath": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.results.extraData.hobbies": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 0
+                }
+              ]
+            },
+            "$.results.extraData.medicalInfo": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.results.fatherId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.results.gender": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.results.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.results.isDeceased": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.results.motherId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.results.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.results.spouses": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 0
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pactRust": {
+      "ffi": "0.4.27",
+      "mockserver": "1.2.11",
+      "models": "1.2.8"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "member"
+  }
+}
