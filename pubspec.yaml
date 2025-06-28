@@ -20,7 +20,7 @@ dependencies:
   url_launcher: ^6.3.1
   org_chart: ^5.0.0-alpha
   flutter_vector_icons: ^2.0.0
-  flutter_calendar_carousel: ^2.5.3
+  calendar_view: ^1.4.0
   intl: ^0.20.0
   simple_gallery: ^0.0.3
   fl_chart: ^1.0.0
