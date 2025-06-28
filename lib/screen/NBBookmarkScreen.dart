@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gia_pha_mobile/model/NBModel.dart';
-import 'package:gia_pha_mobile/screen/NBNewsDetailsScreen.dart';
 import 'package:gia_pha_mobile/screen/PurchaseMoreScreen.dart';
 import 'package:gia_pha_mobile/utils/NBColors.dart';
 import 'package:gia_pha_mobile/utils/NBDataProviders.dart';
@@ -59,7 +58,7 @@ class NBBookmarkScreenState extends State<NBBookmarkScreen> {
                         items: List.generate(dropDownItems.length, (index) {
                           return DropdownMenuItem(
                             value: dropDownItems[index],
-                            child: Text('${dropDownItems[index]}', style: boldTextStyle()),
+                            child: Text(dropDownItems[index], style: boldTextStyle()),
                           );
                         }),
                         onChanged: (dynamic value) {

@@ -26,7 +26,7 @@ class WAStatisticsScreenState extends State<WAStatisticsScreen> {
     init();
   }
 
-  init() async {
+  Future<void> init() async {
     //
   }
 
@@ -61,7 +61,7 @@ class WAStatisticsScreenState extends State<WAStatisticsScreen> {
                   children: [
                     Text('Overview', style: boldTextStyle(size: 20)),
                     16.height,
-                    Container(
+                    SizedBox(
                       width: 100,
                       height: 50,
                       child: DropdownButtonFormField(

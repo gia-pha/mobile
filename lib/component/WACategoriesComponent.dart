@@ -7,7 +7,7 @@ class WACategoriesComponent extends StatefulWidget {
 
   final WATransactionModel? categoryModel;
 
-  WACategoriesComponent({this.categoryModel});
+  const WACategoriesComponent({super.key, this.categoryModel});
 
   @override
   WACategoriesComponentState createState() => WACategoriesComponentState();
@@ -20,7 +20,7 @@ class WACategoriesComponentState extends State<WACategoriesComponent> {
     init();
   }
 
-  init() async {
+  Future<void> init() async {
     //
   }
 
@@ -38,7 +38,7 @@ class WACategoriesComponentState extends State<WACategoriesComponent> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          new Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
@@ -46,7 +46,7 @@ class WACategoriesComponentState extends State<WACategoriesComponent> {
                 width: 50,
                 alignment: Alignment.center,
                 decoration: boxDecorationWithRoundedCorners(boxShape: BoxShape.circle, backgroundColor: widget.categoryModel!.color!.withOpacity(0.1)),
-                child: ImageIcon(AssetImage('${widget.categoryModel!.image!}'), size: 24, color: widget.categoryModel!.color!),
+                child: ImageIcon(AssetImage(widget.categoryModel!.image!), size: 24, color: widget.categoryModel!.color!),
               ),
               SizedBox(width: 10),
               Text(widget.categoryModel!.title!, style: boldTextStyle()),
@@ -60,7 +60,7 @@ class WACategoriesComponentState extends State<WACategoriesComponent> {
               borderRadius: BorderRadius.circular(30),
               backgroundColor: widget.categoryModel!.color!.withOpacity(0.1),
             ),
-            child: Text('${widget.categoryModel!.balance!}', maxLines: 1, style: boldTextStyle(size: 12, color: widget.categoryModel!.color!)),
+            child: Text(widget.categoryModel!.balance!, maxLines: 1, style: boldTextStyle(size: 12, color: widget.categoryModel!.color!)),
           ),
         ]
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:gia_pha_mobile/screen/WAStatisticsScreen.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gia_pha_mobile/component/WACategoriesComponent.dart';
@@ -24,7 +23,7 @@ class WACategoriesScreenState extends State<WACategoriesScreen> {
     init();
   }
 
-  init() async {
+  Future<void> init() async {
     //
   }
 

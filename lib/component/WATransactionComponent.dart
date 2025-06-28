@@ -7,7 +7,7 @@ class WATransactionComponent extends StatefulWidget {
 
   final WATransactionModel? transactionModel;
 
-  WATransactionComponent({this.transactionModel});
+  const WATransactionComponent({super.key, this.transactionModel});
 
   @override
   WATransactionComponentState createState() => WATransactionComponentState();
@@ -48,7 +48,7 @@ class WATransactionComponentState extends State<WATransactionComponent> {
             backgroundColor: widget.transactionModel!.color!.withOpacity(0.1),
           ),
           child: ImageIcon(
-            AssetImage('${widget.transactionModel!.image!}'),
+            AssetImage(widget.transactionModel!.image!),
             size: 24,
             color: widget.transactionModel!.color!,
           ),
@@ -56,7 +56,7 @@ class WATransactionComponentState extends State<WATransactionComponent> {
         title: RichTextWidget(
           list: [
             TextSpan(
-              text: '${widget.transactionModel!.title!}',
+              text: widget.transactionModel!.title!,
               style: primaryTextStyle(color: Colors.black54, size: 14),
             ),
             TextSpan(
@@ -66,7 +66,7 @@ class WATransactionComponentState extends State<WATransactionComponent> {
           ],
           maxLines: 1,
         ),
-        subtitle: Text('${widget.transactionModel!.time!}', style: primaryTextStyle(color: Colors.black54, size: 14)),
+        subtitle: Text(widget.transactionModel!.time!, style: primaryTextStyle(color: Colors.black54, size: 14)),
         trailing: Container(
           width: 80,
           height: 35,
@@ -76,7 +76,7 @@ class WATransactionComponentState extends State<WATransactionComponent> {
             backgroundColor: widget.transactionModel!.color!.withOpacity(0.1),
           ),
           child: Text(
-            '${widget.transactionModel!.balance!}',
+            widget.transactionModel!.balance!,
             maxLines: 1,
             style: boldTextStyle(size: 12, color: widget.transactionModel!.color!),
           ),

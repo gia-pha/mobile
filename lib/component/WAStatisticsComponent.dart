@@ -5,6 +5,8 @@ import 'package:gia_pha_mobile/utils/WAWidgets.dart';
 class WAStatisticsComponent extends StatefulWidget {
   static String tag = '/WAStatisticsComponent';
 
+  const WAStatisticsComponent({super.key});
+
   @override
   WAStatisticsComponentState createState() => WAStatisticsComponentState();
 }
@@ -16,7 +18,7 @@ class WAStatisticsComponentState extends State<WAStatisticsComponent> {
     init();
   }
 
-  init() async {
+  Future<void> init() async {
     //
   }
 
