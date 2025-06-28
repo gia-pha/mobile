@@ -28,7 +28,7 @@ class WAStatisticsChartComponentState extends State<WAStatisticsChartComponent> 
     init();
   }
 
-  init() async {
+  Future<void> init() async {
     final barGroup1 = makeGroupData(0, 5, 12);
     final barGroup2 = makeGroupData(1, 16, 12);
     final barGroup3 = makeGroupData(2, 18, 5);

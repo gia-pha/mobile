@@ -34,7 +34,7 @@ class NBSettingScreenState extends State<NBSettingScreen> {
     if (mounted) super.setState(fn);
   }
 
-  gotoNext(int index) async {
+  Future<void> gotoNext(int index) async {
     result = await mSettingList[index].widget.launch(context);
     setState(() {});
   }
