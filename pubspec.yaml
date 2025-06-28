@@ -29,7 +29,7 @@ dependency_overrides:
   pact_dart:
     git:
       url: https://github.com/tienvx/pact_dart.git
-      ref: allow-install-http-package-1.0
+      ref: move-http-to-dev-dependencies
 
 dev_dependencies:
   flutter_test:
