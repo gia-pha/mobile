@@ -3,19 +3,15 @@ import 'package:gia_pha_mobile/utils/genogram_utils.dart';
 import 'package:gia_pha_mobile/widgets/genogram_node.dart';
 import 'package:org_chart/org_chart.dart';
 import 'package:gia_pha_mobile/model/FamilyMember.dart';
-import 'package:gia_pha_mobile/model/NBModel.dart';
 
-class FamilyTreeComponent extends StatefulWidget {
-  static String tag = '/NBNewsComponent';
-  final List<NBNewsDetailsModel>? list;
-
-  const FamilyTreeComponent({super.key, this.list});
+class FamilyTreeScreen extends StatefulWidget {
+  const FamilyTreeScreen({super.key});
 
   @override
-  FamilyTreeComponentState createState() => FamilyTreeComponentState();
+  State<FamilyTreeScreen> createState() => _FamilyTreeScreenState();
 }
 
-class FamilyTreeComponentState extends State<FamilyTreeComponent> {
+class _FamilyTreeScreenState extends State<FamilyTreeScreen> {
   late final GenogramController<FamilyMember> controller;
   final CustomInteractiveViewerController _interactiveController =
       CustomInteractiveViewerController();
@@ -83,14 +79,20 @@ class FamilyTreeComponentState extends State<FamilyTreeComponent> {
             decorator: const DivorceDecorator(),
           )),
       isDraggable: true,
-      enableZoom: true,
-      minScale: 0.4,
-      maxScale: 2.0,
+      interactionConfig: const InteractionConfig(
+        enableRotation: false,
+        constrainBounds: true,
+        // enablePan: true,
+        // scrollMode: ScrollMode.drag,
+      ),
+      zoomConfig: const ZoomConfig(
+        enableZoom: true,
+        minScale: 0.4,
+        maxScale: 2.0,
+        enableDoubleTapZoom: true,
+        doubleTapZoomFactor: 0.8,
+      ),
       focusNode: focusNode,
-      enableRotation: false,
-      constrainBounds: true,
-      enableDoubleTapZoom: true,
-      doubleTapZoomFactor: 0.8,
     );
   }
 }
