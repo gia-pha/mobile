@@ -189,10 +189,10 @@ packages:
     dependency: transitive
     description:
       name: custom_interactive_viewer
-      sha256: "52b64f9e1c5b25cd0c277dfb609663c75b79f5af64c2254ae6ae1145f898255e"
+      sha256: b81623e13c16dd7a9bf417a7379f270ef1256a8c89b34b327945c26bb7017549
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.6"
+    version: "0.0.7"
   dbus:
     dependency: transitive
     description:
@@ -580,10 +580,10 @@ packages:
     dependency: "direct main"
     description:
       name: org_chart
-      sha256: "21c1391a4c4a84c3777c0796b7aacc42472274b8bc08ae4316c896d612f994fa"
+      sha256: "8e3e79e8ec6d9e737ebcbf4b2a1f0b90eaff6ef975c42b6af42c4ed3150cd51b"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0-alpha.3"
+    version: "5.0.0-alpha.5"
   package_config:
     dependency: transitive
     description:

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gia_pha_mobile/component/FamilyTreeComponent.dart';
+import 'package:gia_pha_mobile/screen/FamilyTreeScreen.dart';
 import 'package:gia_pha_mobile/screen/EAForYouTabScreen.dart';
 import 'package:gia_pha_mobile/screen/FamilyDetailsScreen.dart';
 import 'package:gia_pha_mobile/screen/ImageGalleryScreen.dart';
@@ -137,7 +137,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
         controller: tabController,
         children: [
           FamilyDetailsScreen(newsDetails: mNewsList[0],),
-          FamilyTreeComponent(),
+          FamilyTreeScreen(),
           EAMayBEYouKnowScreen(),
           EAForYouTabScreen(),
           CalendarScreen(),
