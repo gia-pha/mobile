@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gia_pha_mobile/screen/NBSplashScreen.dart';
+import 'package:gia_pha_mobile/screen/PasskeyAuthScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: NBSplashScreen(),
+      home: PasskeyAuthScreen(),
     );
   }
 }
