@@ -580,10 +580,10 @@ packages:
     dependency: "direct main"
     description:
       name: org_chart
-      sha256: "8e3e79e8ec6d9e737ebcbf4b2a1f0b90eaff6ef975c42b6af42c4ed3150cd51b"
+      sha256: "7695c00760416452ef5edf80d322f9f521e206379ad872153c3409e3b696cc0d"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0-alpha.5"
+    version: "5.0.2"
   package_config:
     dependency: transitive
     description:
