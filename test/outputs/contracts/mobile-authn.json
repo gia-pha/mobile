@@ -1,0 +1,146 @@
+{
+  "consumer": {
+    "name": "mobile"
+  },
+  "interactions": [
+    {
+      "description": "a request to create authentication options",
+      "request": {
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "method": "POST",
+        "path": "/webauthn/authentication/options"
+      },
+      "response": {
+        "body": {
+          "challenge": "aBcDeFg123",
+          "rpId": "example.com",
+          "timeout": 60000,
+          "userVerification": "required"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "a request to create registration options",
+      "request": {
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "method": "POST",
+        "path": "/webauthn/registration/options"
+      },
+      "response": {
+        "body": {
+          "attestation": "none",
+          "authenticatorSelection": {
+            "residentKey": "required",
+            "userVerification": "required"
+          },
+          "challenge": "3vTO0kB4v2T6xMEsIgO7Bg",
+          "pubKeyCredParams": [
+            {
+              "alg": -7,
+              "type": "public-key"
+            },
+            {
+              "alg": -257,
+              "type": "public-key"
+            }
+          ],
+          "rp": {
+            "id": "example.com",
+            "name": "My App"
+          },
+          "timeout": 60000,
+          "user": {
+            "displayName": "Passkey User",
+            "id": "QWJjMTIzNDU2",
+            "name": "user@example.com"
+          }
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "a request to finish authentication",
+      "request": {
+        "body": {
+          "id": "ZGV2aWNlY3JlZGlk",
+          "rawId": "ZGV2aWNlY3JlZGlk",
+          "response": {
+            "authenticatorData": "YXV0aGRhdGE",
+            "clientDataJSON": "eyJjaGFsbGVuZ2UiOiAiLi4uIn0",
+            "signature": "c2lnbmF0dXJl",
+            "userHandle": "QWJjMTIzNDU2"
+          },
+          "type": "public-key"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "method": "POST",
+        "path": "/webauthn/authentication/verify"
+      },
+      "response": {
+        "body": {
+          "status": "ok",
+          "userId": "QWJjMTIzNDU2"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "a request to finish registration",
+      "request": {
+        "body": {
+          "id": "ZGV2aWNlY3JlZGlk",
+          "rawId": "ZGV2aWNlY3JlZGlk",
+          "response": {
+            "attestationObject": "o2NmbXR...",
+            "clientDataJSON": "eyJjaGFsbGVuZ2UiOiAiLi4uIn0"
+          },
+          "type": "public-key"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "method": "POST",
+        "path": "/webauthn/registration/verify"
+      },
+      "response": {
+        "body": {
+          "status": "ok",
+          "userId": "QWJjMTIzNDU2"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pactRust": {
+      "ffi": "0.4.27",
+      "mockserver": "1.2.11",
+      "models": "1.2.8"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "authn"
+  }
+}

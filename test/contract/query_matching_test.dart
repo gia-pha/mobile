@@ -66,7 +66,7 @@ void main() {
       print('Response body: ${response.body}');
 
       // Write the pact file if all tests pass
-      pact.writePactFile(directory: 'test/contract/contracts');
+      pact.writePactFile(directory: 'test/outputs/contracts');
     } finally {
       // Clean up the mock server
       pact.reset();
