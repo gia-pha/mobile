@@ -21,7 +21,7 @@ class _PasskeyAuthScreenState extends State<PasskeyAuthScreen> {
   bool _registered = false;
   List<Map<String, dynamic>> _credentials = [];
 
-  final String backendBase = 'https://your-backend.example.com';
+  final String backendBase = 'http://localhost:46025/';
 
   @override
   void initState() {
