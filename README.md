@@ -119,6 +119,7 @@ flutter test test/path_to_test.dart
 ### Contract Tests
 
 ```bash
+PACT_DART_LIB_DOWNLOAD_PATH=./bin flutter pub run pact_dart:install
 PACT_DART_LIB_DOWNLOAD_PATH=./bin flutter test test/contract/query_matching_test.dart
 ```
 
