@@ -4,6 +4,78 @@
   },
   "interactions": [
     {
+      "description": "a request to check authentication status",
+      "request": {
+        "headers": {
+          "Cookie": "session=abc12345"
+        },
+        "matchingRules": {
+          "header": {
+            "Cookie": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "session=[a-zA-Z0-9\\-_.]+"
+                }
+              ]
+            }
+          }
+        },
+        "method": "GET",
+        "path": "/session"
+      },
+      "response": {
+        "body": {
+          "authenticated": true
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$.authenticated": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "boolean"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "a request to check authentication status with no session",
+      "request": {
+        "method": "GET",
+        "path": "/session"
+      },
+      "response": {
+        "body": {
+          "authenticated": false
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$.authenticated": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "boolean"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    },
+    {
       "description": "a request to create authentication options",
       "request": {
         "headers": {

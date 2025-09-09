@@ -612,8 +612,8 @@ packages:
     dependency: "direct dev"
     description:
       path: "."
-      ref: move-http-to-dev-dependencies
-      resolved-ref: "95737a1440607cd7fd2ad26c549f61941444fdc1"
+      ref: all
+      resolved-ref: dd958b1541eab46e775b61f31ecea9c69b8c54e2
       url: "https://github.com/tienvx/pact_dart.git"
     source: git
     version: "0.8.0"
