@@ -15,13 +15,15 @@ class PasskeyAuthScreen extends StatefulWidget {
 
 class _PasskeyAuthScreenState extends State<PasskeyAuthScreen> {
   static const MethodChannel _channel = MethodChannel('com.example.passkey/channel');
+  static const String backendBase = String.fromEnvironment(
+    'API_BASE_URL',
+    defaultValue: 'http://localhost:46025',
+  );
 
   bool _loading = true;
   String? _statusMessage;
   bool _registered = false;
   List<Map<String, dynamic>> _credentials = [];
-
-  final String backendBase = 'http://localhost:46025/';
 
   @override
   void initState() {
