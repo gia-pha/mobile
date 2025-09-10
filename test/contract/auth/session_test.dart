@@ -1,9 +1,10 @@
 import 'package:pact_dart/pact_dart.dart';
 import 'package:test/test.dart';
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 void main() {
-  test('Valid Session', () async {
+  test('Has Session', () async {
     // Create a Pact between the consumer and provider
     final pact = PactMockService('mobile', 'authn');
 
@@ -40,8 +41,10 @@ void main() {
         url,
         headers: {'Cookie': 'session=a1B2c3D4e5F6g7H8i9J0K'},
       );
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      assert(response.statusCode == 200);
+      final parsed = jsonDecode(response.body);
+      expect(parsed, isA<Map>());
+      expect(parsed, containsPair('authenticated', true));
 
       // Write the pact file if all tests pass
       pact.writePactFile(directory: 'test/outputs/contracts');
@@ -84,8 +87,10 @@ void main() {
       var response = await http.get(
         url,
       );
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      assert(response.statusCode == 200);
+      final parsed = jsonDecode(response.body);
+      expect(parsed, isA<Map>());
+      expect(parsed, containsPair('authenticated', false));
 
       // Write the pact file if all tests pass
       pact.writePactFile(directory: 'test/outputs/contracts');
