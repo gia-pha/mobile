@@ -4,17 +4,17 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 void main() {
-  test('Begin Registration', () async {
+  test('Begin Register', () async {
     // Create a Pact between the consumer and provider
     final pact = PactMockService('mobile', 'authn');
 
     // Create a new interaction
     pact
-        .newInteraction(description: 'a request to create registration options')
+        .newInteraction(description: 'a request to create register options')
         // Configure the request
         .withRequest(
           'POST',
-          '/webauthn/registration/options',
+          '/webauthn/register/options',
           headers: {'Content-Type': 'application/json'},
         )
         // Configure the response
@@ -50,7 +50,7 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
-      var url = Uri.http(pact.addr, '/webauthn/registration/options');
+      var url = Uri.http(pact.addr, '/webauthn/register/options');
       var response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
@@ -66,17 +66,17 @@ void main() {
     }
   });
 
-  test('Finish Registration', () async {
+  test('Finish Register', () async {
     // Create a Pact between the consumer and provider
     final pact = PactMockService('mobile', 'authn');
 
     // Create a new interaction
     pact
-        .newInteraction(description: 'a request to finish registration')
+        .newInteraction(description: 'a request to finish register')
         // Configure the request
         .withRequest(
           'POST',
-          '/webauthn/registration/verify',
+          '/webauthn/register/verify',
           headers: {'Content-Type': 'application/json'},
           body: {
             "id": "ZGV2aWNlY3JlZGlk",
@@ -103,7 +103,7 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
-      var url = Uri.http(pact.addr, '/webauthn/registration/verify');
+      var url = Uri.http(pact.addr, '/webauthn/register/verify');
       var response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},

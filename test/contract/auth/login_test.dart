@@ -11,12 +11,12 @@ void main() {
     // Create a new interaction
     pact
         .newInteraction(
-          description: 'a request to create authentication options',
+          description: 'a request to create login options',
         )
         // Configure the request
         .withRequest(
           'POST',
-          '/webauthn/authentication/options',
+          '/webauthn/login/options',
           headers: {'Content-Type': 'application/json'},
         )
         // Configure the response
@@ -40,7 +40,7 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
-      var url = Uri.http(pact.addr, '/webauthn/authentication/options');
+      var url = Uri.http(pact.addr, '/webauthn/login/options');
       var response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
@@ -62,11 +62,11 @@ void main() {
 
     // Create a new interaction
     pact
-        .newInteraction(description: 'a request to finish authentication')
+        .newInteraction(description: 'a request to finish login')
         // Configure the request
         .withRequest(
           'POST',
-          '/webauthn/authentication/verify',
+          '/webauthn/login/verify',
           headers: {'Content-Type': 'application/json'},
           body: {
             "id": "ZGV2aWNlY3JlZGlk",
@@ -95,7 +95,7 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
-      var url = Uri.http(pact.addr, '/webauthn/authentication/verify');
+      var url = Uri.http(pact.addr, '/webauthn/login/verify');
       var response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},

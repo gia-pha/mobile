@@ -76,13 +76,13 @@
       }
     },
     {
-      "description": "a request to create authentication options",
+      "description": "a request to create login options",
       "request": {
         "headers": {
           "Content-Type": "application/json"
         },
         "method": "POST",
-        "path": "/webauthn/authentication/options"
+        "path": "/webauthn/login/options"
       },
       "response": {
         "body": {
@@ -98,13 +98,13 @@
       }
     },
     {
-      "description": "a request to create registration options",
+      "description": "a request to create register options",
       "request": {
         "headers": {
           "Content-Type": "application/json"
         },
         "method": "POST",
-        "path": "/webauthn/registration/options"
+        "path": "/webauthn/register/options"
       },
       "response": {
         "body": {
@@ -142,7 +142,7 @@
       }
     },
     {
-      "description": "a request to finish authentication",
+      "description": "a request to finish login",
       "request": {
         "body": {
           "id": "ZGV2aWNlY3JlZGlk",
@@ -159,7 +159,7 @@
           "Content-Type": "application/json"
         },
         "method": "POST",
-        "path": "/webauthn/authentication/verify"
+        "path": "/webauthn/login/verify"
       },
       "response": {
         "body": {
@@ -173,7 +173,7 @@
       }
     },
     {
-      "description": "a request to finish registration",
+      "description": "a request to finish register",
       "request": {
         "body": {
           "id": "ZGV2aWNlY3JlZGlk",
@@ -188,7 +188,7 @@
           "Content-Type": "application/json"
         },
         "method": "POST",
-        "path": "/webauthn/registration/verify"
+        "path": "/webauthn/register/verify"
       },
       "response": {
         "body": {
