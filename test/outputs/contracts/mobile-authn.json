@@ -27,18 +27,45 @@
       },
       "response": {
         "body": {
-          "authenticated": true
+          "createdAt": "2023-10-01T12:34:56Z",
+          "id": "123",
+          "name": "John Doe",
+          "updatedAt": "2023-10-01T12:34:56Z"
         },
         "headers": {
           "Content-Type": "application/json"
         },
         "matchingRules": {
           "body": {
-            "$.authenticated": {
+            "$.createdAt": {
               "combine": "AND",
               "matchers": [
                 {
-                  "match": "boolean"
+                  "match": "type"
+                }
+              ]
+            },
+            "$.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.updatedAt": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
                 }
               ]
             }
@@ -54,25 +81,7 @@
         "path": "/session"
       },
       "response": {
-        "body": {
-          "authenticated": false
-        },
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "matchingRules": {
-          "body": {
-            "$.authenticated": {
-              "combine": "AND",
-              "matchers": [
-                {
-                  "match": "boolean"
-                }
-              ]
-            }
-          }
-        },
-        "status": 200
+        "status": 401
       }
     },
     {
@@ -82,7 +91,7 @@
           "Content-Type": "application/json"
         },
         "method": "POST",
-        "path": "/webauthn/login/options"
+        "path": "/login/start"
       },
       "response": {
         "body": {
@@ -104,7 +113,7 @@
           "Content-Type": "application/json"
         },
         "method": "POST",
-        "path": "/webauthn/register/options"
+        "path": "/register/start"
       },
       "response": {
         "body": {
@@ -159,7 +168,7 @@
           "Content-Type": "application/json"
         },
         "method": "POST",
-        "path": "/webauthn/login/verify"
+        "path": "/login/complete"
       },
       "response": {
         "body": {
@@ -188,7 +197,7 @@
           "Content-Type": "application/json"
         },
         "method": "POST",
-        "path": "/webauthn/register/verify"
+        "path": "/register/complete"
       },
       "response": {
         "body": {

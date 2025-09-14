@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/screen/PasskeyAuthScreen.dart';
+import 'package:gia_pha_mobile/services/auth_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (AuthService.credentialManager.isSupportedPlatform) { //check if platform is supported
+    await AuthService.credentialManager.init(
+      preferImmediatelyAvailableCredentials: true,
+    );
+  }
   runApp(const MyApp());
 }
 

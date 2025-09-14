@@ -16,7 +16,7 @@ void main() {
         // Configure the request
         .withRequest(
           'POST',
-          '/webauthn/login/options',
+          '/login/start',
           headers: {'Content-Type': 'application/json'},
         )
         // Configure the response
@@ -40,7 +40,7 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
-      var url = Uri.http(pact.addr, '/webauthn/login/options');
+      var url = Uri.http(pact.addr, '/login/start');
       var response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
@@ -66,7 +66,7 @@ void main() {
         // Configure the request
         .withRequest(
           'POST',
-          '/webauthn/login/verify',
+          '/login/complete',
           headers: {'Content-Type': 'application/json'},
           body: {
             "id": "ZGV2aWNlY3JlZGlk",
@@ -95,7 +95,7 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
-      var url = Uri.http(pact.addr, '/webauthn/login/verify');
+      var url = Uri.http(pact.addr, '/login/complete');
       var response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},

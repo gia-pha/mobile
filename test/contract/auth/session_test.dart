@@ -24,7 +24,10 @@ void main() {
           200,
           headers: {'Content-Type': 'application/json'},
           body: {
-            "authenticated": PactMatchers.boolean(true),
+            "id": PactMatchers.SomethingLike('123'),
+            "name": PactMatchers.SomethingLike('John Doe'),
+            'createdAt': PactMatchers.SomethingLike('2023-10-01T12:34:56Z'),
+            'updatedAt': PactMatchers.SomethingLike('2023-10-01T12:34:56Z'),
           },
         );
 
@@ -44,7 +47,10 @@ void main() {
       assert(response.statusCode == 200);
       final parsed = jsonDecode(response.body);
       expect(parsed, isA<Map>());
-      expect(parsed, containsPair('authenticated', true));
+      expect(parsed, containsPair('id', '123'));
+      expect(parsed, containsPair('name', 'John Doe'));
+      expect(parsed, contains('createdAt'));
+      expect(parsed, contains('updatedAt'));
 
       // Write the pact file if all tests pass
       pact.writePactFile(directory: 'test/outputs/contracts');
@@ -68,11 +74,7 @@ void main() {
         )
         // Configure the response
         .willRespondWith(
-          200,
-          headers: {'Content-Type': 'application/json'},
-          body: {
-            "authenticated": PactMatchers.boolean(false),
-          },
+          401,
         );
 
     try {
@@ -87,10 +89,7 @@ void main() {
       var response = await http.get(
         url,
       );
-      assert(response.statusCode == 200);
-      final parsed = jsonDecode(response.body);
-      expect(parsed, isA<Map>());
-      expect(parsed, containsPair('authenticated', false));
+      assert(response.statusCode == 401);
 
       // Write the pact file if all tests pass
       pact.writePactFile(directory: 'test/outputs/contracts');
