@@ -12,6 +12,19 @@
                 "PACT_DART_LIB_DOWNLOAD_PATH": "./bin",
             },
             "templateFor": ""
-        }
+        },
+        {
+            "name": "Run/Debug With Stub Server",
+            "request": "launch",
+            "type": "dart",
+            "env": {
+                // if we need env vars
+            },
+            // toolArgs to always be set when running tests
+            "toolArgs": [
+                "--dart-define=API_BASE_URL=http://10.0.2.2:38699"
+            ],
+            "templateFor": ""
+        },
     ]
 }
