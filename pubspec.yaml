@@ -25,10 +25,10 @@ dependencies:
   simple_gallery: ^0.0.3
   fl_chart: ^1.0.0
   http: ^1.5.0
-  credential_manager: ^2.0.4
   dio_cookie_manager: ^3.3.0
   dio: ^5.9.0
   cookie_jar: ^4.0.8
+  passkeys: ^2.13.0
 
 dependency_overrides:
   pact_dart:

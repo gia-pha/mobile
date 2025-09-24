@@ -1,19 +1,24 @@
 
 import 'dart:async';
-import 'dart:developer';
-import 'package:credential_manager/credential_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/screen/NBHomeScreen.dart';
-import 'package:gia_pha_mobile/services/auth_service.dart';
+import 'package:gia_pha_mobile/services/relying_party_server.dart';
+import 'package:passkeys/authenticator.dart';
 
 class PasskeyAuthScreen extends StatefulWidget {
-  const PasskeyAuthScreen({super.key});
+  final RelyingPartyServer rps;
+  final PasskeyAuthenticator authenticator;
+
+  const PasskeyAuthScreen({super.key, required this.rps, required this.authenticator});
 
   @override
   State<PasskeyAuthScreen> createState() => _PasskeyAuthScreenState();
 }
 
 class _PasskeyAuthScreenState extends State<PasskeyAuthScreen> {
+  late final RelyingPartyServer _rps = widget.rps;
+  late final PasskeyAuthenticator _authenticator = widget.authenticator;
+
   bool _loading = true;
   String? errorMessage;
 
@@ -26,7 +31,7 @@ class _PasskeyAuthScreenState extends State<PasskeyAuthScreen> {
 
   Future<void> _checkAuthStatus() async {
     try {
-      await AuthService.getUser();
+      await _rps.getUser();
       _navigateToMain();
     } catch (_) {}
     setState(() {
@@ -74,6 +79,13 @@ class _PasskeyAuthScreenState extends State<PasskeyAuthScreen> {
                   ),
                 ),
               ),
+              const SizedBox(height: 20),
+              if (errorMessage != null) // <-- Add this block
+                Text(
+                  errorMessage!,
+                  style: const TextStyle(color: Colors.red),
+                  textAlign: TextAlign.center,
+                ),
             ],
           ),
         ),
@@ -81,48 +93,14 @@ class _PasskeyAuthScreenState extends State<PasskeyAuthScreen> {
     );
   }
 
-  Future<CredentialCreationOptions?> initRegister() async {
-    final res = await AuthService.passKeyRegisterInit();
-    return res;
-  }
-
-  Future<CredentialLoginOptions?> initLogin() async {
-    final res = await AuthService.passKeyLoginInit();
-    return res;
-  }
-
   Future<void> login() async {
     setState(() {
       errorMessage = null;
     });
     try {
-      final options = await initLogin();
-      if (options == null) {
-        setState(() {
-          errorMessage = 'No credentials found';
-        });
-        return;
-      }
-      final credResponse =
-          await AuthService.credentialManager.getCredentials(
-        passKeyOption: CredentialLoginOptions(
-          challenge: options.challenge,
-          rpId: options.rpId,
-          userVerification: options.userVerification,
-        ),
-      );
-
-      if (credResponse.publicKeyCredential == null) {
-        setState(() {
-          errorMessage = 'No credentials found';
-        });
-        return;
-      }
-
-      final res = await AuthService.passKeyLoginFinish(
-        challenge: options.challenge,
-        request: credResponse.publicKeyCredential!,
-      );
+      final rps1 = await _rps.passKeyLoginInit();
+      final authenticatorRes = await _authenticator.authenticate(rps1);
+      _rps.passKeyLoginFinish(data: authenticatorRes);
 
       if (!mounted) return;
       Navigator.of(context).pushReplacement(
@@ -143,27 +121,14 @@ class _PasskeyAuthScreenState extends State<PasskeyAuthScreen> {
       errorMessage = null;
     });
     try {
-      final options = await initRegister();
-      if (options == null) {
-        return;
-      }
-      final credResponse = await AuthService.credentialManager
-          .savePasskeyCredentials(request: options);
-
-      final res = await AuthService.passKeyRegisterFinish(
-        challenge: options.challenge,
-        request: credResponse,
-      );
+      final rps1 = await _rps.startPasskeyRegister();
+      final authenticatorRes = await _authenticator.register(rps1);
+      _rps.passKeyRegisterFinish(data: authenticatorRes);
 
       if (!mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => const NBHomeScreen()),
       );
-    } on CredentialException catch (e) {
-      log("Error: ${e.message} ${e.code} ${e.details} ");
-      setState(() {
-        errorMessage = 'Error: ${e.message}';
-      });
     } catch (e) {
       setState(() {
         errorMessage = 'Error: $e';

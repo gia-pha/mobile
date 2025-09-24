@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/screen/PasskeyAuthScreen.dart';
-import 'package:gia_pha_mobile/services/auth_service.dart';
+import 'package:gia_pha_mobile/services/relying_party_server.dart';
+import 'package:passkeys/authenticator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (AuthService.credentialManager.isSupportedPlatform) { //check if platform is supported
-    await AuthService.credentialManager.init(
-      preferImmediatelyAvailableCredentials: true,
-    );
-  }
   runApp(const MyApp());
 }
 
@@ -23,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PasskeyAuthScreen(),
+      home: PasskeyAuthScreen(rps: RelyingPartyServer(), authenticator: PasskeyAuthenticator(),),
     );
   }
 }
