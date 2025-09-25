@@ -32,7 +32,7 @@ class RelyingPartyServer {
         name: response.data['user']['name'],
         displayName: response.data['user']['displayName'],
       ),
-      excludeCredentials: (response.data['excludeCredentials'] as List)
+      excludeCredentials: (response.data['excludeCredentials'] ?? [])
           .map(
             (e) => CredentialType(
               id: e['id'],
@@ -42,20 +42,22 @@ class RelyingPartyServer {
                   : <String>[],
             ),
           )
-          .toList(),
+          .toList()
+          .cast<CredentialType>(),
       authSelectionType: AuthenticatorSelectionType(
         requireResidentKey:
-            response.data['authSelectionType']['requireResidentKey'],
-        residentKey: response.data['authSelectionType']['residentKey'],
+            response.data['authenticatorSelection']?['requireResidentKey'] ?? false,
+        residentKey: response.data['authenticatorSelection']?['residentKey'],
         userVerification:
-            response.data['authSelectionType']['userVerification'],
+            response.data['authenticatorSelection']?['userVerification'],
         authenticatorAttachment:
-            response.data['authSelectionType']['authenticatorAttachment'],
+            response.data['authenticatorSelection']?['authenticatorAttachment'],
       ),
       pubKeyCredParams: (response.data['pubKeyCredParams'] as List)
           .map((e) => PubKeyCredParamType(type: e['type'], alg: e['alg']))
           .toList(),
-      timeout: 60000,
+      timeout: response.data['timeout'],
+      attestation: response.data['attestation'],
     );
   }
 
@@ -69,12 +71,14 @@ class RelyingPartyServer {
         data: data,
         options: Options(headers: {'Content-Type': 'application/json'}),
       );
+      if (kDebugMode) debugPrint('code: ${response.statusCode.toString()}');
 
       if (response.statusCode != 200) {
         throw Exception(
           'Failed to finish passkey registration: ${response.statusMessage}',
         );
       }
+      if (kDebugMode) debugPrint('code: ${response.statusCode.toString()}');
 
       return UserModel.fromJson(response.data);
     } catch (e) {
@@ -97,7 +101,7 @@ class RelyingPartyServer {
 
     return AuthenticateRequestType(
       challenge: response.data['challenge'],
-      allowCredentials: (response.data['allowCredentials'] as List)
+      allowCredentials: (response.data['allowCredentials'] ?? [])
           .map(
             (e) => CredentialType(
               id: e['id'],
@@ -107,7 +111,8 @@ class RelyingPartyServer {
                   : <String>[],
             ),
           )
-          .toList(),
+          .toList()
+          .cast<CredentialType>(),
       timeout: 60000,
       relyingPartyId: response.data['rpId'],
       userVerification: response.data['userVerification'],
