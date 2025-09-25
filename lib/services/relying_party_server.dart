@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'package:flutter/foundation.dart';
 
 import 'package:dio/dio.dart';
 import 'package:gia_pha_mobile/model/user_model.dart';
@@ -14,13 +14,13 @@ class RelyingPartyServer {
       '/register/start',
       options: Options(headers: {'Content-Type': 'application/json'}),
     );
-    print(response.toString());
+    if (kDebugMode) debugPrint(response.toString());
     if (response.statusCode != 200) {
       throw Exception(
         'Failed to load credential creation options: ${response.statusMessage}',
       );
     }
-    print('code: ${response.statusCode.toString()}');
+    if (kDebugMode) debugPrint('code: ${response.statusCode.toString()}');
     return RegisterRequestType(
       challenge: response.data['challenge'],
       relyingParty: RelyingPartyType(
@@ -78,7 +78,7 @@ class RelyingPartyServer {
 
       return UserModel.fromJson(response.data);
     } catch (e) {
-      log(e.toString());
+      if (kDebugMode) debugPrint(e.toString());
       throw Exception('Failed to finish passkey registration $e');
     }
   }
