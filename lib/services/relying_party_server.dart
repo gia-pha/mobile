@@ -20,7 +20,6 @@ class RelyingPartyServer {
         'Failed to load credential creation options: ${response.statusMessage}',
       );
     }
-    if (kDebugMode) debugPrint('code: ${response.statusCode.toString()}');
     return RegisterRequestType(
       challenge: response.data['challenge'],
       relyingParty: RelyingPartyType(
@@ -93,6 +92,7 @@ class RelyingPartyServer {
       '/login/start',
       options: Options(headers: {'Content-Type': 'application/json'}),
     );
+    if (kDebugMode) debugPrint(response.toString());
     if (response.statusCode != 200) {
       throw Exception(
         'Failed to load credential login options ${response.statusMessage}',
