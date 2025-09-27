@@ -89,7 +89,7 @@ class RelyingPartyServer {
 
   // Initialize passkey login
   Future<AuthenticateRequestType> passKeyLoginInit() async {
-    final response = await dio.get(
+    final response = await dio.post(
       '/login/start',
       options: Options(headers: {'Content-Type': 'application/json'}),
     );
