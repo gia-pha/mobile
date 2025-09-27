@@ -95,7 +95,7 @@
       },
       "response": {
         "body": {
-          "challenge": "aBcDeFg123",
+          "challenge": "T1xCsnxM2DNL2KdK5CLa6fMhD7OBqho6syzInk_n-Uo",
           "rpId": "example.com",
           "timeout": 60000,
           "userVerification": "required"

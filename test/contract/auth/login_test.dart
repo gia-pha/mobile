@@ -24,7 +24,7 @@ void main() {
           200,
           headers: {'Content-Type': 'application/json'},
           body: {
-            "challenge": "aBcDeFg123", // base64url
+            "challenge": "T1xCsnxM2DNL2KdK5CLa6fMhD7OBqho6syzInk_n-Uo", // base64url
             "rpId": "example.com",
             "timeout": 60000,
             "userVerification": "required",
