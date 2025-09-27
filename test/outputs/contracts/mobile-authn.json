@@ -154,26 +154,36 @@
       "description": "a request to finish login",
       "request": {
         "body": {
-          "id": "ZGV2aWNlY3JlZGlk",
-          "rawId": "ZGV2aWNlY3JlZGlk",
-          "response": {
-            "authenticatorData": "YXV0aGRhdGE",
-            "clientDataJSON": "eyJjaGFsbGVuZ2UiOiAiLi4uIn0",
-            "signature": "c2lnbmF0dXJl",
-            "userHandle": "QWJjMTIzNDU2"
-          },
-          "type": "public-key"
+          "authenticatorData": "o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcNAAAAAA",
+          "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiVDF4Q3NueE0yRE5MMktkSzVDTGE2Zk1oRDdPQnFobzZzeXpJbmtfbi1VbyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+          "id": "LuWl0E7-XeIUPAIYsREHgQ",
+          "rawId": "LuWl0E7-XeIUPAIYsREHgQ",
+          "signature": "MEQCIEaLypVlw9uHcwqISxlnfDsG11mkRvXTKHoA-EgrKir1AiB0NqkAaYnsomnltCMWlaoLFe6Rs_yElleNbCxhi6wv-Q",
+          "userHandle": "QWJjMTIzNDU2"
         },
         "headers": {
           "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$.signature": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
         },
         "method": "POST",
         "path": "/login/complete"
       },
       "response": {
         "body": {
-          "status": "ok",
-          "userId": "QWJjMTIzNDU2"
+          "displayName": "Passkey User",
+          "id": "QWJjMTIzNDU2",
+          "name": "user@example.com"
         },
         "headers": {
           "Content-Type": "application/json"

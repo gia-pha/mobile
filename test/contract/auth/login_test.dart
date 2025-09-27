@@ -69,22 +69,23 @@ void main() {
           '/login/complete',
           headers: {'Content-Type': 'application/json'},
           body: {
-            "id": "ZGV2aWNlY3JlZGlk",
-            "rawId": "ZGV2aWNlY3JlZGlk",
-            "type": "public-key",
-            "response": {
-              "clientDataJSON": "eyJjaGFsbGVuZ2UiOiAiLi4uIn0",
-              "authenticatorData": "YXV0aGRhdGE",
-              "signature": "c2lnbmF0dXJl",
-              "userHandle": "QWJjMTIzNDU2", // maps back to user
-            },
+            "id": "LuWl0E7-XeIUPAIYsREHgQ",
+            "rawId": "LuWl0E7-XeIUPAIYsREHgQ",
+            "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiVDF4Q3NueE0yRE5MMktkSzVDTGE2Zk1oRDdPQnFobzZzeXpJbmtfbi1VbyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+            "authenticatorData": "o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcNAAAAAA",
+            "signature": PactMatchers.SomethingLike("MEQCIEaLypVlw9uHcwqISxlnfDsG11mkRvXTKHoA-EgrKir1AiB0NqkAaYnsomnltCMWlaoLFe6Rs_yElleNbCxhi6wv-Q"),
+            "userHandle": "QWJjMTIzNDU2", // maps back to user
           },
         )
         // Configure the response
         .willRespondWith(
           200,
           headers: {'Content-Type': 'application/json'},
-          body: {"status": "ok", "userId": "QWJjMTIzNDU2"},
+          body: {
+            "id": "QWJjMTIzNDU2", // base64url random ID
+            "name": "user@example.com", // placeholder
+            "displayName": "Passkey User",
+          },
         );
 
     try {
@@ -100,15 +101,12 @@ void main() {
         url,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
-          "id": "ZGV2aWNlY3JlZGlk",
-          "rawId": "ZGV2aWNlY3JlZGlk",
-          "type": "public-key",
-          "response": {
-            "clientDataJSON": "eyJjaGFsbGVuZ2UiOiAiLi4uIn0",
-            "authenticatorData": "YXV0aGRhdGE",
-            "signature": "c2lnbmF0dXJl",
-            "userHandle": "QWJjMTIzNDU2", // maps back to user
-          },
+          "id": "LuWl0E7-XeIUPAIYsREHgQ",
+          "rawId": "LuWl0E7-XeIUPAIYsREHgQ",
+          "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiVDF4Q3NueE0yRE5MMktkSzVDTGE2Zk1oRDdPQnFobzZzeXpJbmtfbi1VbyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+          "authenticatorData": "o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcNAAAAAA",
+          "signature": "MEQCIEaLypVlw9uHcwqISxlnfDsG11mkRvXTKHoA-EgrKir1AiB0NqkAaYnsomnltCMWlaoLFe6Rs_yElleNbCxhi6wv-Q",
+          "userHandle": "QWJjMTIzNDU2", // maps back to user
         },
       ));
       print('Response status: ${response.statusCode}');
