@@ -113,11 +113,11 @@ class RelyingPartyServer {
           )
           .toList()
           .cast<CredentialType>(),
-      timeout: 60000,
+      timeout: response.data['timeout'],
       relyingPartyId: response.data['rpId'],
       userVerification: response.data['userVerification'],
-      preferImmediatelyAvailableCredentials: response.data['preferImmediatelyAvailableCredentials'],
-      mediation: response.data['mediation'],
+      preferImmediatelyAvailableCredentials: response.data['preferImmediatelyAvailableCredentials'] ?? false,
+      mediation: MediationType.Silent,
     );
   }
 
