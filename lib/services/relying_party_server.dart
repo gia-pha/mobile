@@ -125,11 +125,13 @@ class RelyingPartyServer {
   Future<UserModel> passKeyLoginFinish({
     required AuthenticateResponseType data,
   }) async {
+    if (kDebugMode) debugPrint(data.toJson().toString());
     final response = await dio.post(
       '/login/complete',
       data: data,
       options: Options(headers: {'Content-Type': 'application/json'}),
     );
+    if (kDebugMode) debugPrint(response.toString());
 
     if (response.statusCode != 200) {
       throw Exception(
