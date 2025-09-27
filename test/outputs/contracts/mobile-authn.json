@@ -195,24 +195,62 @@
       "description": "a request to finish register",
       "request": {
         "body": {
-          "id": "ZGV2aWNlY3JlZGlk",
-          "rawId": "ZGV2aWNlY3JlZGlk",
-          "response": {
-            "attestationObject": "o2NmbXR...",
-            "clientDataJSON": "eyJjaGFsbGVuZ2UiOiAiLi4uIn0"
-          },
-          "type": "public-key"
+          "attestationObject": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiM3ZUTzBrQjR2MlQ2eE1Fc0lnTzdCZyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+          "clientDataJSON": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YViUo3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUdNAAAAAOrs3vIcMVY0hjnxy9nACggAEKuUhHbC3Iysm7IvDwqDXR6lAQIDJiABIVggmMR59_yMHPhTGqY1JYC-nSPjj0w2zjEfEnar9cIM4QwiWCBCj_IwW_uYnuJ6FfnWkWlIh8KcEV__eq4BYjcg9LejVA",
+          "id": "q5SEdsLcjKybsi8PCoNdHg",
+          "rawId": "q5SEdsLcjKybsi8PCoNdHg",
+          "transports": [
+            "internal",
+            "hybrid"
+          ]
         },
         "headers": {
           "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$.attestationObject": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.clientDataJSON": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.rawId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
         },
         "method": "POST",
         "path": "/register/complete"
       },
       "response": {
         "body": {
-          "status": "ok",
-          "userId": "QWJjMTIzNDU2"
+          "displayName": "Passkey User",
+          "id": "QWJjMTIzNDU2",
+          "name": "user@example.com"
         },
         "headers": {
           "Content-Type": "application/json"

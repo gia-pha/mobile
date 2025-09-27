@@ -79,20 +79,25 @@ void main() {
           '/register/complete',
           headers: {'Content-Type': 'application/json'},
           body: {
-            "id": "ZGV2aWNlY3JlZGlk",
-            "rawId": "ZGV2aWNlY3JlZGlk",
-            "type": "public-key",
-            "response": {
-              "clientDataJSON": "eyJjaGFsbGVuZ2UiOiAiLi4uIn0",
-              "attestationObject": "o2NmbXR...",
-            },
+            "id": PactMatchers.SomethingLike("q5SEdsLcjKybsi8PCoNdHg"),
+            "rawId": PactMatchers.SomethingLike("q5SEdsLcjKybsi8PCoNdHg"),
+            "attestationObject": PactMatchers.SomethingLike("eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiM3ZUTzBrQjR2MlQ2eE1Fc0lnTzdCZyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9"),
+            "clientDataJSON": PactMatchers.SomethingLike("o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YViUo3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUdNAAAAAOrs3vIcMVY0hjnxy9nACggAEKuUhHbC3Iysm7IvDwqDXR6lAQIDJiABIVggmMR59_yMHPhTGqY1JYC-nSPjj0w2zjEfEnar9cIM4QwiWCBCj_IwW_uYnuJ6FfnWkWlIh8KcEV__eq4BYjcg9LejVA"),
+            "transports": [
+              "internal",
+              "hybrid"
+            ]
           },
         )
         // Configure the response
         .willRespondWith(
           200,
           headers: {'Content-Type': 'application/json'},
-          body: {"status": "ok", "userId": "QWJjMTIzNDU2"},
+          body: {
+            "id": "QWJjMTIzNDU2", // base64url random ID
+            "name": "user@example.com", // placeholder
+            "displayName": "Passkey User",
+          },
         );
 
     try {
@@ -108,13 +113,14 @@ void main() {
         url,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
-          "id": "ZGV2aWNlY3JlZGlk",
-          "rawId": "ZGV2aWNlY3JlZGlk",
-          "type": "public-key",
-          "response": {
-            "clientDataJSON": "eyJjaGFsbGVuZ2UiOiAiLi4uIn0",
-            "attestationObject": "o2NmbXR...",
-          },
+          "id": "q5SEdsLcjKybsi8PCoNdHg",
+          "rawId": "q5SEdsLcjKybsi8PCoNdHg",
+          "attestationObject": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiM3ZUTzBrQjR2MlQ2eE1Fc0lnTzdCZyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+          "clientDataJSON": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YViUo3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUdNAAAAAOrs3vIcMVY0hjnxy9nACggAEKuUhHbC3Iysm7IvDwqDXR6lAQIDJiABIVggmMR59_yMHPhTGqY1JYC-nSPjj0w2zjEfEnar9cIM4QwiWCBCj_IwW_uYnuJ6FfnWkWlIh8KcEV__eq4BYjcg9LejVA",
+          "transports": [
+            "internal",
+            "hybrid"
+          ]
         }),
       );
       print('Response status: ${response.statusCode}');

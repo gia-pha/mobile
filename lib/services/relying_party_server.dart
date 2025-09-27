@@ -67,17 +67,22 @@ class RelyingPartyServer {
     try {
       final response = await dio.post(
         '/register/complete',
-        data: data,
+        data: {
+          'id': data.id,
+          'rawId': data.rawId,
+          'clientDataJSON': data.clientDataJSON,
+          'attestationObject': data.attestationObject,
+          'transports': data.transports,
+        },
         options: Options(headers: {'Content-Type': 'application/json'}),
       );
-      if (kDebugMode) debugPrint('code: ${response.statusCode.toString()}');
+      if (kDebugMode) debugPrint(response.toString());
 
       if (response.statusCode != 200) {
         throw Exception(
           'Failed to finish passkey registration: ${response.statusMessage}',
         );
       }
-      if (kDebugMode) debugPrint('code: ${response.statusCode.toString()}');
 
       return UserModel.fromJson(response.data);
     } catch (e) {
