@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/screen/NBHomeScreen.dart';
@@ -106,9 +105,6 @@ class _PasskeyAuthScreenState extends State<PasskeyAuthScreen> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => const NBHomeScreen()),
       );
-      //Navigator.of(context).push(/*waiting dialog */);
-      //await Future.delayed(const Duration(seconds: 2));
-      if (context.mounted) Navigator.of(context).pop();
     } catch (e) {
       setState(() {
         errorMessage = 'Error: $e';
