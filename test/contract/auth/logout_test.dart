@@ -1,6 +1,6 @@
+import 'package:gia_pha_mobile/services/api_service.dart';
 import 'package:pact_dart/pact_dart.dart';
 import 'package:test/test.dart';
-import 'package:http/http.dart' as http;
 
 void main() {
   test('Logout', () async {
@@ -33,9 +33,9 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
-      var url = Uri.http(pact.addr, '/logout');
-      var response = await http.post(
-        url,
+      final apiService = ApiService(baseUrl: 'http://${pact.addr}');
+      var response = await apiService.post(
+        '/logout',
       );
       assert(response.statusCode == 204);
 

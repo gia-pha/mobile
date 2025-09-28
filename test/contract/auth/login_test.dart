@@ -1,7 +1,6 @@
+import 'package:gia_pha_mobile/services/api_service.dart';
 import 'package:pact_dart/pact_dart.dart';
 import 'package:test/test.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 void main() {
   test('Begin Login', () async {
@@ -40,13 +39,13 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
-      var url = Uri.http(pact.addr, '/login/start');
-      var response = await http.post(
-        url,
+      final apiService = ApiService(baseUrl: 'http://${pact.addr}');
+      var response = await apiService.post(
+        '/login/start',
         headers: {'Content-Type': 'application/json'},
       );
       print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      print('Response body: ${response.data}');
 
       // Write the pact file if all tests pass
       pact.writePactFile(directory: 'test/outputs/contracts');
@@ -99,11 +98,11 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
-      var url = Uri.http(pact.addr, '/login/complete');
-      var response = await http.post(
-        url,
+      final apiService = ApiService(baseUrl: 'http://${pact.addr}');
+      var response = await apiService.post(
+        '/login/complete',
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
+        data: {
           "id": "LuWl0E7-XeIUPAIYsREHgQ",
           "rawId": "LuWl0E7-XeIUPAIYsREHgQ",
           "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiVDF4Q3NueE0yRE5MMktkSzVDTGE2Zk1oRDdPQnFobzZzeXpJbmtfbi1VbyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
@@ -111,9 +110,9 @@ void main() {
           "signature": "MEQCIEaLypVlw9uHcwqISxlnfDsG11mkRvXTKHoA-EgrKir1AiB0NqkAaYnsomnltCMWlaoLFe6Rs_yElleNbCxhi6wv-Q",
           "userHandle": "QWJjMTIzNDU2", // maps back to user
         },
-      ));
+      );
       print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      print('Response body: ${response.data}');
 
       // Write the pact file if all tests pass
       pact.writePactFile(directory: 'test/outputs/contracts');

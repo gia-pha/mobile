@@ -1,16 +1,20 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/screen/PasskeyAuthScreen.dart';
-import 'package:gia_pha_mobile/services/http_client.dart';
+import 'package:gia_pha_mobile/services/api_service.dart';
 
 class LogoutScreen extends StatefulWidget {
-  const LogoutScreen({super.key});
+  final ApiService apiService;
+
+  LogoutScreen({super.key, ApiService? apiService})
+      : apiService = apiService ?? ApiService();
 
   @override
   State<LogoutScreen> createState() => _LogoutScreenState();
 }
 
 class _LogoutScreenState extends State<LogoutScreen> {
+  late final ApiService _apiService = widget.apiService;
+
   @override
   void initState() {
     super.initState();
@@ -18,9 +22,8 @@ class _LogoutScreenState extends State<LogoutScreen> {
   }
 
   Future<void> _logout() async {
-    final Dio dio = HttpClient().dio;
     try {
-      final response = await dio.post(
+      final response = await _apiService.post(
         '/logout',
       );
 
@@ -30,7 +33,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
     } catch (e) {
       debugPrint('Logout error: $e');
     }
-      if (!mounted) return;
+    if (!mounted) return;
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) => PasskeyAuthScreen()),
     );

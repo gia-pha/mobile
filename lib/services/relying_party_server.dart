@@ -1,23 +1,25 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:dio/dio.dart';
 import 'package:gia_pha_mobile/model/user_model.dart';
-import 'package:gia_pha_mobile/services/http_client.dart';
+import 'package:gia_pha_mobile/services/api_service.dart';
 import 'package:passkeys/types.dart';
 
 class RelyingPartyServer {
-  final Dio dio = HttpClient().dio;
+  final ApiService apiService;
+
+  RelyingPartyServer({ApiService? apiService})
+      : apiService = apiService ?? ApiService();
 
   // Initialize passkey registration
   Future<RegisterRequestType> startPasskeyRegister() async {
-    final response = await dio.post(
+    final response = await apiService.post(
       '/register/start',
-      options: Options(headers: {'Content-Type': 'application/json'}),
+      headers: {'Content-Type': 'application/json'},
     );
     if (kDebugMode) debugPrint(response.toString());
     if (response.statusCode != 200) {
       throw Exception(
-        'Failed to load credential creation options: ${response.statusMessage}',
+        'Failed to load credential creation options: ${response.statusCode}',
       );
     }
     return RegisterRequestType(
@@ -65,7 +67,7 @@ class RelyingPartyServer {
     required RegisterResponseType data,
   }) async {
     try {
-      final response = await dio.post(
+      final response = await apiService.post(
         '/register/complete',
         data: {
           'id': data.id,
@@ -74,13 +76,13 @@ class RelyingPartyServer {
           'attestationObject': data.attestationObject,
           'transports': data.transports,
         },
-        options: Options(headers: {'Content-Type': 'application/json'}),
+        headers: {'Content-Type': 'application/json'},
       );
       if (kDebugMode) debugPrint(response.toString());
 
       if (response.statusCode != 200) {
         throw Exception(
-          'Failed to finish passkey registration: ${response.statusMessage}',
+          'Failed to finish passkey registration: ${response.statusCode}',
         );
       }
 
@@ -93,14 +95,14 @@ class RelyingPartyServer {
 
   // Initialize passkey login
   Future<AuthenticateRequestType> passKeyLoginInit() async {
-    final response = await dio.post(
+    final response = await apiService.post(
       '/login/start',
-      options: Options(headers: {'Content-Type': 'application/json'}),
+      headers: {'Content-Type': 'application/json'},
     );
     if (kDebugMode) debugPrint(response.toString());
     if (response.statusCode != 200) {
       throw Exception(
-        'Failed to load credential login options ${response.statusMessage}',
+        'Failed to load credential login options ${response.statusCode}',
       );
     }
 
@@ -131,16 +133,16 @@ class RelyingPartyServer {
     required AuthenticateResponseType data,
   }) async {
     if (kDebugMode) debugPrint(data.toJson().toString());
-    final response = await dio.post(
+    final response = await apiService.post(
       '/login/complete',
       data: data,
-      options: Options(headers: {'Content-Type': 'application/json'}),
+      headers: {'Content-Type': 'application/json'},
     );
     if (kDebugMode) debugPrint(response.toString());
 
     if (response.statusCode != 200) {
       throw Exception(
-        'Failed to finish passkey login: ${response.statusMessage}',
+        'Failed to finish passkey login: ${response.statusCode}',
       );
     }
 
@@ -149,12 +151,12 @@ class RelyingPartyServer {
 
   // Get user details
   Future<UserModel> getUser() async {
-    final response = await dio.get(
+    final response = await apiService.get(
       '/session',
-      options: Options(headers: {'Content-Type': 'application/json'}),
+      headers: {'Content-Type': 'application/json'},
     );
     if (response.statusCode != 200) {
-      throw Exception('Failed to get current user: ${response.statusMessage}');
+      throw Exception('Failed to get current user: ${response.statusCode}');
     }
     return UserModel.fromJson(response.data);
   }
