@@ -3,6 +3,7 @@ import 'package:gia_pha_mobile/screen/NBBookmarkScreen.dart';
 import 'package:gia_pha_mobile/screen/NBMembershipScreen.dart';
 import 'package:gia_pha_mobile/screen/NBSettingScreen.dart';
 import 'package:gia_pha_mobile/screen/PurchaseMoreScreen.dart';
+import 'package:gia_pha_mobile/screen/logout_screen.dart';
 import 'package:gia_pha_mobile/utils/NBImages.dart';
 
 String details = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '
@@ -40,6 +41,7 @@ List<NBDrawerItemModel> nbGetDrawerItems() {
   drawerItems.add(NBDrawerItemModel(title: 'Bookmark', widget: NBBookmarkScreen()));
   drawerItems.add(NBDrawerItemModel(title: 'Membership', widget: NBMembershipScreen()));
   drawerItems.add(NBDrawerItemModel(title: 'Setting', widget: NBSettingScreen()));
+  drawerItems.add(NBDrawerItemModel(title: 'Logout', widget: LogoutScreen()));
   return drawerItems;
 }
 

@@ -80,7 +80,10 @@ void main() {
         // Configure the response
         .willRespondWith(
           200,
-          headers: {'Content-Type': 'application/json'},
+          headers: {
+            'Content-Type': 'application/json',
+            'Set-Cookie': 'session=abcdef12345; Path=/; HttpOnly; Secure; SameSite=Strict'
+          },
           body: {
             "id": "QWJjMTIzNDU2", // base64url random ID
             "name": "user@example.com", // placeholder

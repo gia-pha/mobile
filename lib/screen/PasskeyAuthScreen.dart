@@ -8,7 +8,20 @@ class PasskeyAuthScreen extends StatefulWidget {
   final RelyingPartyServer rps;
   final PasskeyAuthenticator authenticator;
 
-  const PasskeyAuthScreen({super.key, required this.rps, required this.authenticator});
+  const PasskeyAuthScreen._({
+    required this.rps,
+    required this.authenticator,
+  });
+
+  factory PasskeyAuthScreen({
+    RelyingPartyServer? rps,
+    PasskeyAuthenticator? authenticator,
+  }) {
+    return PasskeyAuthScreen._(
+      rps: rps ?? RelyingPartyServer(),
+      authenticator: authenticator ?? PasskeyAuthenticator(),
+    );
+  }
 
   @override
   State<PasskeyAuthScreen> createState() => _PasskeyAuthScreenState();

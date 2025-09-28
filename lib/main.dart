@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/screen/PasskeyAuthScreen.dart';
-import 'package:gia_pha_mobile/services/relying_party_server.dart';
-import 'package:passkeys/authenticator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PasskeyAuthScreen(rps: RelyingPartyServer(), authenticator: PasskeyAuthenticator(),),
+      home: PasskeyAuthScreen(),
     );
   }
 }

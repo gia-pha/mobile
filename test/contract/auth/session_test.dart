@@ -25,9 +25,8 @@ void main() {
           headers: {'Content-Type': 'application/json'},
           body: {
             "id": PactMatchers.SomethingLike('123'),
-            "name": PactMatchers.SomethingLike('John Doe'),
-            'createdAt': PactMatchers.SomethingLike('2023-10-01T12:34:56Z'),
-            'updatedAt': PactMatchers.SomethingLike('2023-10-01T12:34:56Z'),
+            "name": PactMatchers.SomethingLike('0123456789'),
+            'displayName': PactMatchers.SomethingLike('John Doe'),
           },
         );
 
@@ -48,9 +47,8 @@ void main() {
       final parsed = jsonDecode(response.body);
       expect(parsed, isA<Map>());
       expect(parsed, containsPair('id', '123'));
-      expect(parsed, containsPair('name', 'John Doe'));
-      expect(parsed, contains('createdAt'));
-      expect(parsed, contains('updatedAt'));
+      expect(parsed, containsPair('name', '0123456789'));
+      expect(parsed, containsPair('displayName', 'John Doe'));
 
       // Write the pact file if all tests pass
       pact.writePactFile(directory: 'test/outputs/contracts');
