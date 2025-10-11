@@ -87,12 +87,24 @@
       "response": {
         "body": {
           "challenge": "T1xCsnxM2DNL2KdK5CLa6fMhD7OBqho6syzInk_n-Uo",
-          "rpId": "example.com",
+          "rpId": "localhost",
           "timeout": 60000,
           "userVerification": "required"
         },
         "headers": {
           "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$.rpId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
         },
         "status": 200
       }
@@ -125,7 +137,7 @@
             }
           ],
           "rp": {
-            "id": "example.com",
+            "id": "localhost",
             "name": "My App"
           },
           "timeout": 60000,
@@ -137,6 +149,18 @@
         },
         "headers": {
           "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$.rp.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
         },
         "status": 200
       }

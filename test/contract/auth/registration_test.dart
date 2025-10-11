@@ -22,7 +22,7 @@ void main() {
           headers: {'Content-Type': 'application/json'},
           body: {
             "challenge": "3vTO0kB4v2T6xMEsIgO7Bg", // base64url
-            "rp": {"id": "example.com", "name": "My App"},
+            "rp": {"id": PactMatchers.SomethingLike("localhost"), "name": "My App"},
             "user": {
               "id": "QWJjMTIzNDU2", // base64url random ID
               "name": "user@example.com", // placeholder
