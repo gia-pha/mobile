@@ -27,18 +27,36 @@
       },
       "response": {
         "body": {
-          "authenticated": true
+          "displayName": "John Doe",
+          "id": "123",
+          "name": "0123456789"
         },
         "headers": {
           "Content-Type": "application/json"
         },
         "matchingRules": {
           "body": {
-            "$.authenticated": {
+            "$.displayName": {
               "combine": "AND",
               "matchers": [
                 {
-                  "match": "boolean"
+                  "match": "type"
+                }
+              ]
+            },
+            "$.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
                 }
               ]
             }
@@ -54,25 +72,7 @@
         "path": "/session"
       },
       "response": {
-        "body": {
-          "authenticated": false
-        },
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "matchingRules": {
-          "body": {
-            "$.authenticated": {
-              "combine": "AND",
-              "matchers": [
-                {
-                  "match": "boolean"
-                }
-              ]
-            }
-          }
-        },
-        "status": 200
+        "status": 401
       }
     },
     {
@@ -82,17 +82,29 @@
           "Content-Type": "application/json"
         },
         "method": "POST",
-        "path": "/webauthn/login/options"
+        "path": "/login/start"
       },
       "response": {
         "body": {
-          "challenge": "aBcDeFg123",
-          "rpId": "example.com",
+          "challenge": "T1xCsnxM2DNL2KdK5CLa6fMhD7OBqho6syzInk_n-Uo",
+          "rpId": "localhost",
           "timeout": 60000,
           "userVerification": "required"
         },
         "headers": {
           "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$.rpId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
         },
         "status": 200
       }
@@ -104,7 +116,7 @@
           "Content-Type": "application/json"
         },
         "method": "POST",
-        "path": "/webauthn/register/options"
+        "path": "/register/start"
       },
       "response": {
         "body": {
@@ -125,7 +137,7 @@
             }
           ],
           "rp": {
-            "id": "example.com",
+            "id": "localhost",
             "name": "My App"
           },
           "timeout": 60000,
@@ -138,6 +150,18 @@
         "headers": {
           "Content-Type": "application/json"
         },
+        "matchingRules": {
+          "body": {
+            "$.rp.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
         "status": 200
       }
     },
@@ -145,29 +169,40 @@
       "description": "a request to finish login",
       "request": {
         "body": {
-          "id": "ZGV2aWNlY3JlZGlk",
-          "rawId": "ZGV2aWNlY3JlZGlk",
-          "response": {
-            "authenticatorData": "YXV0aGRhdGE",
-            "clientDataJSON": "eyJjaGFsbGVuZ2UiOiAiLi4uIn0",
-            "signature": "c2lnbmF0dXJl",
-            "userHandle": "QWJjMTIzNDU2"
-          },
-          "type": "public-key"
+          "authenticatorData": "o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcNAAAAAA",
+          "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiVDF4Q3NueE0yRE5MMktkSzVDTGE2Zk1oRDdPQnFobzZzeXpJbmtfbi1VbyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+          "id": "LuWl0E7-XeIUPAIYsREHgQ",
+          "rawId": "LuWl0E7-XeIUPAIYsREHgQ",
+          "signature": "MEQCIEaLypVlw9uHcwqISxlnfDsG11mkRvXTKHoA-EgrKir1AiB0NqkAaYnsomnltCMWlaoLFe6Rs_yElleNbCxhi6wv-Q",
+          "userHandle": "QWJjMTIzNDU2"
         },
         "headers": {
           "Content-Type": "application/json"
         },
+        "matchingRules": {
+          "body": {
+            "$.signature": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
         "method": "POST",
-        "path": "/webauthn/login/verify"
+        "path": "/login/complete"
       },
       "response": {
         "body": {
-          "status": "ok",
-          "userId": "QWJjMTIzNDU2"
+          "displayName": "Passkey User",
+          "id": "QWJjMTIzNDU2",
+          "name": "user@example.com"
         },
         "headers": {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Set-Cookie": "session=abcdef12345; Path=/; HttpOnly; Secure; SameSite=Strict"
         },
         "status": 200
       }
@@ -176,29 +211,81 @@
       "description": "a request to finish register",
       "request": {
         "body": {
-          "id": "ZGV2aWNlY3JlZGlk",
-          "rawId": "ZGV2aWNlY3JlZGlk",
-          "response": {
-            "attestationObject": "o2NmbXR...",
-            "clientDataJSON": "eyJjaGFsbGVuZ2UiOiAiLi4uIn0"
-          },
-          "type": "public-key"
+          "attestationObject": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiM3ZUTzBrQjR2MlQ2eE1Fc0lnTzdCZyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+          "clientDataJSON": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YViUo3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUdNAAAAAOrs3vIcMVY0hjnxy9nACggAEKuUhHbC3Iysm7IvDwqDXR6lAQIDJiABIVggmMR59_yMHPhTGqY1JYC-nSPjj0w2zjEfEnar9cIM4QwiWCBCj_IwW_uYnuJ6FfnWkWlIh8KcEV__eq4BYjcg9LejVA",
+          "id": "q5SEdsLcjKybsi8PCoNdHg",
+          "rawId": "q5SEdsLcjKybsi8PCoNdHg",
+          "transports": [
+            "internal",
+            "hybrid"
+          ]
         },
         "headers": {
           "Content-Type": "application/json"
         },
+        "matchingRules": {
+          "body": {
+            "$.attestationObject": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.clientDataJSON": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.rawId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
         "method": "POST",
-        "path": "/webauthn/register/verify"
+        "path": "/register/complete"
       },
       "response": {
         "body": {
-          "status": "ok",
-          "userId": "QWJjMTIzNDU2"
+          "displayName": "Passkey User",
+          "id": "QWJjMTIzNDU2",
+          "name": "user@example.com"
         },
         "headers": {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Set-Cookie": "session=abcdef12345; Path=/; HttpOnly; Secure; SameSite=Strict"
         },
         "status": 200
+      }
+    },
+    {
+      "description": "a request to logout",
+      "request": {
+        "method": "POST",
+        "path": "/logout"
+      },
+      "response": {
+        "headers": {
+          "Set-Cookie": "session=; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Path=/;"
+        },
+        "status": 204
       }
     }
   ],

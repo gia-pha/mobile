@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/screen/PasskeyAuthScreen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

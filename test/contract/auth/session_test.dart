@@ -1,7 +1,6 @@
+import 'package:gia_pha_mobile/services/api_service.dart';
 import 'package:pact_dart/pact_dart.dart';
 import 'package:test/test.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 void main() {
   test('Has Session', () async {
@@ -24,7 +23,9 @@ void main() {
           200,
           headers: {'Content-Type': 'application/json'},
           body: {
-            "authenticated": PactMatchers.boolean(true),
+            "id": PactMatchers.SomethingLike('123'),
+            "name": PactMatchers.SomethingLike('0123456789'),
+            'displayName': PactMatchers.SomethingLike('John Doe'),
           },
         );
 
@@ -36,15 +37,16 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
-      var url = Uri.http(pact.addr, '/session');
-      var response = await http.get(
-        url,
+      final apiService = ApiService(baseUrl: 'http://${pact.addr}');
+      var response = await apiService.get(
+        '/session',
         headers: {'Cookie': 'session=a1B2c3D4e5F6g7H8i9J0K'},
       );
       assert(response.statusCode == 200);
-      final parsed = jsonDecode(response.body);
-      expect(parsed, isA<Map>());
-      expect(parsed, containsPair('authenticated', true));
+      expect(response.data, isA<Map>());
+      expect(response.data, containsPair('id', '123'));
+      expect(response.data, containsPair('name', '0123456789'));
+      expect(response.data, containsPair('displayName', 'John Doe'));
 
       // Write the pact file if all tests pass
       pact.writePactFile(directory: 'test/outputs/contracts');
@@ -68,11 +70,7 @@ void main() {
         )
         // Configure the response
         .willRespondWith(
-          200,
-          headers: {'Content-Type': 'application/json'},
-          body: {
-            "authenticated": PactMatchers.boolean(false),
-          },
+          401,
         );
 
     try {
@@ -83,14 +81,11 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
-      var url = Uri.http(pact.addr, '/session');
-      var response = await http.get(
-        url,
+      final apiService = ApiService(baseUrl: 'http://${pact.addr}');
+      var response = await apiService.get(
+        '/session',
       );
-      assert(response.statusCode == 200);
-      final parsed = jsonDecode(response.body);
-      expect(parsed, isA<Map>());
-      expect(parsed, containsPair('authenticated', false));
+      assert(response.statusCode == 401);
 
       // Write the pact file if all tests pass
       pact.writePactFile(directory: 'test/outputs/contracts');

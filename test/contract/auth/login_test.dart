@@ -1,7 +1,6 @@
+import 'package:gia_pha_mobile/services/api_service.dart';
 import 'package:pact_dart/pact_dart.dart';
 import 'package:test/test.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 void main() {
   test('Begin Login', () async {
@@ -16,7 +15,7 @@ void main() {
         // Configure the request
         .withRequest(
           'POST',
-          '/webauthn/login/options',
+          '/login/start',
           headers: {'Content-Type': 'application/json'},
         )
         // Configure the response
@@ -24,8 +23,8 @@ void main() {
           200,
           headers: {'Content-Type': 'application/json'},
           body: {
-            "challenge": "aBcDeFg123", // base64url
-            "rpId": "example.com",
+            "challenge": "T1xCsnxM2DNL2KdK5CLa6fMhD7OBqho6syzInk_n-Uo", // base64url
+            "rpId": PactMatchers.SomethingLike("localhost"),
             "timeout": 60000,
             "userVerification": "required",
             // note: NO allowCredentials -> usernameless (discoverable)
@@ -40,13 +39,13 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
-      var url = Uri.http(pact.addr, '/webauthn/login/options');
-      var response = await http.post(
-        url,
+      final apiService = ApiService(baseUrl: 'http://${pact.addr}');
+      var response = await apiService.post(
+        '/login/start',
         headers: {'Content-Type': 'application/json'},
       );
       print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      print('Response body: ${response.data}');
 
       // Write the pact file if all tests pass
       pact.writePactFile(directory: 'test/outputs/contracts');
@@ -66,25 +65,29 @@ void main() {
         // Configure the request
         .withRequest(
           'POST',
-          '/webauthn/login/verify',
+          '/login/complete',
           headers: {'Content-Type': 'application/json'},
           body: {
-            "id": "ZGV2aWNlY3JlZGlk",
-            "rawId": "ZGV2aWNlY3JlZGlk",
-            "type": "public-key",
-            "response": {
-              "clientDataJSON": "eyJjaGFsbGVuZ2UiOiAiLi4uIn0",
-              "authenticatorData": "YXV0aGRhdGE",
-              "signature": "c2lnbmF0dXJl",
-              "userHandle": "QWJjMTIzNDU2", // maps back to user
-            },
+            "id": "LuWl0E7-XeIUPAIYsREHgQ",
+            "rawId": "LuWl0E7-XeIUPAIYsREHgQ",
+            "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiVDF4Q3NueE0yRE5MMktkSzVDTGE2Zk1oRDdPQnFobzZzeXpJbmtfbi1VbyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+            "authenticatorData": "o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcNAAAAAA",
+            "signature": PactMatchers.SomethingLike("MEQCIEaLypVlw9uHcwqISxlnfDsG11mkRvXTKHoA-EgrKir1AiB0NqkAaYnsomnltCMWlaoLFe6Rs_yElleNbCxhi6wv-Q"),
+            "userHandle": "QWJjMTIzNDU2", // maps back to user
           },
         )
         // Configure the response
         .willRespondWith(
           200,
-          headers: {'Content-Type': 'application/json'},
-          body: {"status": "ok", "userId": "QWJjMTIzNDU2"},
+          headers: {
+            'Content-Type': 'application/json',
+            'Set-Cookie': 'session=abcdef12345; Path=/; HttpOnly; Secure; SameSite=Strict'
+          },
+          body: {
+            "id": "QWJjMTIzNDU2", // base64url random ID
+            "name": "user@example.com", // placeholder
+            "displayName": "Passkey User",
+          },
         );
 
     try {
@@ -95,24 +98,21 @@ void main() {
       // to the mock server and validate the response
       print('Mock server running at ${pact.addr}');
 
-      var url = Uri.http(pact.addr, '/webauthn/login/verify');
-      var response = await http.post(
-        url,
+      final apiService = ApiService(baseUrl: 'http://${pact.addr}');
+      var response = await apiService.post(
+        '/login/complete',
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          "id": "ZGV2aWNlY3JlZGlk",
-          "rawId": "ZGV2aWNlY3JlZGlk",
-          "type": "public-key",
-          "response": {
-            "clientDataJSON": "eyJjaGFsbGVuZ2UiOiAiLi4uIn0",
-            "authenticatorData": "YXV0aGRhdGE",
-            "signature": "c2lnbmF0dXJl",
-            "userHandle": "QWJjMTIzNDU2", // maps back to user
-          },
+        data: {
+          "id": "LuWl0E7-XeIUPAIYsREHgQ",
+          "rawId": "LuWl0E7-XeIUPAIYsREHgQ",
+          "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiVDF4Q3NueE0yRE5MMktkSzVDTGE2Zk1oRDdPQnFobzZzeXpJbmtfbi1VbyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+          "authenticatorData": "o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcNAAAAAA",
+          "signature": "MEQCIEaLypVlw9uHcwqISxlnfDsG11mkRvXTKHoA-EgrKir1AiB0NqkAaYnsomnltCMWlaoLFe6Rs_yElleNbCxhi6wv-Q",
+          "userHandle": "QWJjMTIzNDU2", // maps back to user
         },
-      ));
+      );
       print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      print('Response body: ${response.data}');
 
       // Write the pact file if all tests pass
       pact.writePactFile(directory: 'test/outputs/contracts');

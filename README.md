@@ -102,6 +102,24 @@ BlocProvider(
 )
 ```
 
+## Development
+
+```bash
+pact-stub-server --file ./test/outputs/contracts/mobile-authn.json --loglevel debug --port 42985 --cors
+```
+
+Android Emulator:
+
+```bash
+flutter run --dart-define=API_BASE_URL=http://10.0.2.2:42985
+```
+
+Web:
+
+```bash
+flutter run -d web-server --web-port=8080 --dart-define=API_BASE_URL=http://localhost:42985
+```
+
 ## 🧪 Testing
 
 ### Unit & Widget Tests
