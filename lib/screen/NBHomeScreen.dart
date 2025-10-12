@@ -135,6 +135,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
       ),
       body: TabBarView(
         controller: tabController,
+        physics: NeverScrollableScrollPhysics(),
         children: [
           FamilyDetailsScreen(newsDetails: mNewsList[0],),
           FamilyTreeScreen(),
