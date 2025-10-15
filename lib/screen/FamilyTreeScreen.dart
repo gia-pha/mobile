@@ -1,8 +1,10 @@
+import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/utils/genogram_utils.dart';
 import 'package:gia_pha_mobile/widgets/genogram_node.dart';
 import 'package:org_chart/org_chart.dart';
 import 'package:gia_pha_mobile/model/FamilyMember.dart';
+import 'dart:typed_data';
 
 class FamilyTreeScreen extends StatefulWidget {
   const FamilyTreeScreen({super.key});
@@ -127,6 +129,14 @@ class _FamilyTreeScreenState extends State<FamilyTreeScreen> {
                 setState(() {});
               },
             ),
+            IconButton(
+              icon: Icon(Icons.rotate_90_degrees_ccw),
+              onPressed: () => controller.switchOrientation(),
+            ),
+            IconButton(
+              icon: Icon(Icons.download),
+              onPressed: exportFamilyTree,
+            ),
           ],
         ),
       ),
@@ -181,5 +191,65 @@ class _FamilyTreeScreenState extends State<FamilyTreeScreen> {
       ),
       focusNode: focusNode,
     );
+  }
+
+  Future<void> _saveBytesToStorage(Uint8List bytes, String ext, MimeType mimeType) async {
+    final filename = 'family_tree_${DateTime.now().millisecondsSinceEpoch}';
+    final path = await FileSaver.instance.saveFile(
+      name: filename,
+      bytes: bytes,
+      fileExtension: ext,
+      mimeType: mimeType,
+    );
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Saved to: $path')));
+  }
+
+  // Export family tree
+  void exportFamilyTree() async {
+    final action = await showDialog<String>(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: Text('Export Family Tree'),
+        children: [
+          SimpleDialogOption(
+            onPressed: () => Navigator.pop(context, 'image'),
+            child: Text('Export as Image'),
+          ),
+          SimpleDialogOption(
+            onPressed: () => Navigator.pop(context, 'pdf'),
+            child: Text('Export as PDF'),
+          ),
+        ],
+      ),
+    );
+
+    if (!mounted) return;
+    if (action == null) return;
+
+    try {
+      if (action == 'image') {
+        final Uint8List? bytes = await controller.exportAsImage();
+        if (bytes == null || bytes.isEmpty) {
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No image data to export')));
+          return;
+        }
+
+        await _saveBytesToStorage(bytes, 'png', MimeType.png);
+      } else if (action == 'pdf') {
+        final Uint8List? pdfBytes = await controller.exportAsPdf().then((doc) => doc?.save());
+        if (pdfBytes == null || pdfBytes.isEmpty) {
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No PDF data to export')));
+          return;
+        }
+
+        await _saveBytesToStorage(pdfBytes, 'pdf', MimeType.pdf);
+      }
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Export failed: $e')));
+    }
   }
 }
