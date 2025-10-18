@@ -12,6 +12,8 @@ class FamilyMember {
   final List<String> spouses; // IDs of relationships
   final Map<String, dynamic> extraData; // Additional data like medical info
   final Color color;
+  final String? avatarUrl;
+  final String kinship;
   bool isDeceased;
   FamilyMember({
     required this.id,
@@ -24,6 +26,8 @@ class FamilyMember {
     List<String>? spouses,
     Map<String, dynamic>? extraData,
     Color? color,
+    this.avatarUrl,
+    this.kinship = '',
     this.isDeceased = false,
   })  : spouses = spouses ?? [],
         extraData = extraData ?? {},
@@ -40,6 +44,7 @@ class FamilyMember {
       'relationships': spouses,
       'extraData': extraData,
       'color': color,
+      //'kinship': kinship,
       'isDeceased': isDeceased,
     };
   }
@@ -60,6 +65,7 @@ class FamilyMember {
       spouses: List<String>.from(map['spouses'] ?? []),
       extraData: Map<String, dynamic>.from(map['extraData'] ?? {}),
       color: map['color'] ?? Colors.blue,
+      //kinship: map['kinship'],
       isDeceased: map['isDeceased'] ?? false,
     );
   }
@@ -74,6 +80,7 @@ class FamilyMember {
     List<String>? spouses,
     Map<String, dynamic>? extraData,
     Color? color,
+    //String? kinship,
     bool? isDeceased,
   }) {
     return FamilyMember(
@@ -87,6 +94,7 @@ class FamilyMember {
       spouses: spouses ?? List.from(this.spouses),
       extraData: extraData ?? Map.from(this.extraData),
       color: color ?? this.color,
+      //kinship: kinship ?? this.kinship,
       isDeceased: isDeceased ?? this.isDeceased,
     );
   }
