@@ -74,6 +74,8 @@ class GenogramUtils {
         isDeceased: true,
         dateOfBirth: DateTime(1920),
         dateOfDeath: DateTime(1990),
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_1.png',
+        kinship: 'Father',
       ),
       FamilyMember(
         id: 'gm1',
@@ -84,6 +86,8 @@ class GenogramUtils {
         isDeceased: true,
         dateOfBirth: DateTime(1925),
         dateOfDeath: DateTime(1995),
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_2.png',
+        kinship: 'Mother',
       ),
 
       // First generation - Other side
@@ -99,6 +103,8 @@ class GenogramUtils {
         isDeceased: true,
         dateOfBirth: DateTime(1918),
         dateOfDeath: DateTime(1985),
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_3.png',
+        kinship: 'Son',
       ),
       FamilyMember(
         id: 'gm2',
@@ -109,6 +115,8 @@ class GenogramUtils {
         dateOfBirth: DateTime(1922),
         dateOfDeath: DateTime(2000),
         isDeceased: true,
+        //avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_4.png',
+        kinship: 'Daughter',
       ),
       FamilyMember(
         id: 'gm2b',
@@ -118,6 +126,8 @@ class GenogramUtils {
         // relationshipTypes: {'gf2': RelationshipType.married},
         dateOfBirth: DateTime(1930),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_5.png',
+        kinship: 'Brother',
       ),
 
       // Second generation - Parents
@@ -131,6 +141,8 @@ class GenogramUtils {
         // relationshipTypes: {'m1': RelationshipType.married},
         dateOfBirth: DateTime(1950),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_6.png',
+        kinship: 'Sister',
       ),
       FamilyMember(
         id: 'm1',
@@ -142,6 +154,8 @@ class GenogramUtils {
         // relationshipTypes: {'f1': RelationshipType.married},
         dateOfBirth: DateTime(1952),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_7.png',
+        kinship: 'Husband',
       ),
       FamilyMember(
         id: 'm2',
@@ -153,6 +167,8 @@ class GenogramUtils {
         // relationshipTypes: {'f1': RelationshipType.married},
         dateOfBirth: DateTime(1952),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_8.png',
+        kinship: 'Wife',
       ),
       FamilyMember(
         id: 'm3',
@@ -164,6 +180,8 @@ class GenogramUtils {
         // relationshipTypes: {'f1': RelationshipType.married},
         dateOfBirth: DateTime(1952),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_9.png',
+        kinship: 'Uncle',
       ),
       FamilyMember(
         id: 'm4',
@@ -175,6 +193,8 @@ class GenogramUtils {
         // relationshipTypes: {'f1': RelationshipType.married},
         dateOfBirth: DateTime(1952),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_10.png',
+        kinship: 'Aunt',
       ),
 
       // Uncle with multiple marriages
@@ -191,6 +211,8 @@ class GenogramUtils {
         // },
         dateOfBirth: DateTime(1955),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_11.png',
+        kinship: 'Nephew',
       ),
       FamilyMember(
         id: 'u201',
@@ -205,6 +227,8 @@ class GenogramUtils {
         // },
         dateOfBirth: DateTime(1955),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_12.png',
+        kinship: 'Niece',
       ),
       FamilyMember(
         id: 'u2901',
@@ -219,6 +243,8 @@ class GenogramUtils {
         // },
         dateOfBirth: DateTime(1955),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_13.png',
+        kinship: 'Cousin',
       ),
       FamilyMember(
         id: 'u-21',
@@ -233,6 +259,8 @@ class GenogramUtils {
         // },
         dateOfBirth: DateTime(1955),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_14.png',
+        kinship: 'Grandfather',
       ),
       FamilyMember(
         id: 'u219=',
@@ -247,6 +275,8 @@ class GenogramUtils {
         // },
         dateOfBirth: DateTime(1955),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_15.png',
+        kinship: 'Grandmother',
       ),
       FamilyMember(
         id: 'u21',
@@ -261,6 +291,8 @@ class GenogramUtils {
         // },
         dateOfBirth: DateTime(1955),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_16.png',
+        kinship: 'Grandson',
       ),
       FamilyMember(
         id: 'u212',
@@ -275,6 +307,8 @@ class GenogramUtils {
         // },
         dateOfBirth: DateTime(1955),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_17.png',
+        kinship: 'Granddaughter',
       ),
       // Uncle with multiple marriages
       FamilyMember(
@@ -290,6 +324,8 @@ class GenogramUtils {
         // },
         dateOfBirth: DateTime(1955),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_18.png',
+        kinship: 'Father-in-law',
       ),
       FamilyMember(
         id: 'a1',
@@ -299,6 +335,8 @@ class GenogramUtils {
         // relationshipTypes: {'u1': RelationshipType.divorced},
         dateOfBirth: DateTime(1958),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_19.png',
+        kinship: 'Mother-in-law',
       ),
       FamilyMember(
         id: 'a2',
@@ -308,6 +346,8 @@ class GenogramUtils {
         // relationshipTypes: {'u1': RelationshipType.married},
         dateOfBirth: DateTime(1960),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_1.png',
+        kinship: 'Son-in-law',
       ),
 
       // Aunt from second marriage
@@ -319,6 +359,8 @@ class GenogramUtils {
         motherId: 'gm2b',
         dateOfBirth: DateTime(1962),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_2.png',
+        kinship: 'Daughter-in-law',
       ),
 
       // Third generation - Siblings including twins
@@ -332,6 +374,8 @@ class GenogramUtils {
         isDeceased: false,
         spouses: ['p1'],
         // relationshipTypes: {'p1': RelationshipType.married},
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_3.png',
+        kinship: 'Brother-in-law',
       ),
       FamilyMember(
         id: 'c2',
@@ -342,6 +386,8 @@ class GenogramUtils {
         dateOfBirth: DateTime(1980),
         isDeceased: false,
         // birthType: BirthType.identical,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_4.png',
+        kinship: 'Sister-in-law',
         // ,
       ),
       FamilyMember(
@@ -353,6 +399,8 @@ class GenogramUtils {
         dateOfBirth: DateTime(1980),
         isDeceased: false,
         // birthType: BirthType.identical,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_5.png',
+        kinship: 'Stepfather',
       ),
       FamilyMember(
         id: 'c4',
@@ -362,6 +410,8 @@ class GenogramUtils {
         motherId: 'm1',
         dateOfBirth: DateTime(1985),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_1.png',
+        kinship: 'Stepmother',
       ),
 
       // Cousins from uncle's first marriage
@@ -373,6 +423,8 @@ class GenogramUtils {
         motherId: 'a1',
         dateOfBirth: DateTime(1978),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_2.png',
+        kinship: 'Stepson',
       ),
 
       // Cousins from uncle's second marriage - Fraternal twins
@@ -385,6 +437,8 @@ class GenogramUtils {
         dateOfBirth: DateTime(1988),
         isDeceased: false,
         // birthType: BirthType.fraternal,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_3.png',
+        kinship: 'Stepdaughter',
         // ,
       ),
       FamilyMember(
@@ -396,6 +450,8 @@ class GenogramUtils {
         dateOfBirth: DateTime(1988),
         isDeceased: false,
         // birthType: BirthType.fraternal,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_4.png',
+        kinship: 'Half-brother',
         // ,
       ),
 
@@ -408,6 +464,8 @@ class GenogramUtils {
         // relationshipTypes: {'c1': RelationshipType.married},
         dateOfBirth: DateTime(1978),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_5.png',
+        kinship: 'Half-sister',
       ),
       FamilyMember(
         id: 'gc1',
@@ -417,6 +475,8 @@ class GenogramUtils {
         motherId: 'p1',
         dateOfBirth: DateTime(2005),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_6.png',
+        kinship: 'Ancestor',
       ),
       FamilyMember(
         id: 'gc2',
@@ -425,6 +485,8 @@ class GenogramUtils {
         gender: 0,
         dateOfBirth: DateTime(2008),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_7.png',
+        kinship: 'Descendant',
       ),
       FamilyMember(
         id: '45gc1',
@@ -433,6 +495,8 @@ class GenogramUtils {
         // spouses: ['gc2'],
         dateOfBirth: DateTime(2005),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_8.png',
+        kinship: 'Relative',
       ),
       FamilyMember(
         id: 'gc542',
@@ -442,6 +506,8 @@ class GenogramUtils {
         fatherId: 'gc2',
         dateOfBirth: DateTime(2008),
         isDeceased: false,
+        avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_9.png',
+        kinship: 'Kin',
       ),
     ];
   }
