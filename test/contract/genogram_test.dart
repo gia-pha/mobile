@@ -3,23 +3,19 @@ import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
-  test('Counter value should be incremented', () async {
+  test('Get family members', () async {
     // Create a Pact between the consumer and provider
-    final pact = PactMockService('mobile', 'member');
+    final pact = PactMockService('mobile', 'genogram');
 
     // Create a new interaction
     pact
-        .newInteraction(description: 'a request to search with query matchers')
+        .newInteraction(description: 'a request to get family members')
         // Set up the provider state
-        .given('search service is running')
+        .given('family members exist in the system')
         // Configure the request
         .withRequest(
           'GET',
           '/api/members',
-          query: {
-            'status': PactMatchers.QueryRegex('divorced', 'divorced|separated|engaged'),
-            'adoptionStatus': PactMatchers.QueryRegex('adopted', 'adopted|foster'),
-          },
         )
         // Configure the response
         .willRespondWith(
@@ -32,16 +28,13 @@ void main() {
                 'name': PactMatchers.SomethingLike('Robert Smith'),
                 'fatherId': PactMatchers.SomethingLike('gf2'),
                 'motherId': PactMatchers.SomethingLike('gm2'),
-                'dateOfBirth': PactMatchers.SomethingLike('1980-01-01T00:00:00Z'),
-                'dateOfDeath': PactMatchers.SomethingLike('2020-01-01T00:00:00Z'),
+                'dateOfBirth': PactMatchers.SomethingLike('1980-01-01'),
+                'dateOfDeath': PactMatchers.SomethingLike('2020-01-01'),
                 'gender': PactMatchers.IntegerLike(1),
                 'spouses': PactMatchers.EachLike('gf2'),
-                'extraData': {
-                  'medicalInfo': PactMatchers.SomethingLike('No allergies'),
-                  'hobbies': PactMatchers.EachLike('reading'),
-                },
-                'color': PactMatchers.IntegerLike(4289374895), // Example ARGB color
+                'avatarUrl': PactMatchers.SomethingLike('https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_5.png'),
                 'isDeceased': PactMatchers.SomethingLike(true),
+                'kinship': PactMatchers.SomethingLike('Father'),
               },
               min: 1,
             ),
@@ -57,10 +50,7 @@ void main() {
       print('Mock server running at ${pact.addr}');
 
 
-      var url = Uri.http(pact.addr, '/api/members', {
-        'status': 'divorced',
-        'adoptionStatus': 'adopted',
-      });
+      var url = Uri.http(pact.addr, '/api/members');
       var response = await http.get(url);
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
