@@ -4,60 +4,27 @@
   },
   "interactions": [
     {
-      "description": "a request to search with query matchers",
+      "description": "a request to get family members",
       "providerStates": [
         {
-          "name": "search service is running"
+          "name": "family members exist in the system"
         }
       ],
       "request": {
-        "matchingRules": {
-          "query": {
-            "adoptionStatus": {
-              "combine": "AND",
-              "matchers": [
-                {
-                  "match": "regex",
-                  "regex": "adopted|foster"
-                }
-              ]
-            },
-            "status": {
-              "combine": "AND",
-              "matchers": [
-                {
-                  "match": "regex",
-                  "regex": "divorced|separated|engaged"
-                }
-              ]
-            }
-          }
-        },
         "method": "GET",
-        "path": "/api/members",
-        "query": {
-          "adoptionStatus": [
-            "adopted"
-          ],
-          "status": [
-            "divorced"
-          ]
-        }
+        "path": "/api/members"
       },
       "response": {
         "body": {
           "results": {
-            "color": 4289374895,
-            "dateOfBirth": "1980-01-01T00:00:00Z",
-            "dateOfDeath": "2020-01-01T00:00:00Z",
-            "extraData": {
-              "hobbies": "reading",
-              "medicalInfo": "No allergies"
-            },
+            "avatarUrl": "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_5.png",
+            "dateOfBirth": "1980-01-01",
+            "dateOfDeath": "2020-01-01",
             "fatherId": "gf2",
             "gender": 1,
             "id": "gf1",
             "isDeceased": true,
+            "kinship": "Father",
             "motherId": "gm2",
             "name": "Robert Smith",
             "spouses": "gf2"
@@ -77,11 +44,11 @@
                 }
               ]
             },
-            "$.results.color": {
+            "$.results.avatarUrl": {
               "combine": "AND",
               "matchers": [
                 {
-                  "match": "integer"
+                  "match": "type"
                 }
               ]
             },
@@ -94,23 +61,6 @@
               ]
             },
             "$.results.dateOfDeath": {
-              "combine": "AND",
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ]
-            },
-            "$.results.extraData.hobbies": {
-              "combine": "AND",
-              "matchers": [
-                {
-                  "match": "type",
-                  "min": 0
-                }
-              ]
-            },
-            "$.results.extraData.medicalInfo": {
               "combine": "AND",
               "matchers": [
                 {
@@ -143,6 +93,14 @@
               ]
             },
             "$.results.isDeceased": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.results.kinship": {
               "combine": "AND",
               "matchers": [
                 {
@@ -192,6 +150,6 @@
     }
   },
   "provider": {
-    "name": "member"
+    "name": "genogram"
   }
 }
