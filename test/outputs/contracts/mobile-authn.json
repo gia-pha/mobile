@@ -181,6 +181,14 @@
         },
         "matchingRules": {
           "body": {
+            "$.authenticatorData": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
             "$.signature": {
               "combine": "AND",
               "matchers": [
