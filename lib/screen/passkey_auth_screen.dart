@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:gia_pha_mobile/screen/NBHomeScreen.dart';
+import 'package:gia_pha_mobile/screen/home_screen.dart';
 import 'package:gia_pha_mobile/services/relying_party_server.dart';
 import 'package:passkeys/authenticator.dart';
 
