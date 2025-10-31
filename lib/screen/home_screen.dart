@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gia_pha_mobile/screen/FamilyTreeScreen.dart';
+import 'package:gia_pha_mobile/screen/family_tree_screen.dart';
 import 'package:gia_pha_mobile/screen/EAForYouTabScreen.dart';
 import 'package:gia_pha_mobile/screen/FamilyDetailsScreen.dart';
 import 'package:gia_pha_mobile/screen/ImageGalleryScreen.dart';

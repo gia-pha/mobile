@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gia_pha_mobile/screen/PasskeyAuthScreen.dart';
+import 'package:gia_pha_mobile/screen/passkey_auth_screen.dart';
 import 'package:gia_pha_mobile/services/api_service.dart';
 
 class LogoutScreen extends StatefulWidget {
