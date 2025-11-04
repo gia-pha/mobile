@@ -81,7 +81,7 @@ class GenogramNode extends StatelessWidget {
                   member.name,
                   textAlign: TextAlign.center,
                   style: theme.textTheme.titleMedium?.copyWith(
-                    color: member.isDeceased ? Colors.grey.shade100 : _getTextColor(member.gender),
+                    color: _getTextColor(member.gender),
                     fontWeight: FontWeight.bold,
                   ),
                   overflow: TextOverflow.ellipsis,
@@ -95,7 +95,7 @@ class GenogramNode extends StatelessWidget {
                     children: [
                       Icon(Icons.cake,
                           size: 14,
-                          color: member.isDeceased ? Colors.grey.shade100 : _getTextColor(member.gender)
+                          color: _getTextColor(member.gender)
                               .withValues(alpha: 0.7)),
                       //const SizedBox(width: 4),
                       Text(
@@ -128,7 +128,7 @@ class GenogramNode extends StatelessWidget {
                 Text(
                   member.kinship,
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: member.isDeceased ? Colors.grey.shade100 : Colors.grey.shade900,
+                    color: Colors.grey.shade900,
                     fontWeight: FontWeight.w500,
                   ),
                   textAlign: TextAlign.center,
@@ -224,7 +224,7 @@ class GenogramShapePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = isDeceased ? Colors.grey : color
+      ..color = color
       ..style = PaintingStyle.fill;
 
     final borderPaint = Paint()
@@ -234,80 +234,18 @@ class GenogramShapePainter extends CustomPainter {
 
     final center = Offset(size.width / 2, size.height / 2);
 
-    // Draw shape based on gender
-    switch (gender) {
-      case 0:
-        // Male: Square
-        final square = Rect.fromCenter(
-          center: center,
-          width: size.width * 0.8,
-          height: size.height * 1.2,
-        );
-        canvas.drawRect(square, paint);
-        canvas.drawRect(square, borderPaint);
-        break;
-
-      case 1:
-        // Female: Circle
-        // canvas.drawCircle(
-        //   center,
-        //   size.width * 0.4,
-        //   paint,
-        // );
-        // canvas.drawCircle(
-        //   center,
-        //   size.width * 0.4,
-        //   borderPaint,
-        // );
-        final square = Rect.fromCenter(
-          center: center,
-          width: size.width * 0.8,
-          height: size.height * 1.2,
-        );
-        canvas.drawOval(
-          square,
-          paint,
-        );
-        canvas.drawOval(
-          square,
-          borderPaint,
-        );
-        break;
-
-      default:
-        // Unknown or Other: Diamond
-        final path = Path();
-        path.moveTo(center.dx, center.dy - size.height * 0.4); // Top
-        path.lineTo(center.dx + size.width * 0.4, center.dy); // Right
-        path.lineTo(center.dx, center.dy + size.height * 0.4); // Bottom
-        path.lineTo(center.dx - size.width * 0.4, center.dy); // Left
-        path.close();
-
-        canvas.drawPath(path, paint);
-        canvas.drawPath(path, borderPaint);
-        break;
-    }
-
-    // Draw deceased indicator (diagonal line through shape)
-    /*if (isDeceased) {
-      final deceasedPaint = Paint()
-        ..color = Colors.black87
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2.0;
-
-      // Diagonal line from top-left to bottom-right
-      canvas.drawLine(
-        Offset(center.dx - size.width * 0.4, center.dy - size.height * 0.4),
-        Offset(center.dx + size.width * 0.4, center.dy + size.height * 0.4),
-        deceasedPaint,
-      );
-    }*/
+    final square = Rect.fromCenter(
+      center: center,
+      width: size.width * 0.8,
+      height: size.height * 1.2,
+    );
+    canvas.drawRect(square, paint);
+    canvas.drawRect(square, borderPaint);
   }
 
   @override
   bool shouldRepaint(covariant GenogramShapePainter oldDelegate) {
     return oldDelegate.gender != gender ||
-        oldDelegate.isDeceased != isDeceased ||
         oldDelegate.isSelected != isSelected ||
         oldDelegate.color != color ||
         oldDelegate.borderColor != borderColor;
