@@ -19,8 +19,6 @@ class FamilyMemberDetailScreen extends StatefulWidget {
 }
 
 class _FamilyMemberDetailScreenState extends State<FamilyMemberDetailScreen> {
-  // Notes editing removed — screen is read-only now.
-
   String _formatYear(DateTime? d) => d == null ? 'Unknown' : '${d.year}';
 
   String _ageText(DateTime? birth) {
