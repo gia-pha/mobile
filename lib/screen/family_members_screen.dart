@@ -1,22 +1,17 @@
-import 'package:gia_pha_mobile/model/EAForYouModel.dart';
 import 'package:gia_pha_mobile/model/FamilyMember.dart';
-// import 'package:event_flutter/screens/EAChattingScreen.dart';
-import 'package:gia_pha_mobile/utils/EAColors.dart';
-import 'package:gia_pha_mobile/utils/EADataProvider.dart';
-import 'package:gia_pha_mobile/utils/EAapp_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/utils/genogram_utils.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gia_pha_mobile/screen/family_member_detail_screen.dart';
 
-class EAMayBEYouKnowScreen extends StatefulWidget {
-  const EAMayBEYouKnowScreen({super.key});
+class FamilyMembersScreen extends StatefulWidget {
+  const FamilyMembersScreen({super.key});
 
   @override
-  EAMayBEYouKnowScreenState createState() => EAMayBEYouKnowScreenState();
+  FamilyMembersScreenState createState() => FamilyMembersScreenState();
 }
 
-class EAMayBEYouKnowScreenState extends State<EAMayBEYouKnowScreen> {
+class FamilyMembersScreenState extends State<FamilyMembersScreen> {
   List<FamilyMember> list = GenogramUtils.getSampleFamilyData();
 
   @override
