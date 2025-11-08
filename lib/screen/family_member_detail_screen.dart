@@ -176,6 +176,35 @@ class _FamilyMemberDetailScreenState extends State<FamilyMemberDetailScreen> {
 
             const SizedBox(height: 12),
 
+            // Extra data
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _sectionTitle('Extra data'),
+                    const SizedBox(height: 8),
+                    if (m.extraData.isEmpty)
+                      const Text('None', style: TextStyle(color: Colors.black54))
+                    else
+                      Column(
+                        children: m.extraData.entries.map((entry) {
+                          return ListTile(
+                            dense: true,
+                            contentPadding: EdgeInsets.zero,
+                            title: Text(entry.key),
+                            subtitle: Text(entry.value?.toString() ?? ''),
+                          );
+                        }).toList(),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
             // Action buttons
             Row(
               children: [
