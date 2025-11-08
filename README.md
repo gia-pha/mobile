@@ -105,7 +105,7 @@ BlocProvider(
 ## Development
 
 ```bash
-pact-stub-server --file ./test/outputs/contracts/mobile-authn.json --loglevel debug --port 42985 --cors
+pact-stub-server --dir ./test/outputs/contracts --loglevel debug --port 42985 --cors
 ```
 
 Android Emulator:
