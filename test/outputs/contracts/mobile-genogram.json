@@ -4,6 +4,155 @@
   },
   "interactions": [
     {
+      "description": "a request to get family member",
+      "providerStates": [
+        {
+          "name": "family member exist in the system"
+        }
+      ],
+      "request": {
+        "generators": {
+          "path": {
+            "expression": "/api/members/${id}",
+            "type": "ProviderState"
+          }
+        },
+        "matchingRules": {
+          "path": {
+            "combine": "AND",
+            "matchers": [
+              {
+                "match": "regex",
+                "regex": "/api/members/\\d+"
+              }
+            ]
+          }
+        },
+        "method": "GET",
+        "path": "/api/members/5"
+      },
+      "response": {
+        "body": {
+          "avatarUrl": "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_5.png",
+          "dateOfBirth": "1980-01-01",
+          "dateOfDeath": "2020-01-01",
+          "fatherId": "gf2",
+          "gender": 1,
+          "id": "gf1",
+          "isDeceased": true,
+          "kinship": "Father",
+          "motherId": "gm2",
+          "name": "Robert Smith",
+          "spouses": "gf2"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.avatarUrl": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.dateOfBirth": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.dateOfDeath": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.fatherId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.gender": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.isDeceased": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.kinship": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.motherId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.spouses": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 0
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    },
+    {
       "description": "a request to get family members",
       "providerStates": [
         {
