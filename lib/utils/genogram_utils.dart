@@ -76,6 +76,7 @@ class GenogramUtils {
         dateOfDeath: DateTime(1990),
         avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_1.png',
         kinship: 'Father',
+        extraData: {'occupation': 'Farmer', 'hobbies': ['Fishing', 'Gardening'], 'medicalHistory': 'Diabetes' },
       ),
       FamilyMember(
         id: 'gm1',
@@ -88,6 +89,7 @@ class GenogramUtils {
         dateOfDeath: DateTime(1995),
         avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_2.png',
         kinship: 'Mother',
+        extraData: {'occupation': 'Teacher', 'hobbies': ['Knitting', 'Reading'], 'medicalHistory': 'Hypertension' },
       ),
 
       // First generation - Other side
@@ -105,6 +107,7 @@ class GenogramUtils {
         dateOfDeath: DateTime(1985),
         avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_3.png',
         kinship: 'Son',
+        extraData: {'occupation': 'Engineer', 'hobbies': ['Traveling', 'Cooking'], 'medicalHistory': 'Asthma' },
       ),
       FamilyMember(
         id: 'gm2',
@@ -117,6 +120,7 @@ class GenogramUtils {
         isDeceased: true,
         //avatarUrl: 'https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_4.png',
         kinship: 'Daughter',
+        extraData: {'occupation': 'Nurse', 'hobbies': ['Painting', 'Dancing'], 'medicalHistory': 'None' },
       ),
       FamilyMember(
         id: 'gm2b',
