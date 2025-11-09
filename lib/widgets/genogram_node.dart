@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gia_pha_mobile/model/FamilyMember.dart';
+import 'package:gia_pha_mobile/model/family_member.dart';
 import 'package:org_chart/org_chart.dart';
 
 class GenogramNode extends StatelessWidget {
