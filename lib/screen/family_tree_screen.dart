@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/utils/genogram_utils.dart';
 import 'package:gia_pha_mobile/widgets/genogram_node.dart';
 import 'package:org_chart/org_chart.dart';
-import 'package:gia_pha_mobile/model/FamilyMember.dart';
+import 'package:gia_pha_mobile/model/family_member.dart';
 import 'dart:typed_data';
 
 class FamilyTreeScreen extends StatefulWidget {

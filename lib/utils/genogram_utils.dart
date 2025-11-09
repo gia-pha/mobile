@@ -1,4 +1,4 @@
-import 'package:gia_pha_mobile/model/FamilyMember.dart';
+import 'package:gia_pha_mobile/model/family_member.dart';
 
 /// Utility class for genogram-related functions
 class GenogramUtils {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gia_pha_mobile/model/FamilyMember.dart';
+import 'package:gia_pha_mobile/model/family_member.dart';
 
 class FamilyMemberDetailScreen extends StatefulWidget {
   final FamilyMember member;

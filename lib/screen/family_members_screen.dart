@@ -1,4 +1,4 @@
-import 'package:gia_pha_mobile/model/FamilyMember.dart';
+import 'package:gia_pha_mobile/model/family_member.dart';
 import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/utils/genogram_utils.dart';
 import 'package:nb_utils/nb_utils.dart';
