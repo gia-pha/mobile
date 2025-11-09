@@ -23,10 +23,21 @@ class FamilyMembersScreenState extends State<FamilyMembersScreen> {
   // collapsed by default
   bool filtersExpanded = false;
 
+  // name search
+  String nameQuery = '';
+  final TextEditingController _nameController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
+    _nameController.text = nameQuery;
     init();
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
   }
 
   Future<void> init() async {
@@ -39,7 +50,14 @@ class FamilyMembersScreenState extends State<FamilyMembersScreen> {
   }
 
   List<FamilyMember> get filteredList {
+    final q = nameQuery.trim().toLowerCase();
     return list.where((data) {
+      // name search
+      if (q.isNotEmpty) {
+        final name = (data.name ?? '').toLowerCase();
+        if (!name.contains(q)) return false;
+      }
+
       // gender
       if (genderFilter != -1 && data.gender != genderFilter) return false;
 
@@ -97,6 +115,27 @@ class FamilyMembersScreenState extends State<FamilyMembersScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Name search field
+              TextField(
+                controller: _nameController,
+                onChanged: (v) => setState(() => nameQuery = v),
+                decoration: InputDecoration(
+                  isDense: true,
+                  hintText: 'Search by name',
+                  prefixIcon: const Icon(Icons.search),
+                  suffixIcon: nameQuery.isNotEmpty
+                      ? IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () => setState(() {
+                            _nameController.clear();
+                            nameQuery = '';
+                          }),
+                        )
+                      : null,
+                  border: OutlineInputBorder(borderRadius: radius(8)),
+                ),
+              ),
+              8.height,
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
@@ -199,6 +238,8 @@ class FamilyMembersScreenState extends State<FamilyMembersScreen> {
                       deceasedFilter = -1;
                       marriedFilter = -1;
                       childrenFilter = -1;
+                      nameQuery = '';
+                      _nameController.clear();
                     }),
                     child: const Text('Clear filters'),
                   ),
