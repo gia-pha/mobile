@@ -191,6 +191,18 @@ class EAForYouTabScreenState extends State<EAForYouTabScreen> {
                                   style: primaryTextStyle(size: 12, color: primaryColor1),
                                 ),
                               ),
+                              6.height,
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: primaryColor1.withOpacity(0.12),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Text(
+                                  '10 months ago', // placeholder since EventModel has no distance field
+                                  style: primaryTextStyle(size: 12, color: primaryColor1),
+                                ),
+                              ),
                             ],
                           ),
                         ],

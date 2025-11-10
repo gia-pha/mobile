@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:gia_pha_mobile/model/event_model.dart';
 import 'package:gia_pha_mobile/utils/EAColors.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:simple_gallery/simple_gallery.dart';
+import 'dart:math' as math;
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -67,6 +69,10 @@ class _EAEventDetailScreenState extends State<EAEventDetailScreen> {
   Widget build(BuildContext context) {
     final images = widget.event.images;
     final hasCoords = widget.event.latitude != null && widget.event.longitude != null;
+
+    // responsive gallery height: 16:9 based on width, min 180, max 60% of screen height
+    final mq = MediaQuery.of(context);
+    final galleryHeight = math.min(math.max(mq.size.width * 9 / 16, 180.0), mq.size.height * 0.6);
 
     return Scaffold(
       appBar: AppBar(
@@ -213,33 +219,77 @@ class _EAEventDetailScreenState extends State<EAEventDetailScreen> {
             if (images.isNotEmpty) 8.height,
             if (images.isNotEmpty)
               SizedBox(
-                height: 90,
-                child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: images.length,
-                  separatorBuilder: (_, __) => 8.width,
-                  itemBuilder: (context, i) {
-                    final img = images[i];
-                    return GestureDetector(
-                      onTap: () => _openFullScreenGallery(i),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: SizedBox(
-                          width: 120,
-                          height: 90,
+                height: galleryHeight,
+                child: SimpleGallery<NetworkImage>(
+                  items: images,
+                  itemSize: (item) async => Size(1, 1),
+                  itemBuilder: (context, item, itemSize, viewSize) {
+                    return Stack(
+                      children: [
+                        Positioned.fill(
                           child: CachedNetworkImage(
-                            imageUrl: img.url.toString(),
+                            imageUrl: item.url.toString(),
                             fit: BoxFit.cover,
-                            placeholder: (c, u) =>
-                                ColoredBox(color: Colors.black12, child: const Center(child: CircularProgressIndicator())),
-                            errorWidget: (c, u, e) =>
-                                const ColoredBox(color: Colors.black12, child: Center(child: Icon(Icons.error))),
+                            placeholder: (context, url) => Center(
+                              child: ColoredBox(
+                                color: Colors.black38,
+                                child: Center(child: CircularProgressIndicator()),
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => Center(
+                              child: Icon(Icons.error, color: Colors.red),
+                            ),
                           ),
                         ),
-                      ),
+                        Positioned(
+                          bottom: 5,
+                          right: 5,
+                          child: Icon(Icons.favorite, color: Colors.pink),
+                        ),
+                      ],
                     );
                   },
+                  placeholderBuilder: (context, item) {
+                    return ColoredBox(
+                      color: Colors.black38,
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  },
+                  detailDecoration: DetailDecoration(
+                    detailBuilder: (context, item, itemSize, viewSize) {
+                      return Stack(
+                        children: [
+                          Positioned.fill(
+                            child: CachedNetworkImage(
+                              imageUrl: item.url.toString(),
+                              fit: BoxFit.contain,
+                              placeholder: (context, url) => Center(
+                                child: ColoredBox(
+                                  color: Colors.black38,
+                                  child: Center(child: CircularProgressIndicator()),
+                                ),
+                              ),
+                              errorWidget: (context, url, error) => Center(
+                                child: Icon(Icons.error, color: Colors.red),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 5,
+                            right: 5,
+                            child: Icon(Icons.favorite, color: Colors.pink),
+                          ),
+                        ],
+                      );
+                    },
+                    placeholderBuilder: (context, item) {
+                      return ColoredBox(
+                        color: Colors.black38,
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    },
+                    pageGap: 16,
+                  ),
                 ),
               ),
             24.height,
