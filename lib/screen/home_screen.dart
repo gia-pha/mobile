@@ -8,7 +8,7 @@ import 'package:gia_pha_mobile/component/NBNewsComponent.dart';
 import 'package:gia_pha_mobile/model/NBModel.dart';
 import 'package:gia_pha_mobile/screen/PurchaseMoreScreen.dart';
 import 'package:gia_pha_mobile/screen/family_members_screen.dart';
-import 'package:gia_pha_mobile/screen/CalendarScreen.dart';
+import 'package:gia_pha_mobile/screen/calendar_screen.dart';
 import 'package:gia_pha_mobile/screen/WACategoriesScreen.dart';
 import 'package:gia_pha_mobile/utils/NBColors.dart';
 import 'package:gia_pha_mobile/utils/NBDataProviders.dart';
