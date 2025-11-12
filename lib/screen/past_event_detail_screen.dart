@@ -13,16 +13,16 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as ll;
 
-class EAEventDetailScreen extends StatefulWidget {
+class PastEventDetailScreen extends StatefulWidget {
   final EventModel event;
 
-  const EAEventDetailScreen({super.key, required this.event});
+  const PastEventDetailScreen({super.key, required this.event});
 
   @override
-  _EAEventDetailScreenState createState() => _EAEventDetailScreenState();
+  _PastEventDetailScreenState createState() => _PastEventDetailScreenState();
 }
 
-class _EAEventDetailScreenState extends State<EAEventDetailScreen> {
+class _PastEventDetailScreenState extends State<PastEventDetailScreen> {
   late PageController pageController;
   int currentIndexPage = 0;
 
@@ -36,16 +36,6 @@ class _EAEventDetailScreenState extends State<EAEventDetailScreen> {
   void dispose() {
     pageController.dispose();
     super.dispose();
-  }
-
-  void _openFullScreenGallery([int initialPage = 0]) {
-    if (widget.event.images.isEmpty) return;
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => FullScreenGallery(images: widget.event.images, initialPage: initialPage),
-        fullscreenDialog: true,
-      ),
-    );
   }
 
   Future<void> _openExternalMaps() async {
@@ -241,11 +231,6 @@ class _EAEventDetailScreenState extends State<EAEventDetailScreen> {
                             ),
                           ),
                         ),
-                        Positioned(
-                          bottom: 5,
-                          right: 5,
-                          child: Icon(Icons.favorite, color: Colors.pink),
-                        ),
                       ],
                     );
                   },
@@ -274,11 +259,6 @@ class _EAEventDetailScreenState extends State<EAEventDetailScreen> {
                               ),
                             ),
                           ),
-                          Positioned(
-                            bottom: 5,
-                            right: 5,
-                            child: Icon(Icons.favorite, color: Colors.pink),
-                          ),
                         ],
                       );
                     },
@@ -295,96 +275,6 @@ class _EAEventDetailScreenState extends State<EAEventDetailScreen> {
             24.height,
           ],
         ),
-      ),
-    );
-  }
-}
-
-// FullScreenGallery (unchanged)
-class FullScreenGallery extends StatefulWidget {
-  final List<NetworkImage> images;
-  final int initialPage;
-
-  const FullScreenGallery({super.key, required this.images, this.initialPage = 0});
-
-  @override
-  State<FullScreenGallery> createState() => _FullScreenGalleryState();
-}
-
-class _FullScreenGalleryState extends State<FullScreenGallery> {
-  late final PageController _controller;
-  late int _current;
-
-  @override
-  void initState() {
-    super.initState();
-    _current = widget.initialPage.clamp(0, widget.images.length - 1);
-    _controller = PageController(initialPage: _current);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        children: [
-          SafeArea(
-            child: PageView.builder(
-              controller: _controller,
-              itemCount: widget.images.length,
-              onPageChanged: (p) => setState(() => _current = p),
-              itemBuilder: (context, index) {
-                final item = widget.images[index];
-                return Center(
-                  child: CachedNetworkImage(
-                    imageUrl: item.url.toString(),
-                    fit: BoxFit.contain,
-                    placeholder: (_, __) => const Center(child: CircularProgressIndicator()),
-                    errorWidget: (_, __, ___) => const Center(child: Icon(Icons.error, color: Colors.red)),
-                  ),
-                );
-              },
-            ),
-          ),
-          Positioned(
-            top: 12,
-            left: 12,
-            child: SafeArea(
-              child: ClipOval(
-                child: Material(
-                  color: Colors.black45,
-                  child: InkWell(
-                    onTap: () => Navigator.of(context).pop(),
-                    child: const SizedBox(width: 44, height: 44, child: Icon(Icons.close, color: Colors.white)),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 20,
-            left: 0,
-            right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(widget.images.length, (i) {
-                final active = i == _current;
-                return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  width: active ? 10 : 6,
-                  height: active ? 10 : 6,
-                  decoration: BoxDecoration(color: active ? Colors.white : Colors.white54, shape: BoxShape.circle),
-                );
-              }),
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import 'event_detail_screen.dart';
+import 'past_event_detail_screen.dart';
 
 class EAForYouTabScreen extends StatefulWidget {
   const EAForYouTabScreen({super.key});
@@ -116,7 +116,7 @@ class EAForYouTabScreenState extends State<EAForYouTabScreen> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   child: InkWell(
                     onTap: () {
-                      EAEventDetailScreen(event: event).launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
+                      PastEventDetailScreen(event: event).launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(12),
