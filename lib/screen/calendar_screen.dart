@@ -34,7 +34,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             //key: state,
             //width: width,
             showWeekends: true,
-            startDay: WeekDays.friday,
+            startDay: WeekDays.monday,
             useAvailableVerticalSpace: true,
             onEventTap: (CalendarEventData<EventModel> event, date) {
               Navigator.of(context).push(
