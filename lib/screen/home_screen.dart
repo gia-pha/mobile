@@ -139,7 +139,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
           FamilyDetailsScreen(newsDetails: mNewsList[0],),
           FamilyTreeScreen(),
           FamilyMembersScreen(),
-          EAForYouTabScreen(),
+          EventsScreen(),
           CalendarScreen(),
           WACategoriesScreen(),
           NBAllNewsComponent(),
