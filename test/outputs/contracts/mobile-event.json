@@ -1,0 +1,212 @@
+{
+  "consumer": {
+    "name": "mobile"
+  },
+  "interactions": [
+    {
+      "description": "a request to get event",
+      "providerStates": [
+        {
+          "name": "event exist in the system"
+        }
+      ],
+      "request": {
+        "generators": {
+          "path": {
+            "expression": "/api/events/${id}",
+            "type": "ProviderState"
+          }
+        },
+        "matchingRules": {
+          "path": {
+            "combine": "AND",
+            "matchers": [
+              {
+                "match": "regex",
+                "regex": "/api/events/\\d+"
+              }
+            ]
+          }
+        },
+        "method": "GET",
+        "path": "/api/events/5"
+      },
+      "response": {
+        "body": {
+          "address": "123 Main St, City, Country",
+          "images": "https://picsum.photos/125/125",
+          "latitude": 12.244052,
+          "longitude": 106.623743,
+          "name": "Anniversary",
+          "time": "2023-10-10 10:00:00"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.address": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.images": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 0
+                }
+              ]
+            },
+            "$.latitude": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.longitude": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.time": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "a request to get events",
+      "providerStates": [
+        {
+          "name": "events exist in the system"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/api/events"
+      },
+      "response": {
+        "body": {
+          "address": "123 Main St, City, Country",
+          "images": "https://picsum.photos/125/125",
+          "latitude": 12.244052,
+          "longitude": 106.623743,
+          "name": "Anniversary",
+          "time": "2023-10-10 10:00:00"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            },
+            "$.address": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.images": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 0
+                }
+              ]
+            },
+            "$.latitude": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.longitude": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.time": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pactRust": {
+      "ffi": "0.4.27",
+      "mockserver": "1.2.11",
+      "models": "1.2.8"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "event"
+  }
+}
