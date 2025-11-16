@@ -7,14 +7,14 @@ import 'package:nb_utils/nb_utils.dart';
 
 import 'past_event_detail_screen.dart';
 
-class EAForYouTabScreen extends StatefulWidget {
-  const EAForYouTabScreen({super.key});
+class EventsScreen extends StatefulWidget {
+  const EventsScreen({super.key});
 
   @override
-  EAForYouTabScreenState createState() => EAForYouTabScreenState();
+  EventsScreenState createState() => EventsScreenState();
 }
 
-class EAForYouTabScreenState extends State<EAForYouTabScreen> {
+class EventsScreenState extends State<EventsScreen> {
   List<EventModel> eventsFiltered = [];
   String searchQuery = '';
   late TextEditingController _searchController;
