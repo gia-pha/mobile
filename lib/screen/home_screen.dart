@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/screen/family_tree_screen.dart';
 import 'package:gia_pha_mobile/screen/events_screen.dart';
 import 'package:gia_pha_mobile/screen/FamilyDetailsScreen.dart';
+import 'package:gia_pha_mobile/screen/funds_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gia_pha_mobile/component/NBAllNewsComponent.dart';
 import 'package:gia_pha_mobile/component/NBNewsComponent.dart';
@@ -80,7 +81,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
         centerTitle: true,
         bottom: TabBar(
           controller: tabController,
-          tabs: [Tab(text: 'Thông Tin Dòng Họ', icon: Icon(Icons.history)), Tab(text: 'Cây Gia Phả', icon: Icon(Icons.account_tree)), Tab(text: 'Thành Viên', icon: Icon(Icons.people)), Tab(text: 'Sự Kiện', icon: Icon(Icons.event)), Tab(text: 'Lịch', icon: Icon(Icons.calendar_month)), Tab(text: 'Quỹ', icon: Icon(Icons.money)), Tab(text: 'All News', icon: Icon(Icons.newspaper)), Tab(text: 'Technology', icon: Icon(Icons.devices)), Tab(text: 'Fashion', icon: Icon(Icons.style)), Tab(text: 'Sports', icon: Icon(Icons.sports_score)), Tab(text: 'Science', icon: Icon(Icons.science))],
+          tabs: [Tab(text: 'Thông Tin Dòng Họ', icon: Icon(Icons.history)), Tab(text: 'Cây Gia Phả', icon: Icon(Icons.account_tree)), Tab(text: 'Thành Viên', icon: Icon(Icons.people)), Tab(text: 'Sự Kiện', icon: Icon(Icons.event)), Tab(text: 'Lịch', icon: Icon(Icons.calendar_month)), Tab(text: 'Quỹ', icon: Icon(Icons.money)), Tab(text: 'Quỹ', icon: Icon(Icons.money)), Tab(text: 'All News', icon: Icon(Icons.newspaper)), Tab(text: 'Technology', icon: Icon(Icons.devices)), Tab(text: 'Fashion', icon: Icon(Icons.style)), Tab(text: 'Sports', icon: Icon(Icons.sports_score)), Tab(text: 'Science', icon: Icon(Icons.science))],
           labelStyle: boldTextStyle(),
           labelColor: black,
           unselectedLabelStyle: primaryTextStyle(),
@@ -141,6 +142,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
           FamilyMembersScreen(),
           EventsScreen(),
           CalendarScreen(),
+          FundsScreen(),
           WACategoriesScreen(),
           NBAllNewsComponent(),
           PurchaseMoreScreen(false),
