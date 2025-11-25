@@ -1,0 +1,216 @@
+{
+  "consumer": {
+    "name": "mobile"
+  },
+  "interactions": [
+    {
+      "description": "a request to get fund",
+      "providerStates": [
+        {
+          "name": "fund exist in the system"
+        }
+      ],
+      "request": {
+        "generators": {
+          "path": {
+            "expression": "/api/funds/${id}",
+            "type": "ProviderState"
+          }
+        },
+        "matchingRules": {
+          "path": {
+            "combine": "AND",
+            "matchers": [
+              {
+                "match": "regex",
+                "regex": "/api/funds/\\d+"
+              }
+            ]
+          }
+        },
+        "method": "GET",
+        "path": "/api/funds/5"
+      },
+      "response": {
+        "body": {
+          "name": "Family Trip 2026",
+          "transactions": {
+            "amount": 500,
+            "date": "2023-01-01T00:00:00Z",
+            "type": "income",
+            "whoOrReason": "Alice"
+          }
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.transactions": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 0
+                }
+              ]
+            },
+            "$.transactions.amount": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.transactions.date": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.transactions.type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "income|outcome"
+                }
+              ]
+            },
+            "$.transactions.whoOrReason": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "a request to get funds",
+      "providerStates": [
+        {
+          "name": "funds exist in the system"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/api/funds"
+      },
+      "response": {
+        "body": {
+          "name": "Family Trip 2026",
+          "transactions": {
+            "amount": 500,
+            "date": "2023-01-01T00:00:00Z",
+            "type": "income",
+            "whoOrReason": "Alice"
+          }
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            },
+            "$.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.transactions": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 0
+                }
+              ]
+            },
+            "$.transactions.amount": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.transactions.date": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.transactions.type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "income|outcome"
+                }
+              ]
+            },
+            "$.transactions.whoOrReason": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pactRust": {
+      "ffi": "0.4.27",
+      "mockserver": "1.2.11",
+      "models": "1.2.8"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "fund"
+  }
+}
