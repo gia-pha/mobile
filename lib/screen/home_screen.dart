@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/screen/family_tree_screen.dart';
 import 'package:gia_pha_mobile/screen/events_screen.dart';
-import 'package:gia_pha_mobile/screen/FamilyDetailsScreen.dart';
+import 'package:gia_pha_mobile/screen/family_intro_screen.dart';
 import 'package:gia_pha_mobile/screen/funds_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gia_pha_mobile/component/NBAllNewsComponent.dart';
@@ -136,7 +136,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
         controller: tabController,
         physics: NeverScrollableScrollPhysics(),
         children: [
-          FamilyDetailsScreen(newsDetails: mNewsList[0],),
+          FamilyIntroScreen(),
           FamilyTreeScreen(),
           FamilyMembersScreen(),
           EventsScreen(),
