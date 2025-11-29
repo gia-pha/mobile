@@ -10,6 +10,7 @@
 #include <file_saver/file_saver_plugin.h>
 #include <file_selector_windows/file_selector_windows.h>
 #include <nb_utils/nb_utils_plugin_c_api.h>
+#include <passkeys_windows/passkeys_windows_plugin.h>
 #include <url_launcher_windows/url_launcher_windows.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
@@ -21,6 +22,8 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("FileSelectorWindows"));
   NbUtilsPluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("NbUtilsPluginCApi"));
+  PasskeysWindowsPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("PasskeysWindowsPlugin"));
   UrlLauncherWindowsRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("UrlLauncherWindows"));
 }
