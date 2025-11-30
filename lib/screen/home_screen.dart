@@ -8,19 +8,17 @@ import 'package:gia_pha_mobile/screen/calendar_screen.dart';
 import 'package:gia_pha_mobile/screen/user_account_screen.dart';
 import 'package:gia_pha_mobile/utils/EAColors.dart';
 
-class NBHomeScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   static String tag = '/NBHomeScreen';
 
-  const NBHomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
-  NBHomeScreenState createState() => NBHomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderStateMixin {
+class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  TabController? tabController;
 
   int _selectedIndex = 0;
   final _pages = <Widget>[
@@ -32,27 +30,6 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
     FundsScreen(),
     UserAccountScreen(),
   ];
-
-  @override
-  void initState() {
-    super.initState();
-    init();
-  }
-
-  Future<void> init() async {
-    tabController = TabController(length: 6, vsync: this);
-  }
-
-  @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
-  }
-
-  @override
-  void dispose() {
-    tabController!.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

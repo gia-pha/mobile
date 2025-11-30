@@ -53,7 +53,7 @@ class _PasskeyAuthScreenState extends State<PasskeyAuthScreen> {
 
   void _navigateToMain() {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => const NBHomeScreen()),
+      MaterialPageRoute(builder: (_) => const HomeScreen()),
     );
   }
 
@@ -116,7 +116,7 @@ class _PasskeyAuthScreenState extends State<PasskeyAuthScreen> {
 
       if (!mounted) return;
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const NBHomeScreen()),
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
       );
     } catch (e) {
       setState(() {
@@ -136,7 +136,7 @@ class _PasskeyAuthScreenState extends State<PasskeyAuthScreen> {
 
       if (!mounted) return;
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const NBHomeScreen()),
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
       );
     } catch (e) {
       setState(() {
