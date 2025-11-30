@@ -34,6 +34,8 @@ dependencies:
   latlong2: ^0.9.1
   flutter_html: ^3.0.0
   flutter_html_iframe: ^3.0.0
+  qr_flutter: ^4.1.0
+  qr_code_scanner: ^0.4.0
 
 dependency_overrides:
   pact_dart:

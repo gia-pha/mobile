@@ -1,9 +1,4 @@
 import 'package:gia_pha_mobile/model/NBModel.dart';
-import 'package:gia_pha_mobile/screen/NBBookmarkScreen.dart';
-import 'package:gia_pha_mobile/screen/NBMembershipScreen.dart';
-import 'package:gia_pha_mobile/screen/NBSettingScreen.dart';
-import 'package:gia_pha_mobile/screen/PurchaseMoreScreen.dart';
-import 'package:gia_pha_mobile/screen/logout_screen.dart';
 import 'package:gia_pha_mobile/utils/NBImages.dart';
 
 String details = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '
@@ -24,18 +19,6 @@ String details = 'Lorem Ipsum is simply dummy text of the printing and typesetti
     'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. '
     'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing '
     'software like Aldus PageMaker including versions of Lorem Ipsum.';
-
-List<NBDrawerItemModel> nbGetDrawerItems() {
-  List<NBDrawerItemModel> drawerItems = [];
-  drawerItems.add(NBDrawerItemModel(title: 'Home'));
-  drawerItems.add(NBDrawerItemModel(title: 'Audio', widget: PurchaseMoreScreen(true)));
-  drawerItems.add(NBDrawerItemModel(title: 'Create New Article', widget: PurchaseMoreScreen(true)));
-  drawerItems.add(NBDrawerItemModel(title: 'Bookmark', widget: NBBookmarkScreen()));
-  drawerItems.add(NBDrawerItemModel(title: 'Membership', widget: NBMembershipScreen()));
-  drawerItems.add(NBDrawerItemModel(title: 'Setting', widget: NBSettingScreen()));
-  drawerItems.add(NBDrawerItemModel(title: 'Logout', widget: LogoutScreen()));
-  return drawerItems;
-}
 
 List<NBNewsDetailsModel> nbGetNewsDetails() {
   List<NBNewsDetailsModel> newsDetailsList = [];
@@ -108,17 +91,6 @@ List<NBNewsDetailsModel> nbGetNewsDetails() {
     time: '20:00',
   ));
   return newsDetailsList;
-}
-
-List<NBSettingsItemModel> nbGetSettingItems() {
-  List<NBSettingsItemModel> settingList = [];
-  settingList.add(NBSettingsItemModel(title: 'Language', widget: PurchaseMoreScreen(true)));
-  settingList.add(NBSettingsItemModel(title: 'Edit Profile', widget: PurchaseMoreScreen(true)));
-  settingList.add(NBSettingsItemModel(title: 'Change Password', widget: PurchaseMoreScreen(true)));
-  settingList.add(NBSettingsItemModel(title: 'Notification Setting', widget: PurchaseMoreScreen(true)));
-  settingList.add(NBSettingsItemModel(title: 'Help and Support'));
-  settingList.add(NBSettingsItemModel(title: 'Terms and Conditions'));
-  return settingList;
 }
 
 List<NBMembershipPlanItemModel> nbGetMembershipPlanItems() {
