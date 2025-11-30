@@ -10,6 +10,7 @@ class FamilyMember {
   final DateTime? dateOfDeath;
   final int gender;
   final List<String> spouses; // IDs of relationships
+  final List<String> children; // IDs of children
   final Map<String, dynamic> extraData; // Additional data like medical info
   final Color color;
   final String? avatarUrl;
@@ -24,12 +25,14 @@ class FamilyMember {
     this.dateOfDeath,
     required this.gender,
     List<String>? spouses,
+    List<String>? children,
     Map<String, dynamic>? extraData,
     Color? color,
     this.avatarUrl,
     this.kinship = '',
     this.isDeceased = false,
   })  : spouses = spouses ?? [],
+        children = children ?? [],
         extraData = extraData ?? {},
         color = color ?? Colors.blue;
   Map<String, dynamic> toMap() {
@@ -41,7 +44,8 @@ class FamilyMember {
       'dateOfBirth': dateOfBirth?.toString(),
       'dateOfDeath': dateOfDeath?.toString(),
       'gender': gender.toString(),
-      'relationships': spouses,
+      'spouses': spouses,
+      'children': children,
       'extraData': extraData,
       'color': color,
       //'kinship': kinship,
@@ -63,6 +67,7 @@ class FamilyMember {
           : null,
       gender: map['gender'],
       spouses: List<String>.from(map['spouses'] ?? []),
+      children: List<String>.from(map['children'] ?? []),
       extraData: Map<String, dynamic>.from(map['extraData'] ?? {}),
       color: map['color'] ?? Colors.blue,
       //kinship: map['kinship'],
@@ -78,6 +83,7 @@ class FamilyMember {
     DateTime? dateOfDeath,
     int? gender,
     List<String>? spouses,
+    List<String>? children,
     Map<String, dynamic>? extraData,
     Color? color,
     //String? kinship,
@@ -92,6 +98,7 @@ class FamilyMember {
       dateOfDeath: dateOfDeath ?? this.dateOfDeath,
       gender: gender ?? this.gender,
       spouses: spouses ?? List.from(this.spouses),
+      children: children ?? List.from(this.children),
       extraData: extraData ?? Map.from(this.extraData),
       color: color ?? this.color,
       //kinship: kinship ?? this.kinship,

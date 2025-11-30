@@ -3,14 +3,10 @@ import 'package:gia_pha_mobile/screen/family_tree_screen.dart';
 import 'package:gia_pha_mobile/screen/events_screen.dart';
 import 'package:gia_pha_mobile/screen/family_intro_screen.dart';
 import 'package:gia_pha_mobile/screen/funds_screen.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:gia_pha_mobile/model/NBModel.dart';
-import 'package:gia_pha_mobile/screen/PurchaseMoreScreen.dart';
 import 'package:gia_pha_mobile/screen/family_members_screen.dart';
 import 'package:gia_pha_mobile/screen/calendar_screen.dart';
-import 'package:gia_pha_mobile/utils/NBColors.dart';
-import 'package:gia_pha_mobile/utils/NBDataProviders.dart';
-import 'package:gia_pha_mobile/utils/NBImages.dart';
+import 'package:gia_pha_mobile/screen/user_account_screen.dart';
+import 'package:gia_pha_mobile/utils/EAColors.dart';
 
 class NBHomeScreen extends StatefulWidget {
   static String tag = '/NBHomeScreen';
@@ -24,9 +20,18 @@ class NBHomeScreen extends StatefulWidget {
 class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  List<NBDrawerItemModel> mDrawerList = nbGetDrawerItems();
-
   TabController? tabController;
+
+  int _selectedIndex = 0;
+  final _pages = <Widget>[
+    FamilyIntroScreen(),
+    FamilyTreeScreen(),
+    FamilyMembersScreen(),
+    EventsScreen(),
+    CalendarScreen(),
+    FundsScreen(),
+    UserAccountScreen(),
+  ];
 
   @override
   void initState() {
@@ -35,7 +40,7 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
   }
 
   Future<void> init() async {
-    tabController = TabController(length: 12, vsync: this);
+    tabController = TabController(length: 6, vsync: this);
   }
 
   @override
@@ -53,80 +58,35 @@ class NBHomeScreenState extends State<NBHomeScreen> with SingleTickerProviderSta
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        leading: IconButton(
-            icon: Icon(Icons.menu,color: Colors.grey),
-            onPressed: () {
-              _scaffoldKey.currentState!.openDrawer();
-            }),
-        title: Text('Dòng họ hiện tại', style: boldTextStyle(color: black, size: 20)),
-        backgroundColor: white,
-        centerTitle: true,
-        bottom: TabBar(
-          controller: tabController,
-          tabs: [Tab(text: 'Thông Tin Dòng Họ', icon: Icon(Icons.history)), Tab(text: 'Cây Gia Phả', icon: Icon(Icons.account_tree)), Tab(text: 'Thành Viên', icon: Icon(Icons.people)), Tab(text: 'Sự Kiện', icon: Icon(Icons.event)), Tab(text: 'Lịch', icon: Icon(Icons.calendar_month)), Tab(text: 'Quỹ', icon: Icon(Icons.money))],
-          labelStyle: boldTextStyle(),
-          labelColor: black,
-          unselectedLabelStyle: primaryTextStyle(),
-          unselectedLabelColor: grey,
-          isScrollable: true,
-          indicatorColor: NBPrimaryColor,
-          indicatorWeight: 3,
-          indicatorSize: TabBarIndicatorSize.tab,
-        ),
-      ),
-      drawer: Drawer(
-        elevation: 0,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 130,
-              child: DrawerHeader(
-                margin: EdgeInsets.all(0),
-                child: ListTile(
-                  contentPadding: EdgeInsets.only(left: 0),
-                  leading: CircleAvatar(backgroundImage: AssetImage(NBProfileImage), radius: 30),
-                  title: Text('Robert Fox', style: boldTextStyle()),
-                  subtitle: Text('View Profile', style: secondaryTextStyle()),
-                  onTap: () {
-                    finish(context);
-                    PurchaseMoreScreen(true).launch(context);
-                  },
-                ),
-              ),
-            ),
-            ListView.separated(
-              padding: EdgeInsets.all(8),
-              separatorBuilder: (_, index) {
-                return Divider();
-              },
-              itemCount: mDrawerList.length,
-              itemBuilder: (_, index) {
-                return Text('${mDrawerList[index].title}', style: boldTextStyle()).onTap(() {
-                  if (index == 0) {
-                    finish(context);
-                  } else {
-                    finish(context);
-                    mDrawerList[index].widget.launch(context);
-                  }
-                }).paddingAll(8);
-              },
-            ).expand()
+      body: _pages.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        clipBehavior: Clip.antiAlias,
+        child: BottomNavigationBar(
+          backgroundColor: Colors.white,
+          currentIndex: _selectedIndex,
+          onTap: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: primaryColor1,
+          unselectedItemColor: Colors.grey,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedFontSize: 0,
+          unselectedFontSize: 0,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Thông Tin Dòng Họ'),
+            BottomNavigationBarItem(icon: Icon(Icons.account_tree), label: 'Cây Gia Phả'),
+            BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Thành Viên'),
+            BottomNavigationBarItem(icon: Icon(Icons.event), label: 'Sự Kiện'),
+            BottomNavigationBarItem(icon: Icon(Icons.calendar_month), label: 'Lịch'),
+            BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Quỹ'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Tài Khoản'),
           ],
         ),
-      ),
-      body: TabBarView(
-        controller: tabController,
-        physics: NeverScrollableScrollPhysics(),
-        children: [
-          FamilyIntroScreen(),
-          FamilyTreeScreen(),
-          FamilyMembersScreen(),
-          EventsScreen(),
-          CalendarScreen(),
-          FundsScreen(),
-        ],
       ),
     );
   }
