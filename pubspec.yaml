@@ -34,8 +34,10 @@ dependencies:
   latlong2: ^0.9.1
   flutter_html: ^3.0.0
   flutter_html_iframe: ^3.0.0
-  qr_flutter: ^4.1.0
   qr_code_scanner: ^0.4.0
+  flutter_svg: ^2.0.10+1
+  qr_flutter: ^4.1.0
+  mobile_scanner: ^5.1.0
 
 dependency_overrides:
   pact_dart:
@@ -60,3 +62,4 @@ flutter:
   uses-material-design: true
   assets:
     - images/newsBlog/
+    - images/flags/

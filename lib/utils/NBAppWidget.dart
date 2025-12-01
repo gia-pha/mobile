@@ -1,10 +1,28 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 Widget commonCacheImageWidget(String? url, double height, {double? width, BoxFit? fit}) {
-  if (url.validate().startsWith('http')) {
+  if (url.validate().endsWith('.svg')) {
+    if (url.validate().startsWith('http')) {
+      return SvgPicture.network(
+        url!,
+        height: height,
+        width: width,
+        fit: fit ?? BoxFit.cover,
+        placeholderBuilder: (_) => placeholderWidget(),
+      );
+    } else {
+      return SvgPicture.asset(
+        url!,
+        height: height,
+        width: width,
+        fit: fit ?? BoxFit.cover,
+        placeholderBuilder: (_) => placeholderWidget(),
+      );
+    }
+  } else if (url.validate().startsWith('http')) {
     if (isMobile) {
       return CachedNetworkImage(
         placeholder: placeholderWidgetFn() as Widget Function(BuildContext, String)?,
