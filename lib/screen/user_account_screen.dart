@@ -1,12 +1,13 @@
+import 'package:gia_pha_mobile/model/family_model.dart';
 import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/model/family_member.dart';
 import 'package:gia_pha_mobile/model/NBModel.dart';
 import 'package:gia_pha_mobile/screen/invite_family_member_screen.dart';
 import 'package:gia_pha_mobile/screen/join_family_screen.dart';
-import 'package:gia_pha_mobile/utils/NBImages.dart';
 import 'package:gia_pha_mobile/utils/NBAppWidget.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:gia_pha_mobile/utils/flag_images.dart';
 
 class UserAccountScreen extends StatefulWidget {
   const UserAccountScreen({super.key});
@@ -31,7 +32,8 @@ class _UserAccountScreenState extends State<UserAccountScreen> {
 
   late TextEditingController _nameController;
   late TextEditingController _dobController;
-  NBLanguageItemModel? result = NBLanguageItemModel(NBEnglishFlag, 'English');
+  NBLanguageItemModel? result = NBLanguageItemModel(englishFlag, 'English');
+  FamilyModel? _currentFamily;
 
   @override
   void initState() {
@@ -41,6 +43,7 @@ class _UserAccountScreenState extends State<UserAccountScreen> {
         text: _user.dateOfBirth != null
             ? DateFormat('yyyy-MM-dd').format(_user.dateOfBirth!)
             : '');
+    _currentFamily = FamilyModel(id: 'family1', name: 'Dòng họ Nguyễn'); // Default family
   }
 
   @override
@@ -53,11 +56,8 @@ class _UserAccountScreenState extends State<UserAccountScreen> {
   // This function is kept for language selection, but simplified as it's the only setting.
   Future<void> _selectLanguage() async {
     List<NBLanguageItemModel> languages = [
-      NBLanguageItemModel(NBEnglishFlag, 'English'),
-      NBLanguageItemModel(NBChineseFlag, 'Chinese'),
-      NBLanguageItemModel(NBMelayuFlag, 'Melayu'),
-      NBLanguageItemModel(NBFrenchFlag, 'French'),
-      NBLanguageItemModel(NBSpainFlag, 'Spanish'),
+      NBLanguageItemModel(englishFlag, 'English'),
+      NBLanguageItemModel(vietnamFlag, 'Tiếng Việt'),
     ];
 
     NBLanguageItemModel? selectedLanguage = await showModalBottomSheet<NBLanguageItemModel>(
@@ -79,6 +79,35 @@ class _UserAccountScreenState extends State<UserAccountScreen> {
     if (selectedLanguage != null) {
       setState(() {
         result = selectedLanguage;
+      });
+    }
+  }
+
+  Future<void> _selectFamily() async {
+    List<FamilyModel> families = [
+      FamilyModel(id: 'family1', name: 'Dòng họ Nguyễn'),
+      FamilyModel(id: 'family2', name: 'Dòng họ Trần'),
+      FamilyModel(id: 'family3', name: 'Dòng họ Lê'),
+    ];
+
+    FamilyModel? selectedFamily = await showModalBottomSheet<FamilyModel>(
+      context: context,
+      builder: (BuildContext context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: families.map((family) {
+            return ListTile(
+              title: Text(family.name),
+              onTap: () => Navigator.pop(context, family),
+            );
+          }).toList(),
+        );
+      },
+    );
+
+    if (selectedFamily != null) {
+      setState(() {
+        _currentFamily = selectedFamily;
       });
     }
   }
@@ -113,17 +142,13 @@ class _UserAccountScreenState extends State<UserAccountScreen> {
                     children: [
                       Text('My Families', style: Theme.of(context).textTheme.titleLarge),
                       const SizedBox(height: 10),
-                      Text('Current Family: Dòng họ Nguyễn'), // Replace with actual data
+                      Text('Current Family: ${_currentFamily?.name ?? 'N/A'}'),
                       const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           ElevatedButton(
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Switch Family not implemented yet')),
-                              );
-                            },
+                            onPressed: _selectFamily,
                             child: const Text('Switch Family'),
                           ),
                           ElevatedButton(
