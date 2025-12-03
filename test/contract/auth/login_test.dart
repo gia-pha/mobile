@@ -68,12 +68,16 @@ void main() {
           '/login/complete',
           headers: {'Content-Type': 'application/json'},
           body: {
-            "id": "LuWl0E7-XeIUPAIYsREHgQ",
-            "rawId": "LuWl0E7-XeIUPAIYsREHgQ",
-            "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiVDF4Q3NueE0yRE5MMktkSzVDTGE2Zk1oRDdPQnFobzZzeXpJbmtfbi1VbyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
-            "authenticatorData": PactMatchers.SomethingLike("o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcNAAAAAA"),
-            "signature": PactMatchers.SomethingLike("MEQCIEaLypVlw9uHcwqISxlnfDsG11mkRvXTKHoA-EgrKir1AiB0NqkAaYnsomnltCMWlaoLFe6Rs_yElleNbCxhi6wv-Q"),
-            "userHandle": "QWJjMTIzNDU2", // maps back to user
+            'clientExtensionResults': {},
+            "id": PactMatchers.SomethingLike("LuWl0E7-XeIUPAIYsREHgQ"),
+            "rawId": PactMatchers.SomethingLike("LuWl0E7-XeIUPAIYsREHgQ"),
+            'type': 'public-key',
+            'response': {
+              "clientDataJSON": PactMatchers.SomethingLike("eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiVDF4Q3NueE0yRE5MMktkSzVDTGE2Zk1oRDdPQnFobzZzeXpJbmtfbi1VbyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9"),
+              "authenticatorData": PactMatchers.SomethingLike("o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcNAAAAAA"),
+              "signature": PactMatchers.SomethingLike("MEQCIEaLypVlw9uHcwqISxlnfDsG11mkRvXTKHoA-EgrKir1AiB0NqkAaYnsomnltCMWlaoLFe6Rs_yElleNbCxhi6wv-Q"),
+              "userHandle": "QWJjMTIzNDU2", // maps back to user
+            }
           },
         )
         // Configure the response
@@ -103,12 +107,16 @@ void main() {
         '/login/complete',
         headers: {'Content-Type': 'application/json'},
         data: {
+          'clientExtensionResults': {},
           "id": "LuWl0E7-XeIUPAIYsREHgQ",
           "rawId": "LuWl0E7-XeIUPAIYsREHgQ",
-          "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiVDF4Q3NueE0yRE5MMktkSzVDTGE2Zk1oRDdPQnFobzZzeXpJbmtfbi1VbyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
-          "authenticatorData": "o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcNAAAAAA",
-          "signature": "MEQCIEaLypVlw9uHcwqISxlnfDsG11mkRvXTKHoA-EgrKir1AiB0NqkAaYnsomnltCMWlaoLFe6Rs_yElleNbCxhi6wv-Q",
-          "userHandle": "QWJjMTIzNDU2", // maps back to user
+          'type': 'public-key',
+          'response': {
+            "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiVDF4Q3NueE0yRE5MMktkSzVDTGE2Zk1oRDdPQnFobzZzeXpJbmtfbi1VbyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOnE4NnRuejJTM3VvaW5ycVpLYVRhMXp3ZXQ2Z3Vsd0lXQ3Y3a0dmUFJRbU0iLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+            "authenticatorData": "o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcNAAAAAA",
+            "signature": "MEQCIEaLypVlw9uHcwqISxlnfDsG11mkRvXTKHoA-EgrKir1AiB0NqkAaYnsomnltCMWlaoLFe6Rs_yElleNbCxhi6wv-Q",
+            "userHandle": "QWJjMTIzNDU2", // maps back to user
+          }
         },
       );
       print('Response status: ${response.statusCode}');
