@@ -232,13 +232,38 @@
       },
       "response": {
         "body": {
+          "currentFamilyId": "family1",
           "displayName": "Passkey User",
+          "families": [
+            "family1"
+          ],
           "id": "QWJjMTIzNDU2",
           "name": "user@example.com"
         },
         "headers": {
           "Content-Type": "application/json",
           "Set-Cookie": "session=abcdef12345; Path=/; HttpOnly; Secure; SameSite=Strict"
+        },
+        "matchingRules": {
+          "body": {
+            "$.currentFamilyId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.families": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 0
+                }
+              ]
+            }
+          }
         },
         "status": 200
       }
@@ -300,7 +325,9 @@
       },
       "response": {
         "body": {
+          "currentFamilyId": null,
           "displayName": "Passkey User",
+          "families": [],
           "id": "QWJjMTIzNDU2",
           "name": "user@example.com"
         },

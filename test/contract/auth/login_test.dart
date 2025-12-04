@@ -91,6 +91,8 @@ void main() {
             "id": "QWJjMTIzNDU2", // base64url random ID
             "name": "user@example.com", // placeholder
             "displayName": "Passkey User",
+            'families': PactMatchers.EachLike(['family1']),
+            'currentFamilyId': PactMatchers.SomethingLike('family1'),
           },
         );
 
