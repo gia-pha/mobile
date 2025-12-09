@@ -85,7 +85,7 @@ void main() {
           200,
           headers: {
             'Content-Type': 'application/json',
-            'Set-Cookie': 'session=abcdef12345; Path=/; HttpOnly; Secure; SameSite=Strict'
+            'Set-Cookie': 'session=abcdef12345; Path=/; HttpOnly; Secure; SameSite=None'
           },
           body: {
             "id": "QWJjMTIzNDU2", // base64url random ID

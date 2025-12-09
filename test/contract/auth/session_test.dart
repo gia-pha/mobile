@@ -26,6 +26,8 @@ void main() {
             "id": PactMatchers.SomethingLike('123'),
             "name": PactMatchers.SomethingLike('0123456789'),
             'displayName': PactMatchers.SomethingLike('John Doe'),
+            'families': PactMatchers.EachLike(['family1']),
+            'currentFamilyId': PactMatchers.SomethingLike('family1'),
           },
         );
 
@@ -67,6 +69,7 @@ void main() {
         .withRequest(
           'GET',
           '/session',
+          headers: {'Cookie': PactMatchers.Term(r'^(?!.*session=[a-zA-Z0-9\-_.]).*$', 'product=12345')},
         )
         // Configure the response
         .willRespondWith(
@@ -84,8 +87,10 @@ void main() {
       final apiService = ApiService(baseUrl: 'http://${pact.addr}');
       var response = await apiService.get(
         '/session',
+        headers: {'Cookie': 'cart=abcde12345; product=1234567890'},
       );
       assert(response.statusCode == 401);
+      expect(response.data, isNull);
 
       // Write the pact file if all tests pass
       pact.writePactFile(directory: 'test/outputs/contracts');
