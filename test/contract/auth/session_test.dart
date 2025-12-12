@@ -69,7 +69,6 @@ void main() {
         .withRequest(
           'GET',
           '/session',
-          headers: {'Cookie': PactMatchers.Null()},
         )
         // Configure the response
         .willRespondWith(
@@ -89,7 +88,7 @@ void main() {
         '/session',
         headers: {},
       );
-      //assert(response.statusCode == 401);
+      assert(response.statusCode == 401);
       expect(response.data, isEmpty);
 
       // Write the pact file if all tests pass

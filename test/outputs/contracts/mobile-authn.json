@@ -90,21 +90,7 @@
       "description": "a request to check authentication status with no session",
       "request": {
         "method": "GET",
-        "path": "/session",
-        "headers": {
-        },
-        "matchingRules": {
-          "header": {
-            "Cookie": {
-              "combine": "AND",
-              "matchers": [
-                {
-                  "match": "null"
-                }
-              ]
-            }
-          }
-        }
+        "path": "/session"
       },
       "response": {
         "status": 401
