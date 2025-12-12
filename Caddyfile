@@ -1,0 +1,14 @@
+{
+    admin off
+    auto_https off
+}
+
+https://localhost:42986 {
+    reverse_proxy http://localhost:42985 {
+        header_down Access-Control-Allow-Origin https://gia-pha.localhost:8000
+        header_down +Access-Control-Allow-Credentials true
+        header_down Access-Control-Allow-Methods "GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH"
+        header_down Access-Control-Allow-Headers "Content-Type"
+    }
+    tls certs/local-cert.pem certs/local-key.pem
+}

@@ -27,7 +27,11 @@
       },
       "response": {
         "body": {
+          "currentFamilyId": "family1",
           "displayName": "John Doe",
+          "families": [
+            "family1"
+          ],
           "id": "123",
           "name": "0123456789"
         },
@@ -36,11 +40,28 @@
         },
         "matchingRules": {
           "body": {
+            "$.currentFamilyId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
             "$.displayName": {
               "combine": "AND",
               "matchers": [
                 {
                   "match": "type"
+                }
+              ]
+            },
+            "$.families": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 0
                 }
               ]
             },
@@ -87,7 +108,7 @@
       "response": {
         "body": {
           "challenge": "T1xCsnxM2DNL2KdK5CLa6fMhD7OBqho6syzInk_n-Uo",
-          "rpId": "localhost",
+          "rpId": "gia-pha.localhost",
           "timeout": 60000,
           "userVerification": "required"
         },
@@ -137,8 +158,8 @@
             }
           ],
           "rp": {
-            "id": "localhost",
-            "name": "My App"
+            "id": "gia-pha.localhost",
+            "name": "Gia Pha"
           },
           "timeout": 60000,
           "user": {
@@ -242,7 +263,7 @@
         },
         "headers": {
           "Content-Type": "application/json",
-          "Set-Cookie": "session=abcdef12345; Path=/; HttpOnly; Secure; SameSite=Strict"
+          "Set-Cookie": "session=abcdef12345; Path=/; HttpOnly; Secure; SameSite=None"
         },
         "matchingRules": {
           "body": {
@@ -333,7 +354,7 @@
         },
         "headers": {
           "Content-Type": "application/json",
-          "Set-Cookie": "session=abcdef12345; Path=/; HttpOnly; Secure; SameSite=Strict"
+          "Set-Cookie": "session=abcdef12345; Path=/; HttpOnly; Secure; SameSite=None"
         },
         "status": 200
       }

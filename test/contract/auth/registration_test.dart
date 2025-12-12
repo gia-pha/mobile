@@ -22,7 +22,7 @@ void main() {
           headers: {'Content-Type': 'application/json'},
           body: {
             "challenge": "3vTO0kB4v2T6xMEsIgO7Bg", // base64url
-            "rp": {"id": PactMatchers.SomethingLike("localhost"), "name": "My App"},
+            "rp": {"id": PactMatchers.SomethingLike("gia-pha.localhost"), "name": "Gia Pha"},
             "user": {
               "id": "QWJjMTIzNDU2", // base64url random ID
               "name": "user@example.com", // placeholder
@@ -93,7 +93,7 @@ void main() {
           200,
           headers: {
             'Content-Type': 'application/json',
-            'Set-Cookie': 'session=abcdef12345; Path=/; HttpOnly; Secure; SameSite=Strict'
+            'Set-Cookie': 'session=abcdef12345; Path=/; HttpOnly; Secure; SameSite=None'
           },
           body: {
             "id": "QWJjMTIzNDU2", // base64url random ID
