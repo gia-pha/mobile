@@ -4,6 +4,8 @@ import 'package:gia_pha_mobile/model/family_member.dart';
 import 'package:gia_pha_mobile/model/NBModel.dart';
 import 'package:gia_pha_mobile/screen/invite_family_member_screen.dart';
 import 'package:gia_pha_mobile/screen/join_family_screen.dart';
+import 'package:gia_pha_mobile/screen/passkey_auth_screen.dart';
+import 'package:gia_pha_mobile/services/api_service.dart';
 import 'package:gia_pha_mobile/utils/NBAppWidget.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -34,6 +36,8 @@ class _UserAccountScreenState extends State<UserAccountScreen> {
   late TextEditingController _dobController;
   NBLanguageItemModel? result = NBLanguageItemModel(englishFlag, 'English');
   FamilyModel? _currentFamily;
+  final ApiService _apiService = ApiService();
+  bool _isLoggingOut = false;
 
   @override
   void initState() {
@@ -51,6 +55,41 @@ class _UserAccountScreenState extends State<UserAccountScreen> {
     _nameController.dispose();
     _dobController.dispose();
     super.dispose();
+  }
+
+  Future<void> _logout() async {
+    setState(() {
+      _isLoggingOut = true;
+    });
+    try {
+      final response = await _apiService.post('/logout');
+      if (response.statusCode == 204) {
+        if (mounted) {
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => PasskeyAuthScreen()),
+            (Route<dynamic> route) => false,
+          );
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Logout failed: ${response.data}')),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('An error occurred during logout: $e')),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoggingOut = false;
+        });
+      }
+    }
   }
 
   // This function is kept for language selection, but simplified as it's the only setting.
@@ -318,6 +357,18 @@ class _UserAccountScreenState extends State<UserAccountScreen> {
                       ).onTap(() {
                         _selectLanguage();
                       }),
+                      const Divider(),
+                      ListTile(
+                        leading: _isLoggingOut
+                            ? const SizedBox(
+                                width: 24,
+                                height: 24,
+                                child: CircularProgressIndicator(strokeWidth: 2),
+                              )
+                            : const Icon(Icons.logout),
+                        title: const Text('Logout'),
+                        onTap: _isLoggingOut ? null : _logout,
+                      ),
                     ],
                   ),
                 ),
