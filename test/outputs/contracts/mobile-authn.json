@@ -27,24 +27,41 @@
       },
       "response": {
         "body": {
-          "displayName": "John Doe",
-          "id": "123",
-          "name": "0123456789",
           "currentFamilyId": "family1",
+          "displayName": "John Doe",
           "families": [
             "family1"
-          ]
+          ],
+          "id": "123",
+          "name": "0123456789"
         },
         "headers": {
           "Content-Type": "application/json"
         },
         "matchingRules": {
           "body": {
+            "$.currentFamilyId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
             "$.displayName": {
               "combine": "AND",
               "matchers": [
                 {
                   "match": "type"
+                }
+              ]
+            },
+            "$.families": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 0
                 }
               ]
             },
@@ -63,23 +80,6 @@
                   "match": "type"
                 }
               ]
-            },
-            "$.currentFamilyId": {
-              "combine": "AND",
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ]
-            },
-            "$.families": {
-              "combine": "AND",
-              "matchers": [
-                {
-                  "match": "type",
-                  "min": 0
-                }
-              ]
             }
           }
         },
@@ -92,7 +92,6 @@
         "method": "GET",
         "path": "/session",
         "headers": {
-          "Cookie": "product=12345"
         },
         "matchingRules": {
           "header": {
@@ -100,8 +99,7 @@
               "combine": "AND",
               "matchers": [
                 {
-                  "match": "regex",
-                  "regex": "^(?!.*session=[a-zA-Z0-9\\-_.]).*$"
+                  "match": "null"
                 }
               ]
             }
@@ -124,7 +122,7 @@
       "response": {
         "body": {
           "challenge": "T1xCsnxM2DNL2KdK5CLa6fMhD7OBqho6syzInk_n-Uo",
-          "rpId": "localhost",
+          "rpId": "gia-pha.localhost",
           "timeout": 60000,
           "userVerification": "required"
         },
@@ -174,8 +172,8 @@
             }
           ],
           "rp": {
-            "id": "localhost",
-            "name": "My App"
+            "id": "gia-pha.localhost",
+            "name": "Gia Pha"
           },
           "timeout": 60000,
           "user": {

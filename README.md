@@ -107,7 +107,7 @@ BlocProvider(
 
 ```bash
 mkcert -install
-mkcert -cert-file certs/local-cert.pem -key-file certs/local-key.pem localhost 127.0.0.1 ::1
+mkcert -cert-file certs/local-cert.pem -key-file certs/local-key.pem gia-pha.localhost localhost 127.0.0.1 ::1
 ```
 
 ```bash
@@ -127,8 +127,11 @@ flutter run --dart-define=API_BASE_URL=https://10.0.2.2:42986
 Web:
 
 ```bash
-flutter run -d web-server --web-tls-cert-path=certs/local-cert.pem --web-tls-cert-key-path=certs/local-key.pem --web-port=8000 --dart-define=API_BASE_URL=https://localhost:42986
+flutter run -d web-server --web-tls-cert-path=certs/local-cert.pem --web-tls-cert-key-path=certs/local-key.pem --web-hostname gia-pha.localhost --web-port=8000 --dart-define=API_BASE_URL=https://localhost:42986
 ```
+
+Frontend: https://gia-pha.localhost:8000
+Backend: https://localhost:42986
 
 ## 🧪 Testing
 

@@ -24,7 +24,7 @@ void main() {
           headers: {'Content-Type': 'application/json'},
           body: {
             "challenge": "T1xCsnxM2DNL2KdK5CLa6fMhD7OBqho6syzInk_n-Uo", // base64url
-            "rpId": PactMatchers.SomethingLike("localhost"),
+            "rpId": PactMatchers.SomethingLike("gia-pha.localhost"),
             "timeout": 60000,
             "userVerification": "required",
             // note: NO allowCredentials -> usernameless (discoverable)
