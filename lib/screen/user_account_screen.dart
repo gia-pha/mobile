@@ -27,7 +27,7 @@ class _UserAccountScreenState extends State<UserAccountScreen> {
     kinship: 'Tổ',
     dateOfBirth: DateTime(1950, 5, 10),
     isDeceased: false,
-    avatarUrl: 'images/newsBlog/nb_profile.jpeg',
+    avatarUrl: '/api/images/b4475dd3-8b13-427f-b261-c8cf5ed36ee9',
     spouses: ['user456'],
     children: ['user789'],
   );
@@ -230,7 +230,29 @@ class _UserAccountScreenState extends State<UserAccountScreen> {
                           height: 84,
                           color: Colors.grey.shade200,
                           child: _user.avatarUrl != null && _user.avatarUrl!.isNotEmpty
-                              ? Image.asset(_user.avatarUrl!, fit: BoxFit.cover, width: 84, height: 84)
+                              ? Image.network(
+                                  ApiService().baseUrl + _user.avatarUrl!,
+                                  fit: BoxFit.cover,
+                                  width: 84,
+                                  height: 84,
+                                  loadingBuilder: (context, child, loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        value: loadingProgress.expectedTotalBytes != null
+                                            ? loadingProgress.cumulativeBytesLoaded /
+                                                loadingProgress.expectedTotalBytes!
+                                            : null,
+                                      ),
+                                    );
+                                  },
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Icon(
+                                      _user.gender == 0 ? Icons.male : _user.gender == 1 ? Icons.female : Icons.person,
+                                      size: 44,
+                                    );
+                                  },
+                                )
                               : Icon(
                                   _user.gender == 0 ? Icons.male : _user.gender == 1 ? Icons.female : Icons.person,
                                   size: 44,
