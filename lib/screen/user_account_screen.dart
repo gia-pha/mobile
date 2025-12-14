@@ -106,7 +106,7 @@ class _UserAccountScreenState extends State<UserAccountScreen> {
           mainAxisSize: MainAxisSize.min,
           children: languages.map((lang) {
             return ListTile(
-              leading: commonCacheImageWidget(lang.image, 30),
+              leading: SizedBox(width: 40, child: commonCacheImageWidget(lang.image, 30)),
               title: Text(lang.name),
               onTap: () => Navigator.pop(context, lang),
             );
