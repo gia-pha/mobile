@@ -1,7 +1,7 @@
 import 'package:gia_pha_mobile/model/family_model.dart';
 import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/model/family_member.dart';
-import 'package:gia_pha_mobile/model/NBModel.dart';
+import 'package:gia_pha_mobile/model/language_model.dart';
 import 'package:gia_pha_mobile/screen/invite_family_member_screen.dart';
 import 'package:gia_pha_mobile/screen/join_family_screen.dart';
 import 'package:gia_pha_mobile/screen/passkey_auth_screen.dart';
@@ -34,7 +34,7 @@ class _UserAccountScreenState extends State<UserAccountScreen> {
 
   late TextEditingController _nameController;
   late TextEditingController _dobController;
-  NBLanguageItemModel? result = NBLanguageItemModel(englishFlag, 'English');
+  Language? result = Language(englishFlag, 'English');
   FamilyModel? _currentFamily;
   final ApiService _apiService = ApiService();
   bool _isLoggingOut = false;
@@ -94,12 +94,12 @@ class _UserAccountScreenState extends State<UserAccountScreen> {
 
   // This function is kept for language selection, but simplified as it's the only setting.
   Future<void> _selectLanguage() async {
-    List<NBLanguageItemModel> languages = [
-      NBLanguageItemModel(englishFlag, 'English'),
-      NBLanguageItemModel(vietnamFlag, 'Tiếng Việt'),
+    List<Language> languages = [
+      Language(englishFlag, 'English'),
+      Language(vietnamFlag, 'Tiếng Việt'),
     ];
 
-    NBLanguageItemModel? selectedLanguage = await showModalBottomSheet<NBLanguageItemModel>(
+    Language? selectedLanguage = await showModalBottomSheet<Language>(
       context: context,
       builder: (BuildContext context) {
         return Column(
