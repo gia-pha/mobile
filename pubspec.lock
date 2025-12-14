@@ -790,7 +790,7 @@ packages:
     description:
       path: "."
       ref: all
-      resolved-ref: dd958b1541eab46e775b61f31ecea9c69b8c54e2
+      resolved-ref: fe638108d36996307e99f14d8b03e8285d1048f5
       url: "https://github.com/tienvx/pact_dart.git"
     source: git
     version: "0.8.0"

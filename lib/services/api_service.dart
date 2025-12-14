@@ -24,8 +24,8 @@ class ApiService {
     dio = createDioClient(baseUrl);
   }
 
-  Future<ApiResponse> get(String path, {Map<String, String>? headers}) async {
-    final response = await dio.get(path, options: Options(headers: headers));
+  Future<ApiResponse> get(String path, {Map<String, String>? headers, ResponseType responseType = ResponseType.json}) async {
+    final response = await dio.get(path, options: Options(headers: headers, responseType: responseType));
     return _convertDioResponse(response);
   }
 
