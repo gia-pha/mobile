@@ -1,5 +1,4 @@
 import 'package:gia_pha_mobile/model/event_model.dart';
-import 'package:gia_pha_mobile/utils/EAColors.dart';
 import 'package:gia_pha_mobile/utils/events_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -60,6 +59,7 @@ class EventsScreenState extends State<EventsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -71,7 +71,7 @@ class EventsScreenState extends State<EventsScreen> {
               decoration: boxDecorationRoundedWithShadow(8),
               child: Row(
                 children: [
-                  Icon(Icons.search, color: primaryColor1),
+                  Icon(Icons.search, color: theme.colorScheme.primary),
                   8.width,
                   Expanded(
                     child: TextField(
@@ -98,7 +98,7 @@ class EventsScreenState extends State<EventsScreen> {
                               )
                             : null,
                       ),
-                      style: primaryTextStyle(color: primaryColor1, size: 16),
+                      style: primaryTextStyle(color: theme.colorScheme.primary, size: 16),
                     ),
                   ),
                 ],
@@ -174,7 +174,7 @@ class EventsScreenState extends State<EventsScreen> {
                             children: [
                               Text(
                                 event.time ?? '',
-                                style: secondaryTextStyle(color: primaryColor1),
+                                style: secondaryTextStyle(color: theme.colorScheme.primary),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -183,24 +183,24 @@ class EventsScreenState extends State<EventsScreen> {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: primaryColor1.withOpacity(0.12),
+                                  color: theme.colorScheme.primary.withOpacity(0.12),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
                                   '10 km', // placeholder since EventModel has no distance field
-                                  style: primaryTextStyle(size: 12, color: primaryColor1),
+                                  style: primaryTextStyle(size: 12, color: theme.colorScheme.primary),
                                 ),
                               ),
                               6.height,
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: primaryColor1.withOpacity(0.12),
+                                  color: theme.colorScheme.primary.withOpacity(0.12),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
                                   '10 months ago', // placeholder since EventModel has no distance field
-                                  style: primaryTextStyle(size: 12, color: primaryColor1),
+                                  style: primaryTextStyle(size: 12, color: theme.colorScheme.primary),
                                 ),
                               ),
                             ],

@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gia_pha_mobile/model/event_model.dart';
-import 'package:gia_pha_mobile/utils/EAColors.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:simple_gallery/simple_gallery.dart';
 import 'dart:math' as math;
@@ -57,6 +56,7 @@ class _PastEventDetailScreenState extends State<PastEventDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final images = widget.event.images;
     final hasCoords = widget.event.latitude != null && widget.event.longitude != null;
 
@@ -66,7 +66,7 @@ class _PastEventDetailScreenState extends State<PastEventDetailScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: primaryColor1,
+        backgroundColor: theme.colorScheme.primary,
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(widget.event.name, style: boldTextStyle(color: Colors.white)),
       ),
@@ -181,20 +181,20 @@ class _PastEventDetailScreenState extends State<PastEventDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(backgroundColor: primaryColor1),
+                    style: ElevatedButton.styleFrom(backgroundColor: theme.colorScheme.primary),
                     onPressed: _openExternalMaps,
                     icon: const Icon(Icons.map, size: 16),
-                    label: const Text('Open in maps'),
+                    label: const Text('Open in maps', style: TextStyle(color: Colors.white)),
                   ),
                   8.width,
                   ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(backgroundColor: primaryColor1),
+                    style: ElevatedButton.styleFrom(backgroundColor: theme.colorScheme.primary),
                     onPressed: () {
                       Clipboard.setData(ClipboardData(text: widget.event.address));
                       toast('Address copied');
                     },
                     icon: const Icon(Icons.copy, size: 16),
-                    label: const Text('Copy address'),
+                    label: const Text('Copy address', style: TextStyle(color: Colors.white)),
                   ),
                 ],
               ),

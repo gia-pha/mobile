@@ -6,7 +6,6 @@ import 'package:gia_pha_mobile/screen/funds_screen.dart';
 import 'package:gia_pha_mobile/screen/family_members_screen.dart';
 import 'package:gia_pha_mobile/screen/calendar_screen.dart';
 import 'package:gia_pha_mobile/screen/user_account_screen.dart';
-import 'package:gia_pha_mobile/utils/EAColors.dart';
 
 class HomeScreen extends StatefulWidget {
   static String tag = '/NBHomeScreen';
@@ -33,6 +32,7 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       key: _scaffoldKey,
       body: _pages.elementAt(_selectedIndex),
@@ -48,7 +48,7 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
             });
           },
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: primaryColor1,
+          selectedItemColor: theme.colorScheme.primary,
           unselectedItemColor: Colors.grey,
           showSelectedLabels: false,
           showUnselectedLabels: false,

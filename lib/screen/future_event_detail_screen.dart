@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gia_pha_mobile/model/event_model.dart';
-import 'package:gia_pha_mobile/utils/EAColors.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -54,11 +53,12 @@ class _FutureEventDetailScreenState extends State<FutureEventDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final hasCoords = widget.event.latitude != null && widget.event.longitude != null;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: primaryColor1,
+        backgroundColor: theme.colorScheme.primary,
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(widget.event.name, style: boldTextStyle(color: Colors.white)),
       ),
@@ -109,14 +109,14 @@ class _FutureEventDetailScreenState extends State<FutureEventDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(backgroundColor: primaryColor1),
+                    style: ElevatedButton.styleFrom(backgroundColor: theme.colorScheme.primary),
                     onPressed: () => {},
                     icon: const Icon(Icons.notifications_active, size: 16),
                     label: const Text('Notify me'),
                   ),
                   8.width,
                   ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(backgroundColor: primaryColor1),
+                    style: ElevatedButton.styleFrom(backgroundColor: theme.colorScheme.primary),
                     onPressed: () => {},
                     icon: const Icon(Icons.event, size: 16),
                     label: const Text('Add to calendar'),
@@ -194,14 +194,14 @@ class _FutureEventDetailScreenState extends State<FutureEventDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(backgroundColor: primaryColor1),
+                    style: ElevatedButton.styleFrom(backgroundColor: theme.colorScheme.primary),
                     onPressed: _openExternalMaps,
                     icon: const Icon(Icons.map, size: 16),
                     label: const Text('Open in maps'),
                   ),
                   8.width,
                   ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(backgroundColor: primaryColor1),
+                    style: ElevatedButton.styleFrom(backgroundColor: theme.colorScheme.primary),
                     onPressed: () {
                       Clipboard.setData(ClipboardData(text: widget.event.address));
                       toast('Address copied');
