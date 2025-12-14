@@ -44,4 +44,4 @@ Widget commonCacheImageWidget(String? url, double height, {double? width, BoxFit
 
 Widget? Function(BuildContext, String) placeholderWidgetFn() => (_, s) => placeholderWidget();
 
-Widget placeholderWidget() => Image.asset('images/newsBlog/placeholder.jpg', fit: BoxFit.cover);
+Widget placeholderWidget() => Placeholder();
