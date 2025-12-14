@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:gia_pha_mobile/utils/genogram_utils.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gia_pha_mobile/screen/family_member_detail_screen.dart';
-import 'package:gia_pha_mobile/utils/EAColors.dart';
 
 class FamilyMembersScreen extends StatefulWidget {
   const FamilyMembersScreen({super.key});
@@ -98,7 +97,8 @@ class FamilyMembersScreenState extends State<FamilyMembersScreen> {
     }).toList();
   }
 
-  Widget _buildFilterChips() {
+  Widget _buildFilterChips(BuildContext context) {
+    final theme = Theme.of(context);
     return ExpansionTile(
       leading: const Icon(Icons.filter_list),
       title: Row(
@@ -120,11 +120,11 @@ class FamilyMembersScreenState extends State<FamilyMembersScreen> {
               TextField(
                 controller: _nameController,
                 onChanged: (v) => setState(() => nameQuery = v),
-                style: primaryTextStyle(color: primaryColor1, size: 16),
+                style: primaryTextStyle(color: theme.colorScheme.primary, size: 16),
                 decoration: InputDecoration(
                   isDense: true,
                   hintText: 'Search by name',
-                  prefixIcon: Icon(Icons.search, color: primaryColor1),
+                  prefixIcon: Icon(Icons.search, color: theme.colorScheme.primary),
                   suffixIcon: nameQuery.isNotEmpty
                       ? IconButton(
                           icon: const Icon(Icons.clear),
@@ -262,7 +262,7 @@ class FamilyMembersScreenState extends State<FamilyMembersScreen> {
     return Scaffold(
       body: Column(
         children: [
-          _buildFilterChips(),
+          _buildFilterChips(context),
           const Divider(height: 1),
           Expanded(
             child: ListView.builder(
