@@ -127,7 +127,7 @@ flutter run --dart-define=API_BASE_URL=https://10.0.2.2:42986
 Web:
 
 ```bash
-flutter run -d web-server --web-tls-cert-path=certs/local-cert.pem --web-tls-cert-key-path=certs/local-key.pem --web-hostname gia-pha.localhost --web-port=8000 --dart-define=API_BASE_URL=https://localhost:42986
+flutter run -d web-server --web-tls-cert-path=certs/local-cert.pem --web-tls-cert-key-path=certs/local-key.pem --web-hostname gia-pha.localhost --web-port=8000 --dart-define=API_BASE_URL=https://localhost:42986 --web-launch-url https://gia-pha.localhost:8000/
 ```
 
 Frontend: https://gia-pha.localhost:8000
