@@ -205,10 +205,10 @@ packages:
     dependency: transitive
     description:
       name: custom_interactive_viewer
-      sha256: b81623e13c16dd7a9bf417a7379f270ef1256a8c89b34b327945c26bb7017549
+      sha256: "613facb0a23bacdbdfd9b00ffc0682ca9fde60bb68a590a1663e9fdd78dab646"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.7"
+    version: "0.0.9"
   dart_earcut:
     dependency: transitive
     description:
@@ -757,10 +757,10 @@ packages:
     dependency: "direct main"
     description:
       name: org_chart
-      sha256: c09710fd22c8ab80251e3a44970db1dad2225c64ee7412806e990ebbf4036f66
+      sha256: "1af4a6063cb82626e7ac871a675079ba39adbb7ad6e6acab0265b554d6636223"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.3"
+    version: "5.2.0"
   package_config:
     dependency: transitive
     description:
@@ -1521,4 +1521,4 @@ packages:
     version: "3.1.3"
 sdks:
   dart: ">=3.9.0 <4.0.0"
-  flutter: ">=3.35.0"
+  flutter: ">=3.35.6"
